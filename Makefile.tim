@@ -1,0 +1,44 @@
+all: \
+	iso/menu/menu.arc \
+	iso/menu/loading.tim \
+	iso/font/boldfont.tim \
+	iso/font/arial.tim \
+	iso/stage/hud0.tim \
+	iso/stage/hud1.tim \
+	iso/stage/hud0weeb.tim \
+	iso/bf/main.arc \
+	iso/bf/dead.arc \
+	iso/dad/main.arc \
+	iso/qtm/main.arc \
+	iso/gf/main.arc \
+	iso/gf/speaker.tim \
+	iso/week2/back.arc \
+	iso/week4/back.arc \
+
+iso/%.tim: iso/%.png
+	tools/funkintimconv/funkintimconv $@ $<
+
+iso/%.arc:
+	tools/funkinarcpak/funkinarcpak $@ $^
+
+# Menu
+iso/menu/menu.arc: iso/menu/back.tim iso/menu/ng.tim iso/menu/story.tim iso/menu/title.tim
+
+# BF
+iso/bf/main.arc: iso/bf/idle.tim iso/bf/hit0.tim iso/bf/miss0.tim iso/bf/hit1.tim iso/bf/miss1.tim iso/bf/peace.tim iso/bf/dead0.tim
+iso/bf/dead.arc: iso/bf/dead1.tim iso/bf/dead2.tim iso/bf/retry.tim
+iso/bf/weeb.arc: iso/bf/weeb0.tim iso/bf/weeb1.tim
+
+# QT
+iso/dad/main.arc: iso/dad/idle0.tim iso/dad/idle1.tim iso/dad/left.tim iso/dad/down.tim iso/dad/up.tim iso/dad/right.tim
+
+iso/qtm/main.arc: iso/qtm/idle0.tim iso/qtm/idle1.tim iso/qtm/left.tim iso/qtm/down.tim iso/qtm/up.tim iso/qtm/right.tim iso/qtm/leftb.tim iso/qtm/downb.tim iso/qtm/upb.tim iso/qtm/rightb.tim
+
+# GF
+iso/gf/main.arc: iso/gf/bopleft.tim iso/gf/bopright.tim iso/gf/cry.tim
+
+# Week 2
+iso/week2/back.arc: iso/week2/back0.tim
+
+# Week 4
+iso/week4/back.arc: iso/week4/back2.tim 
