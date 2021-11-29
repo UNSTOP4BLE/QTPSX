@@ -8,6 +8,7 @@ all: \
 	iso/stage/hud0weeb.tim \
 	iso/bf/main.arc \
 	iso/bf/dead.arc \
+	iso/bf/weeb.arc \
 	iso/dad/main.arc \
 	iso/qtm/main.arc \
 	iso/gf/main.arc \
@@ -32,7 +33,7 @@ iso/bf/weeb.arc: iso/bf/weeb0.tim iso/bf/weeb1.tim
 # QT
 iso/dad/main.arc: iso/dad/idle0.tim iso/dad/idle1.tim iso/dad/left.tim iso/dad/down.tim iso/dad/up.tim iso/dad/right.tim
 
-iso/qtm/main.arc: iso/qtm/idle0.tim iso/qtm/idle1.tim iso/qtm/left.tim iso/qtm/down.tim iso/qtm/up.tim iso/qtm/right.tim iso/qtm/leftb.tim iso/qtm/downb.tim iso/qtm/upb.tim iso/qtm/rightb.tim
+iso/qtm/main.arc: iso/qtm/idle0.tim iso/qtm/idle1.tim iso/qtm/left.tim  iso/qtm/leftb.tim iso/qtm/down0.tim iso/qtm/down1.tim iso/qtm/upb.tim iso/qtm/rightb.tim
 
 # GF
 iso/gf/main.arc: iso/gf/bopleft.tim iso/gf/bopright.tim iso/gf/cry.tim
