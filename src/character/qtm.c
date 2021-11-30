@@ -17,11 +17,11 @@ enum
 	qtm_ArcMain_Idle0,
 	qtm_ArcMain_Idle1,
 	qtm_ArcMain_Left,
-	qtm_ArcMain_Down0,
+	qtm_ArcMain_Down,
 	qtm_ArcMain_Up,
 	qtm_ArcMain_Right,
 	qtm_ArcMain_Leftb,
-	qtm_ArcMain_Down1,
+	qtm_ArcMain_Downb,
 	qtm_ArcMain_Upb,
 	qtm_ArcMain_Rightb,
 	
@@ -57,10 +57,10 @@ static const CharFrame char_qtm_frame[] = {
 	{qtm_ArcMain_Left, {  1,   134, 69, 119}, { 37, 119}},  
 	{qtm_ArcMain_Left, {  120,   138, 69, 118}, { 36, 118}},  
 	
-	{qtm_ArcMain_Down0, {  0,   11, 117, 106}, { 54, 106}},  
-	{qtm_ArcMain_Down0, {  123,   9, 117, 108}, { 55, 108}},  
-	{qtm_ArcMain_Down0, {  1,   143, 115, 112}, { 54, 112}},  
-	{qtm_ArcMain_Down0, {  122,   140, 113, 113}, { 53, 113}},  
+	{qtm_ArcMain_Down, {  0,   11, 117, 106}, { 54, 106}},  
+	{qtm_ArcMain_Down, {  123,   9, 117, 108}, { 55, 108}},  
+	{qtm_ArcMain_Down, {  1,   143, 115, 112}, { 54, 112}},  
+	{qtm_ArcMain_Down, {  122,   140, 113, 113}, { 53, 113}},  
 	
 	{qtm_ArcMain_Up, {  4,   7, 110, 117}, { 60, 117}},  
 	{qtm_ArcMain_Up, {  118,   4, 107, 117}, { 58, 117}},  
@@ -77,10 +77,10 @@ static const CharFrame char_qtm_frame[] = {
 	{qtm_ArcMain_Leftb, {  3,   133, 68, 120}, { 36, 120}},
 	{qtm_ArcMain_Leftb, {  119,   136, 70, 120}, { 37, 120}},
 	
-	{qtm_ArcMain_Down1, {  1,   6, 116, 112}, { 54, 112}},  
-	{qtm_ArcMain_Down1, {  123,   4, 126, 113}, { 55, 113}},  
-	{qtm_ArcMain_Down1, {  1,   138, 115, 117}, { 54, 117}},  
-	{qtm_ArcMain_Down1, {  122,   135, 113, 118}, { 53, 118}},  
+	{qtm_ArcMain_Downb, {  1,   6, 116, 112}, { 54, 112}},  
+	{qtm_ArcMain_Downb, {  123,   4, 126, 113}, { 55, 113}},  
+	{qtm_ArcMain_Downb, {  1,   138, 115, 117}, { 54, 117}},  
+	{qtm_ArcMain_Downb, {  122,   135, 113, 118}, { 53, 118}},  
 	
 	{qtm_ArcMain_Upb, {  5,   5, 109, 119}, { 59, 119}},  
 	{qtm_ArcMain_Upb, {  119,   3, 109, 120}, { 59, 120}},  
@@ -183,11 +183,11 @@ Character *Char_qtm_New(fixed_t x, fixed_t y)
 		"idle0.tim", //qtm_ArcMain_Idle0
 		"idle1.tim", //qtm_ArcMain_Idle1
 		"left.tim",  //qtm_ArcMain_Left
-		"down0.tim",  //qtm_ArcMain_Down0
+		"down.tim",  //qtm_ArcMain_Down0
 		"up.tim",    //qtm_ArcMain_Up
 		"right.tim", //qtm_ArcMain_Right
 		"leftb.tim",  //qtm_ArcMain_Leftb
-		"down1.tim",  //qtm_ArcMain_Down1
+		"downb.tim",  //qtm_ArcMain_Down1
 		"upb.tim",    //qtm_ArcMain_Upb
 		"rightb.tim", //qtm_ArcMain_Rightb
 		NULL
