@@ -92,6 +92,7 @@
 				<!-- QT assets -->
 				<file name = "dad.arc" type = "data" source = "iso/dad/main.arc"/>
 				<file name = "qtm.arc" type = "data" source = "iso/qtm/main.arc"/>
+				<file name = "bot.arc" type = "data" source = "iso/bot/main.arc"/>
 
 				<!-- Girlfriend assets -->
 				<file name = "gf.arc" type = "data" source = "iso/gf/main.arc"/>

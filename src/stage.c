@@ -47,6 +47,7 @@ static const u16 note_key[] = {INPUT_LEFT, INPUT_DOWN, INPUT_UP, INPUT_RIGHT};
 #include "character/bf.h"
 #include "character/dad.h"
 #include "character/qtm.h"
+#include "character/bot.h"
 #include "character/gf.h"
 
 #include "stage/week2.h"

@@ -10,7 +10,7 @@
 #include "../archive.h"
 #include "../stage.h"
 #include "../main.h"
-
+#include "../random.h"
 //qtm character structure
 enum
 {
