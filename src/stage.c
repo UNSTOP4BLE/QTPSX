@@ -1603,11 +1603,21 @@ void Stage_Tick(void)
 						{
 							//Opponent hits note
 							Stage_StartVocal();
-							if (note->type & NOTE_FLAG_SUSTAIN)
+
+							if (stage.stage_id == StageId_1_2 &&  RandomRange(0, 17) == 2 && note->type & NOTE_FLAG_SUSTAIN)
+							opponent_snote = note_anims[note->type & 0x3][1];
+
+							else if (stage.stage_id == StageId_1_2 &&  RandomRange(0, 17) == 2)
+						   {
+							opponent_anote = note_anims[note->type & 0x3][1];
+							note->type |= NOTE_FLAG_HIT;
+						   }
+							else if (note->type & NOTE_FLAG_SUSTAIN )
 								opponent_snote = note_anims[note->type & 0x3][(note->type & NOTE_FLAG_ALT_ANIM) != 0];
 							else
 								opponent_anote = note_anims[note->type & 0x3][(note->type & NOTE_FLAG_ALT_ANIM) != 0];
 							note->type |= NOTE_FLAG_HIT;
+                           
 						}
 					}
 					
