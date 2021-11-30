@@ -35,11 +35,11 @@ static const CharFrame henchmen_frame[10] = {
 	{0, { 98,  98,  62,  89}, { 42,  88}}, //3 left 4
 	{0, {160,  98,  62,  89}, { 42,  88}}, //4 left 5
 	
-	{1, {  0,   0, 101, 103}, { 35, 101}}, //5 right 1
-	{1, {101,   0,  99, 101}, { 33, 100}}, //6 right 2
-	{1, {  0, 103,  99, 101}, { 33,  99}}, //7 right 3
-	{1, { 99, 101,  64,  90}, { 26,  89}}, //8 right 4
-	{1, {163, 101,  64,  90}, { 26,  89}}, //9 right 5
+	{0, {  0,   0, 101, 103}, { 35, 101}}, //5 right 1
+	{0, {101,   0,  99, 101}, { 33, 100}}, //6 right 2
+	{0, {  0, 103,  99, 101}, { 33,  99}}, //7 right 3
+	{0, { 99, 101,  64,  90}, { 26,  89}}, //8 right 4
+	{0, {163, 101,  64,  90}, { 26,  89}}, //9 right 5
 };
 
 static const Animation henchmen_anim[2] = {
@@ -93,9 +93,6 @@ void Back_Week2_DrawBG(StageBack *back)
 		{
 			case 0:
 				Animatable_SetAnim(&this->hench_animatable, 0);
-				break;
-			case 4:
-				Animatable_SetAnim(&this->hench_animatable, 1);
 				break;
 		}
 	}
