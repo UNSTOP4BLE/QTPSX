@@ -61,6 +61,7 @@
 			<dir name = "week2">
 				<!-- Background art -->
 				<file name = "back.arc" type = "data" source = "iso/week2/back.arc"/>
+				<file name = "tv0.arc" type = "data" source = "iso/week2/tv0.arc"/>
 				
 				<!-- Spookeez charts -->
 				<file name = "2.1e.cht" type = "data" source = "iso/chart/spookeez-easy.json.cht"/>
