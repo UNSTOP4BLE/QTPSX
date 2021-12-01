@@ -8,6 +8,7 @@
 
 #include "../mem.h"
 #include "../archive.h"
+#include "../animation.h"
 
 //Week 2 background structure
 typedef struct
@@ -16,7 +17,7 @@ typedef struct
 	StageBack back;
 	
 	//Textures
-	IO_Data arc_tv0, arc_tv0_ptr[2];
+	IO_Data arc_tv0, arc_tv0_ptr[1];
 
 	Gfx_Tex tex_back0; //Background
 	Gfx_Tex tex_error; //Background
@@ -27,12 +28,13 @@ typedef struct
 	u8 tv0_frame, tv0_tex_id;
 	
 	Animatable tv0_animatable;
+	Animatable tv0a2_animatable;
 } Back_Week2;
 
 //tv0 animation and rects
 static const CharFrame tv0_frame[10] = {
 	//idle tv
-	{0, {  0,   0,  47,  39}, { 47,  39}}, //left 
+	{0, {  0,   0,  47,  39}, { 48,  40}}, //left 
 	{0, { 47,   0,  98,  52}, { 91,  52}}, //right
 	//red eye tv thing
 	{0, {  0,  52,  47,  39}, { 47,  39}}, //left 
@@ -46,22 +48,16 @@ static const CharFrame tv0_frame[10] = {
 	{0, {47, 155,  98, 51}, { 91,  52}}, //right 2
 	{0, {47, 206,  98, 50}, { 91,  52}}, //right 3 (turned off)
 };
-static const Animation tv0_anim[2] = {
+static const Animation tv0_anim[1] = {
 
 	//idle tv
-	{2, (const u8[]){0, ASCR_CHGANI, 1}}, //Left
-	{2, (const u8[]){1, ASCR_CHGANI, 1}}, //Right
-	//red eye tv thing
-	{2, (const u8[]){2, ASCR_CHGANI, 1}}, //Left
-	{2, (const u8[]){3, ASCR_CHGANI, 1}}, //Right
-	//warning
-	{2, (const u8[]){4, 5, ASCR_BACK, 1}}, //Left
-	{2, (const u8[]){6, 7, ASCR_BACK, 1}}, //Right
-	//off
-	{2, (const u8[]){8, ASCR_BACK, 1}}, //Left
-	{2, (const u8[]){9, ASCR_BACK, 1}}, //Right
-	
+	{2, (const u8[]){0, 2, ASCR_BACK, 0}}, //Left
+};
 
+static const Animation tv0a2_anim[1] = {
+
+	//idle tv
+	{2, (const u8[]){1, 3, ASCR_BACK, 0}}, //Left
 };
 
 
@@ -79,6 +75,7 @@ void Week2_tv0_SetFrame(void *user, u8 frame)
 			Gfx_LoadTex(&this->tex_tv0, this->arc_tv0_ptr[this->tv0_tex_id = cframe->tex], 0);
 	}
 }
+
 
 void Week2_tv0_Draw(Back_Week2 *this, fixed_t x, fixed_t y)
 {
@@ -101,26 +98,6 @@ void Back_Week2_DrawBG(StageBack *back)
 	fx = stage.camera.x;
 	fy = stage.camera.y;
 
-	//Animate and draw tv0
-	fx = stage.camera.x;
-	fy = stage.camera.y;
-	
-	if (stage.flag & STAGE_FLAG_JUST_STEP)
-	{
-		switch (stage.song_step & 7)
-		{
-			case 0:
-				Animatable_SetAnim(&this->tv0_animatable, 0);
-				break;
-		}
-	}
-	Animatable_Animate(&this->tv0_animatable, (void*)this, Week2_tv0_SetFrame);
-	
-	Week2_tv0_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
-	Week2_tv0_Draw(this,  FIXED_DEC(50,1) - fx, FIXED_DEC(30,1) - fy);
-	Week2_tv0_Draw(this, FIXED_DEC(150,1) - fx, FIXED_DEC(30,1) - fy);
-	Week2_tv0_Draw(this, FIXED_DEC(250,1) - fx, FIXED_DEC(30,1) - fy);
-
 	if (stage.stage_id == StageId_1_3 && stage.song_step >= 98) {
 	//Draw error background
 	RECT error_src = {0, 0, 256, 256};
@@ -133,6 +110,34 @@ void Back_Week2_DrawBG(StageBack *back)
 	
 	Stage_DrawTex(&this->tex_error, &error_src, &error_dst, stage.camera.bzoom);
 	}
+
+	//Animate and draw tv0
+	fx = stage.camera.x;
+	fy = stage.camera.y;
+	
+	if (stage.flag & STAGE_FLAG_JUST_STEP)
+	{
+		switch (stage.song_step & 7)
+		{
+			case 0:
+				Animatable_SetAnim(&this->tv0_animatable, 0);
+				Animatable_SetAnim(&this->tv0a2_animatable, 0);
+				break;
+		}
+	}
+	
+	Animatable_Animate(&this->tv0_animatable, (void*)this, Week2_tv0_SetFrame);
+	{
+	Week2_tv0_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
+	Week2_tv0_Draw(this,  FIXED_DEC(50,1) - fx, FIXED_DEC(30,1) - fy);
+	}
+    
+	Animatable_Animate(&this->tv0a2_animatable, (void*)this, Week2_tv0_SetFrame);
+	{
+	Week2_tv0_Draw(this, FIXED_DEC(150,1) - fx, FIXED_DEC(30,1) - fy);
+	Week2_tv0_Draw(this, FIXED_DEC(250,1) - fx, FIXED_DEC(30,1) - fy);
+	}
+
 	//Draw background
 	RECT back_src = {0, 0, 256, 256};
 	RECT_FIXED back_dst = {
@@ -182,6 +187,8 @@ StageBack *Back_Week2_New(void)
 	
 	//Initialize tv0 state
 	Animatable_Init(&this->tv0_animatable, tv0_anim);
+	Animatable_Init(&this->tv0a2_animatable, tv0a2_anim);
+	Animatable_SetAnim(&this->tv0a2_animatable, 0);
 	Animatable_SetAnim(&this->tv0_animatable, 0);
 	this->tv0_frame = this->tv0_tex_id = 0xFF; //Force art load
 

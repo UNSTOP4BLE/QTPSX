@@ -37,3 +37,5 @@ iso/*/*.cht
 
 # Big Chungus
 GitHubDesktop.exe - Atalho.lnk
+libgcc_s_dw2-1.dll
+libstdc++-6.dll
