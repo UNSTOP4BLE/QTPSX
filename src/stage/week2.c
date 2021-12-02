@@ -33,7 +33,11 @@ typedef struct
 	u8 smoke_frame, smoke_tex_id;
 	
 	Animatable tv0_animatable;
-	Animatable tv0a2_animatable;
+	Animatable tv0right_animatable;
+	Animatable tv0eye_animatable;
+	Animatable tv0eyeright_animatable;
+	Animatable tv0w_animatable;
+	Animatable tv0wright_animatable;
 	Animatable smoke_animatable;
 } Back_Week2;
 
@@ -52,20 +56,38 @@ static const CharFrame tv0_frame[10] = {
 	//warning
 	{0, {47, 104,  98, 51}, { 91,  52}}, //right 1
 	{0, {47, 155,  98, 51}, { 91,  52}}, //right 2
-	{0, {47, 206,  98, 50}, { 91,  52}}, //right 3 (turned off)
+	{0, {158, 0,  98, 52}, { 91,  52}}, //right 3 (turned off)
 };
+//idle
 static const Animation tv0_anim[1] = {
 
-	//idle tv
-	{2, (const u8[]){0, 2, ASCR_BACK, 0}}, //Left
+	{2, (const u8[]){0, ASCR_BACK, 0}},
 };
 
-static const Animation tv0a2_anim[1] = {
+static const Animation tv0right_anim[1] = {
 
-	//idle tv
-	{2, (const u8[]){1, 3, ASCR_BACK, 0}}, //Left
+	{2, (const u8[]){1, ASCR_BACK, 0}}, 
+};
+//eye
+static const Animation tv0eye_anim[1] = {
+
+	{2, (const u8[]){2, ASCR_BACK, 0}},
 };
 
+static const Animation tv0eyeright_anim[1] = {
+
+	{2, (const u8[]){3, ASCR_BACK, 0}},
+};   
+//warning
+static const Animation tv0w_anim[1] = {
+
+	{2, (const u8[]){4, 5, 6, ASCR_BACK, 0}},
+};
+
+static const Animation tv0wright_anim[1] = {
+
+	{2, (const u8[]){7, 8, 9, ASCR_BACK, 0}}, 
+};
 
 //tv0 functions
 void Week2_tv0_SetFrame(void *user, u8 frame)
@@ -97,7 +119,7 @@ void Week2_tv0_Draw(Back_Week2 *this, fixed_t x, fixed_t y)
 }
 
 //smoke animation and rects
-static const CharFrame smoke_frame[10] = {
+static const CharFrame smoke_frame[18] = {
     {0, {  0,    0,  13,  13}, { 0,  13}},
 	{0, {  13,   0,  31,  39}, { 0,  39}},
 	{0, {  44,   0,  33,  47}, { 0,  47}},
@@ -120,7 +142,7 @@ static const CharFrame smoke_frame[10] = {
 static const Animation smoke_anim[1] = {
 
 	//idle smoke
-	{2, (const u8[]){0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, ASCR_BACK, 0}}, //Left
+	{2, (const u8[]){0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, ASCR_BACK, 0}}, 
 };
 
 
@@ -185,21 +207,77 @@ void Back_Week2_DrawBG(StageBack *back)
 		{
 			case 0:
 				Animatable_SetAnim(&this->tv0_animatable, 0);
-				Animatable_SetAnim(&this->tv0a2_animatable, 0);
+				Animatable_SetAnim(&this->tv0right_animatable, 0);
+				Animatable_SetAnim(&this->tv0eye_animatable, 0);
+				Animatable_SetAnim(&this->tv0eyeright_animatable, 0);
+				Animatable_SetAnim(&this->tv0w_animatable, 0);
+				Animatable_SetAnim(&this->tv0wright_animatable, 0);
 				break;
 		}
 	}
-	
+
+
+	//eye
 	Animatable_Animate(&this->tv0_animatable, (void*)this, Week2_tv0_SetFrame);
 	{
 	Week2_tv0_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
-	Week2_tv0_Draw(this,  FIXED_DEC(50,1) - fx, FIXED_DEC(30,1) - fy);
 	}
     
-	Animatable_Animate(&this->tv0a2_animatable, (void*)this, Week2_tv0_SetFrame);
+	Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
 	{
-	Week2_tv0_Draw(this, FIXED_DEC(150,1) - fx, FIXED_DEC(30,1) - fy);
-	Week2_tv0_Draw(this, FIXED_DEC(250,1) - fx, FIXED_DEC(30,1) - fy);
+	Week2_tv0_Draw(this, FIXED_DEC(290,1) - fx, FIXED_DEC(43,1) - fy);
+	}
+
+    if (stage.stage_id == StageId_1_2 && stage.song_step >= 404 && stage.song_step <= 420) {
+	//eye
+	Animatable_Animate(&this->tv0eye_animatable, (void*)this, Week2_tv0_SetFrame);
+	{
+	Week2_tv0_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
+	}
+    
+	Animatable_Animate(&this->tv0eyeright_animatable, (void*)this, Week2_tv0_SetFrame);
+	{
+	Week2_tv0_Draw(this, FIXED_DEC(290,1) - fx, FIXED_DEC(43,1) - fy);
+	}
+	}
+
+	if (stage.stage_id == StageId_1_2 && stage.song_step == 760) {
+	//eye
+	Animatable_Animate(&this->tv0eye_animatable, (void*)this, Week2_tv0_SetFrame);
+	{
+	Week2_tv0_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
+	}
+    
+	Animatable_Animate(&this->tv0eyeright_animatable, (void*)this, Week2_tv0_SetFrame);
+	{
+	Week2_tv0_Draw(this, FIXED_DEC(290,1) - fx, FIXED_DEC(43,1) - fy);
+	}
+	}
+
+	if (stage.stage_id == StageId_1_2 && stage.song_step >= 768 && stage.song_step <= 896) {
+	//warning
+	Animatable_Animate(&this->tv0w_animatable, (void*)this, Week2_tv0_SetFrame);
+	{
+	Week2_tv0_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
+	}
+    
+	Animatable_Animate(&this->tv0wright_animatable, (void*)this, Week2_tv0_SetFrame);
+	{
+	Week2_tv0_Draw(this, FIXED_DEC(290,1) - fx, FIXED_DEC(43,1) - fy);
+	}
+	}
+
+	if (stage.stage_id == StageId_1_2 && stage.song_step >= 896 && stage.song_step <= 914) {
+	//eye
+	Animatable_Animate(&this->tv0eye_animatable, (void*)this, Week2_tv0_SetFrame);
+	{
+	Week2_tv0_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
+	}
+    
+	Animatable_Animate(&this->tv0eyeright_animatable, (void*)this, Week2_tv0_SetFrame);
+	{
+	Week2_tv0_Draw(this, FIXED_DEC(290,1) - fx, FIXED_DEC(43,1) - fy);
+	}
 	}
 
 	//Animate and draw smoke
@@ -214,10 +292,11 @@ void Back_Week2_DrawBG(StageBack *back)
 		}
 	}
 	
+	if (stage.stage_id == StageId_1_3) {
 	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
 	Week2_smoke_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
 	Week2_smoke_Draw(this,  FIXED_DEC(50,1) - fx, FIXED_DEC(30,1) - fy);
-
+	}
 	//Draw background
 	RECT back_src = {0, 0, 256, 256};
 	RECT_FIXED back_dst = {
@@ -238,7 +317,7 @@ void Back_Week2_Free(StageBack *back)
 	//Free tv0 archive
 	Mem_Free(this->arc_tv0);
 
-	//Free tv0 archive
+	//Free smoke archive
 	Mem_Free(this->arc_smoke);
 
 	//Free structure
@@ -274,8 +353,17 @@ StageBack *Back_Week2_New(void)
 	
 	//Initialize tv0 state
 	Animatable_Init(&this->tv0_animatable, tv0_anim);
-	Animatable_Init(&this->tv0a2_animatable, tv0a2_anim);
-	Animatable_SetAnim(&this->tv0a2_animatable, 0);
+	Animatable_Init(&this->tv0right_animatable, tv0right_anim);
+	Animatable_Init(&this->tv0eye_animatable, tv0eye_anim);
+	Animatable_Init(&this->tv0eyeright_animatable, tv0eyeright_anim);
+	Animatable_Init(&this->tv0w_animatable, tv0w_anim);
+	Animatable_Init(&this->tv0wright_animatable, tv0wright_anim);
+	Animatable_SetAnim(&this->tv0_animatable, 0);
+	Animatable_SetAnim(&this->tv0right_animatable, 0);
+	Animatable_SetAnim(&this->tv0eye_animatable, 0);
+	Animatable_SetAnim(&this->tv0eyeright_animatable, 0);
+	Animatable_SetAnim(&this->tv0w_animatable, 0);
+	Animatable_SetAnim(&this->tv0wright_animatable, 0);
 	Animatable_SetAnim(&this->tv0_animatable, 0);
 	this->tv0_frame = this->tv0_tex_id = 0xFF; //Force art load
 

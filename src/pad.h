@@ -1,9 +1,3 @@
-/*
-  This Source Code Form is subject to the terms of the Mozilla Public
-  License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
-*/
-
 #ifndef _PAD_H
 #define _PAD_H
 
@@ -33,6 +27,8 @@ typedef struct
 	u16 held, press;
 	u8 left_x, left_y;
 	u8 right_x, right_y;
+	u8 l1, r1;
+	u8 l2, r2;
 } Pad;
 
 extern Pad pad_state, pad_state_2;

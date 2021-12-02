@@ -11,6 +11,7 @@
 #include "../stage.h"
 #include "../random.h"
 #include "../main.h"
+#include "../pad.h"
 
 //Boyfriend skull fragments
 static SkullFragment char_bf_skull[15] = {
@@ -44,7 +45,8 @@ enum
 	BF_ArcMain_Miss1, //Up Right
 	BF_ArcMain_Peace,
 	BF_ArcMain_Dead0, //BREAK
-	
+	BF_ArcMain_Dodge,
+
 	BF_ArcMain_Max,
 };
 
@@ -123,6 +125,11 @@ static const CharFrame char_bf_frame[] = {
 	{BF_ArcDead_Dead2, {128,   0, 128, 128}, { 53,  98}}, //32 dead2 body twitch 1
 	{BF_ArcDead_Dead2, {  0, 128, 128, 128}, { 53,  98}}, //33 dead2 balls twitch 0
 	{BF_ArcDead_Dead2, {128, 128, 128, 128}, { 53,  98}}, //34 dead2 balls twitch 1
+
+	{BF_ArcMain_Dodge, {  0,   0, 0, 0}, { 53,  98}}, 
+	{BF_ArcMain_Dodge, {  0,   0, 0, 0}, { 53,  97}}, 
+	{BF_ArcMain_Dodge, {  0,   0, 0, 0}, { 53,  97}}, 
+	{BF_ArcMain_Dodge, {  0,   0, 0, 0}, { 53,  97}}, 
 };
 
 static const Animation char_bf_anim[PlayerAnim_Max] = {
@@ -147,6 +154,8 @@ static const Animation char_bf_anim[PlayerAnim_Max] = {
 	
 	{10, (const u8[]){30, 30, 30, ASCR_BACK, 1}}, //PlayerAnim_Dead4
 	{ 3, (const u8[]){33, 34, 30, ASCR_REPEAT}},  //PlayerAnim_Dead5
+
+	{2, (const u8[]){ 31,  32,  33,  34, ASCR_BACK, 1}}, //CharAnim_amogdodg
 };
 
 //Boyfriend player functions
@@ -191,23 +200,12 @@ void Char_BF_Tick(Character *character)
 			(stage.song_step & 0x7) == 0)
 			character->set_anim(character, CharAnim_Idle);
 		
-		/*Stage specific animations
-		if (stage.note_scroll >= 0)
-		{
-			switch (stage.stage_id)
-			{
-				case StageId_1_4: //Tutorial peace
-					if (stage.song_step > 64 && stage.song_step < 192 && (stage.song_step & 0x3F) == 60)
-						character->set_anim(character, PlayerAnim_Peace);
-					break;
-				case StageId_1_1: //Bopeebo peace
-					if ((stage.song_step & 0x1F) == 28)
-						character->set_anim(character, PlayerAnim_Peace);
-					break;
-				default:
-					break;
+
+			//doge anim
+			if (stage.stage_id == StageId_2_2 && pad_state.press & INPUT_L2 || pad_state.press & INPUT_R2 || pad_state.press & INPUT_L1 || pad_state.press & INPUT_R1) {
+			character->set_anim(character, PlayerAnim_Dodge);
 			}
-		}*/
+	}
 	}
 	
 	//Retry screen
