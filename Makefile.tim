@@ -16,6 +16,7 @@ all: \
 	iso/gf/speaker.tim \
 	iso/week2/back.arc \
 	iso/week2/tv0.arc \
+	iso/week2/smoke.arc \
 	iso/week4/back.arc \
 
 iso/%.tim: iso/%.png
@@ -44,6 +45,7 @@ iso/gf/main.arc: iso/gf/bopleft.tim iso/gf/bopright.tim iso/gf/cry.tim
 # Week 2
 iso/week2/back.arc: iso/week2/back0.tim iso/week2/error.tim iso/week2/bsod.tim
 iso/week2/tv0.arc: iso/week2/tv0.tim
+iso/week2/smoke.arc: iso/week2/smoke.tim
 
 # Week 4
 iso/week4/back.arc: iso/week4/back2.tim 

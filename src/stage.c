@@ -1607,7 +1607,7 @@ void Stage_Tick(void)
 							if (stage.stage_id == StageId_1_2 &&  RandomRange(0, 17) == 2 && note->type & NOTE_FLAG_SUSTAIN)
 							opponent_snote = note_anims[note->type & 0x3][1];
 
-							else if (stage.stage_id == StageId_1_2 &&  RandomRange(0, 17) == 2)
+							else if (stage.stage_id == StageId_1_2 &&  RandomRange(1, 17) == 2)
 						   {
 							opponent_anote = note_anims[note->type & 0x3][1];
 							note->type |= NOTE_FLAG_HIT;
