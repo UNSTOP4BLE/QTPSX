@@ -14,6 +14,7 @@ typedef enum
 {
 	PlayerAnim_Peace = CharAnim_Max,
 	PlayerAnim_Sweat,
+	PlayerAnim_Dodge,
 	
 	PlayerAnim_Dead0, //BREAK
 	PlayerAnim_Dead1, //Idle with mic

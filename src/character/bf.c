@@ -11,7 +11,6 @@
 #include "../stage.h"
 #include "../random.h"
 #include "../main.h"
-#include "../pad.h"
 
 //Boyfriend skull fragments
 static SkullFragment char_bf_skull[15] = {
@@ -34,6 +33,7 @@ static SkullFragment char_bf_skull[15] = {
 	{14 * 8, -76 * 8,  9, -6},
 	{26 * 8, -67 * 8, 15, -3},
 };
+
 
 //Boyfriend player types
 enum
@@ -126,10 +126,10 @@ static const CharFrame char_bf_frame[] = {
 	{BF_ArcDead_Dead2, {  0, 128, 128, 128}, { 53,  98}}, //33 dead2 balls twitch 0
 	{BF_ArcDead_Dead2, {128, 128, 128, 128}, { 53,  98}}, //34 dead2 balls twitch 1
 
-	{BF_ArcMain_Dodge, {  0,   0, 0, 0}, { 53,  98}}, 
-	{BF_ArcMain_Dodge, {  0,   0, 0, 0}, { 53,  97}}, 
-	{BF_ArcMain_Dodge, {  0,   0, 0, 0}, { 53,  97}}, 
-	{BF_ArcMain_Dodge, {  0,   0, 0, 0}, { 53,  97}}, 
+	{BF_ArcMain_Dodge, {  0,   0, 128, 124}, { 53,  98}}, 
+	{BF_ArcMain_Dodge, {128,   0, 128, 124}, { 53,  97}}, 
+	{BF_ArcMain_Dodge, {  0, 120, 128, 128}, { 53,  97}}, 
+	{BF_ArcMain_Dodge, {128, 120, 128, 128}, { 53,  97}}, 
 };
 
 static const Animation char_bf_anim[PlayerAnim_Max] = {
@@ -144,6 +144,7 @@ static const Animation char_bf_anim[PlayerAnim_Max] = {
 	{1, (const u8[]){16, 18, 18, 19, ASCR_BACK, 1}},     //CharAnim_RightAlt
 	{2, (const u8[]){20, 21, 22, ASCR_BACK, 1}},         //PlayerAnim_Peace
 	{2, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},       //PlayerAnim_Sweat
+	{1, (const u8[]){ 35,  36,  37,  38, ASCR_BACK, 1}}, //CharAnim_amogdodg
 	
 	{5, (const u8[]){23, 24, 25, 26, 26, 26, 26, 26, 26, 26, ASCR_CHGANI, PlayerAnim_Dead1}}, //PlayerAnim_Dead0
 	{5, (const u8[]){26, ASCR_REPEAT}},                                                       //PlayerAnim_Dead1
@@ -155,7 +156,7 @@ static const Animation char_bf_anim[PlayerAnim_Max] = {
 	{10, (const u8[]){30, 30, 30, ASCR_BACK, 1}}, //PlayerAnim_Dead4
 	{ 3, (const u8[]){33, 34, 30, ASCR_REPEAT}},  //PlayerAnim_Dead5
 
-	{2, (const u8[]){ 31,  32,  33,  34, ASCR_BACK, 1}}, //CharAnim_amogdodg
+	
 };
 
 //Boyfriend player functions
@@ -200,13 +201,11 @@ void Char_BF_Tick(Character *character)
 			(stage.song_step & 0x7) == 0)
 			character->set_anim(character, CharAnim_Idle);
 		
+            if (stage.stage_id == StageId_2_2 && (pad_state.held & (PAD_L1 | PAD_L2 | PAD_R1 | PAD_R2)))
+			    character->set_anim(character, PlayerAnim_Dodge);
 
-			//doge anim
-			if (stage.stage_id == StageId_2_2 && pad_state.press & INPUT_L2 || pad_state.press & INPUT_R2 || pad_state.press & INPUT_L1 || pad_state.press & INPUT_R1) {
-			character->set_anim(character, PlayerAnim_Dodge);
-			}
 	}
-	}
+
 	
 	//Retry screen
 	if (character->animatable.anim >= PlayerAnim_Dead3)
@@ -404,6 +403,7 @@ Character *Char_BF_New(fixed_t x, fixed_t y)
 		"miss1.tim", //BF_ArcMain_Miss1
 		"peace.tim", //BF_ArcMain_Peace
 		"dead0.tim", //BF_ArcMain_Dead0
+		"peace.tim", //BF_ArcMain_Peace
 		NULL
 	};
 	IO_Data *arc_ptr = this->arc_ptr;
