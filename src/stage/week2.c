@@ -40,20 +40,37 @@ typedef struct
 	Animatable tv0right_animatable;
 	Animatable tv0eyeright_animatable;
 	Animatable tv0wright_animatable;
+	Animatable tv0errright_animatable;
+	Animatable tv0bsodright_animatable;
+	Animatable tv0dicright_animatable;
 	Animatable tv0left_animatable;
 	Animatable tv0eyeleft_animatable;
 	Animatable tv0wleft_animatable;
+	Animatable tv0errleft_animatable;
+	Animatable tv0bsodleft_animatable;
+	Animatable tv0dicleft_animatable;
 	Animatable smoke_animatable;
 } Back_Week2;
 
 //tv0 animation and rects
-static const CharFrame tv0_frame[5] = {
+static const CharFrame tv0_frame[8] = {
+	//idle
 	{0, { 47,   0,  98,  52}, { 91,  52}}, //right
+	//eye
 	{0, { 47,  52,  98,  52}, { 91,  52}}, //right
 	//warning
 	{0, {47, 104,  98, 51}, { 91,  52}}, //right 1
 	{0, {47, 155,  98, 51}, { 91,  52}}, //right 2
 	{0, {158, 0,  98, 52}, { 91,  52}}, //right 3 (turned off)
+
+	//error
+	{0, { 158,   52,  98,  52}, { 91,  52}}, //right
+
+	//bsod
+	{0, { 158,   104,  98, 52}, { 91,  52}}, //right
+
+	//incomin drop
+	{0, { 158,   156,  98, 51}, { 91,  52}}, //right
 };
 
 
@@ -75,6 +92,20 @@ static const Animation tv0wright_anim[1] = {
 	{2, (const u8[]){2, 3, 4, ASCR_BACK, 0}}, 
 };
 
+static const Animation tv0errright_anim[1] = {
+
+	{2, (const u8[]){5, ASCR_BACK, 0}}, 
+};
+
+static const Animation tv0bsodright_anim[1] = {
+
+	{2, (const u8[]){6, ASCR_BACK, 0}}, 
+};
+
+static const Animation tv0dicright_anim[1] = {
+
+	{2, (const u8[]){7, ASCR_BACK, 0}}, 
+};
 
 //tv0 functions
 void Week2_tv0_SetFrame(void *user, u8 frame)
@@ -107,7 +138,7 @@ void Week2_tv0_Draw(Back_Week2 *this, fixed_t x, fixed_t y)
 }
 
 
-static const CharFrame tv0l_frame[5] = {
+static const CharFrame tv0l_frame[8] = {
 	//idle tv
 	{0, {  0,   0,  47,  39}, { 48,  40}}, //left 
 	//red eye tv thing
@@ -116,6 +147,15 @@ static const CharFrame tv0l_frame[5] = {
 	{0, {0,   104,  47, 40}, { 47,  39}}, //left 1 
 	{0, {0,   155,  47, 39}, { 47,  39}}, //left 2
 	{0, {0,   207,  48, 39}, { 47,  39}}, //left 3 (turned off)
+
+	//error left
+	{0, {47,   206,  48, 39}, { 47,  39}}, //left
+
+	//bsod left
+	{0, {95,   206,  49, 39}, { 47,  39}}, //left
+
+	//drop incoming left
+	{0, {143,   216,  48, 40}, { 47,  39}}, //left
 };
 //idle
 static const Animation tv0left_anim[1] = {
@@ -131,6 +171,21 @@ static const Animation tv0eyeleft_anim[1] = {
 static const Animation tv0wleft_anim[1] = {
 
 	{2, (const u8[]){2, 3, 4, ASCR_BACK, 0}},
+};
+//error
+static const Animation tv0errleft_anim[1] = {
+
+	{2, (const u8[]){5, ASCR_BACK, 0}},
+};
+//bsod
+static const Animation tv0bsodleft_anim[1] = {
+
+	{2, (const u8[]){6, ASCR_BACK, 0}},
+};
+//drop incoming
+static const Animation tv0dicleft_anim[1] = {
+
+	{2, (const u8[]){7, ASCR_BACK, 0}},
 };
 
 //smoke animation and rects
@@ -153,6 +208,7 @@ static const CharFrame smoke_frame[18] = {
 	{0, {  137,  173, 43,  50}, { 0,  50}},
 	{0, {  180,  175, 32,  43}, { 0,  43}},
 	{0, {  180,  173, 76,  45}, { 0,  45}},
+
 };
 static const Animation smoke_anim[1] = {
 
@@ -219,6 +275,32 @@ void Week2_smoke_Draw(Back_Week2 *this, fixed_t x, fixed_t y)
 }
 
 //Week 2 background functions
+void Back_Week2_DrawFG(StageBack *back)
+{
+	Back_Week2 *this = (Back_Week2*)back;
+	
+	fixed_t fx, fy;
+	fx = stage.camera.x;
+	fy = stage.camera.y;
+	//Animate and draw smoke
+	
+	if (stage.flag & STAGE_FLAG_JUST_STEP)
+	{
+		switch (stage.song_step & 7)
+		{
+			case 0:
+				Animatable_SetAnim(&this->smoke_animatable, 0);
+				break;
+		}
+	}
+	
+	if (stage.stage_id == StageId_1_3) {
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-50,1), FIXED_DEC(30,1));
+	Week2_smoke_Draw(this,  FIXED_DEC(50,1), FIXED_DEC(30,1));
+	}
+}
+
 void Back_Week2_DrawBG(StageBack *back)
 {
 	Back_Week2 *this = (Back_Week2*)back;
@@ -227,20 +309,14 @@ void Back_Week2_DrawBG(StageBack *back)
 	fx = stage.camera.x;
 	fy = stage.camera.y;
 
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 98) {
-	//Draw error background
-	RECT error_src = {0, 0, 256, 256};
-	RECT_FIXED error_dst = {
-		FIXED_DEC(-165,1) - fx,
-		FIXED_DEC(-140,1) - fy,
-		FIXED_DEC(550,1),
-		FIXED_DEC(260,1)
-	};
-	
-	Stage_DrawTex(&this->tex_error, &error_src, &error_dst, stage.camera.bzoom);
-	}
-
-	//Animate and draw tv0left
+/*
+	░█████╗░░█████╗░██████╗░███████╗██╗░░░░░███████╗░██████╗░██████╗
+	██╔══██╗██╔══██╗██╔══██╗██╔════╝██║░░░░░██╔════╝██╔════╝██╔════╝
+	██║░░╚═╝███████║██████╔╝█████╗░░██║░░░░░█████╗░░╚█████╗░╚█████╗░
+	██║░░██╗██╔══██║██╔══██╗██╔══╝░░██║░░░░░██╔══╝░░░╚═══██╗░╚═══██╗
+	╚█████╔╝██║░░██║██║░░██║███████╗███████╗███████╗██████╔╝██████╔╝
+	░╚════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝╚══════╝╚══════╝╚═════╝░╚═════╝░ */
+	//Animate and draw tv0right
 	fx = stage.camera.x;
 	fy = stage.camera.y;
 	
@@ -272,9 +348,9 @@ void Back_Week2_DrawBG(StageBack *back)
 	}
 
 
-	//eye
+	//idle
 	Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
-	Week2_tv0l_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
+	Week2_tv0l_Draw(this, FIXED_DEC(34,1) - fx, FIXED_DEC(37,1) - fy);
     
 	Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
 	Week2_tv0_Draw(this, FIXED_DEC(290,1) - fx, FIXED_DEC(43,1) - fy);
@@ -284,67 +360,152 @@ void Back_Week2_DrawBG(StageBack *back)
 	{
 	case StageId_1_2:
       
-	  //eye
+	//eye
     if (stage.song_step >= 404 && stage.song_step <= 420)
 	{
 	Animatable_Animate(&this->tv0eyeleft_animatable, (void*)this, Week2_tv0l_SetFrame);
-	Week2_tv0l_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
 
 	Animatable_Animate(&this->tv0eyeright_animatable, (void*)this, Week2_tv0_SetFrame);	
-	Week2_tv0_Draw(this, FIXED_DEC(290,1) - fx, FIXED_DEC(43,1) - fy);
 	}
 	
     //eye
 	if (stage.song_step == 760)
 	{
 	Animatable_Animate(&this->tv0eyeleft_animatable, (void*)this, Week2_tv0l_SetFrame);
-	Week2_tv0l_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
     
 	Animatable_Animate(&this->tv0eyeright_animatable, (void*)this, Week2_tv0_SetFrame);
-	Week2_tv0_Draw(this, FIXED_DEC(290,1) - fx, FIXED_DEC(43,1) - fy);
 	}
 
-     //warning
+    //warning
 	if (stage.song_step >= 768 && stage.song_step <= 896)
 	{
 	Animatable_Animate(&this->tv0wleft_animatable, (void*)this, Week2_tv0l_SetFrame);
-	Week2_tv0l_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
 
 	Animatable_Animate(&this->tv0wright_animatable, (void*)this, Week2_tv0_SetFrame);
-	Week2_tv0_Draw(this, FIXED_DEC(290,1) - fx, FIXED_DEC(43,1) - fy);
 	}
 
     //eye
 	if (stage.song_step >= 896 && stage.song_step <= 914)
 	{
 	Animatable_Animate(&this->tv0eyeleft_animatable, (void*)this, Week2_tv0l_SetFrame);
-	Week2_tv0l_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
     
 	Animatable_Animate(&this->tv0eyeright_animatable, (void*)this, Week2_tv0_SetFrame);
-	Week2_tv0_Draw(this, FIXED_DEC(290,1) - fx, FIXED_DEC(43,1) - fy);
 	}
 	break;
   default:
 break;
 }
+/*
+	░█████╗░███████╗███╗░░██╗░██████╗░█████╗░██████╗░██╗░░░██╗
+	██╔══██╗██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗╚██╗░██╔╝
+	██║░░╚═╝█████╗░░██╔██╗██║╚█████╗░██║░░██║██████╔╝░╚████╔╝░
+	██║░░██╗██╔══╝░░██║╚████║░╚═══██╗██║░░██║██╔══██╗░░╚██╔╝░░
+	╚█████╔╝███████╗██║░╚███║██████╔╝╚█████╔╝██║░░██║░░░██║░░░
+	░╚════╝░╚══════╝╚═╝░░╚══╝╚═════╝░░╚════╝░╚═╝░░╚═╝░░░╚═╝░░░
 
-	//Animate and draw smoke
-	
-	if (stage.flag & STAGE_FLAG_JUST_STEP)
+	░█████╗░██╗░░░██╗███████╗██████╗░██╗░░░░░░█████╗░░█████╗░██████╗░
+	██╔══██╗██║░░░██║██╔════╝██╔══██╗██║░░░░░██╔══██╗██╔══██╗██╔══██╗
+	██║░░██║╚██╗░██╔╝█████╗░░██████╔╝██║░░░░░██║░░██║███████║██║░░██║
+	██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗██║░░░░░██║░░██║██╔══██║██║░░██║
+	╚█████╔╝░░╚██╔╝░░███████╗██║░░██║███████╗╚█████╔╝██║░░██║██████╔╝
+	░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚══════╝░╚════╝░╚═╝░░╚═╝╚═════╝░*/
+
+	switch(stage.stage_id)
 	{
-		switch (stage.song_step & 7)
-		{
-			case 0:
-				Animatable_SetAnim(&this->smoke_animatable, 0);
-				break;
-		}
+	case StageId_1_3:
+	//idle
+	Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
+	Week2_tv0l_Draw(this, FIXED_DEC(34,1) - fx, FIXED_DEC(37,1) - fy);
+    
+	Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
+	Week2_tv0_Draw(this, FIXED_DEC(290,1) - fx, FIXED_DEC(43,1) - fy);
+      
+	//eye
+    if (stage.song_step >= 256 && stage.song_step <= 316)
+	{
+	Animatable_Animate(&this->tv0eyeleft_animatable, (void*)this, Week2_tv0l_SetFrame);
+
+	Animatable_Animate(&this->tv0eyeright_animatable, (void*)this, Week2_tv0_SetFrame);	
 	}
 	
-	if (stage.stage_id == StageId_1_3) {
-	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
-	Week2_smoke_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(30,1) - fy);
-	Week2_smoke_Draw(this,  FIXED_DEC(50,1) - fx, FIXED_DEC(30,1) - fy);
+    //drop
+	if (stage.song_step >= 960 && stage.song_step <= 1215)
+	{
+	Animatable_Animate(&this->tv0dicleft_animatable, (void*)this, Week2_tv0l_SetFrame);
+    
+	Animatable_Animate(&this->tv0dicright_animatable, (void*)this, Week2_tv0_SetFrame);
 	}
+
+    //warning
+	if (stage.song_step >= 1216 && stage.song_step <= 1728)
+	{
+	Animatable_Animate(&this->tv0wleft_animatable, (void*)this, Week2_tv0l_SetFrame);
+
+	Animatable_Animate(&this->tv0wright_animatable, (void*)this, Week2_tv0_SetFrame);
+	}
+
+    //eye
+	if (stage.song_step >= 2232 && stage.song_step <= 2240)
+	{
+	Animatable_Animate(&this->tv0eyeleft_animatable, (void*)this, Week2_tv0l_SetFrame);
+    
+	Animatable_Animate(&this->tv0eyeright_animatable, (void*)this, Week2_tv0_SetFrame);
+	}
+
+	//error
+	if (stage.song_step >= 2808 && stage.song_step <= 2815)
+	{
+	Animatable_Animate(&this->tv0errleft_animatable, (void*)this, Week2_tv0l_SetFrame);
+    
+	Animatable_Animate(&this->tv0errright_animatable, (void*)this, Week2_tv0_SetFrame);
+	}
+
+	//bsod
+	if (stage.song_step >= 2816 && stage.song_step <= 3326)
+	{
+	Animatable_Animate(&this->tv0bsodleft_animatable, (void*)this, Week2_tv0l_SetFrame);
+    
+	Animatable_Animate(&this->tv0bsodright_animatable, (void*)this, Week2_tv0_SetFrame);
+	}
+
+    //warning
+	if (stage.song_step >= 3327 && stage.song_step <= 3840)
+	{
+	Animatable_Animate(&this->tv0wleft_animatable, (void*)this, Week2_tv0l_SetFrame);
+
+	Animatable_Animate(&this->tv0wright_animatable, (void*)this, Week2_tv0_SetFrame);
+	}
+
+	break;
+  default:
+break;
+}	
+	//Draw bsod background
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 2816 && stage.song_step <= 3326) {
+	RECT bsod_src = {0, 0, 256, 256};
+	RECT_FIXED bsod_dst = {
+		FIXED_DEC(-165,1) - fx,
+		FIXED_DEC(-140,1) - fy,
+		FIXED_DEC(550,1),
+		FIXED_DEC(260,1)
+	};
+	
+	Stage_DrawTex(&this->tex_bsod, &bsod_src, &bsod_dst, stage.camera.bzoom);
+	}
+
+	//Draw error background
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 2808 && stage.song_step <= 2815) {
+	RECT error_src = {0, 0, 256, 256};
+	RECT_FIXED error_dst = {
+		FIXED_DEC(-165,1) - fx,
+		FIXED_DEC(-140,1) - fy,
+		FIXED_DEC(550,1),
+		FIXED_DEC(260,1)
+	};
+	
+	Stage_DrawTex(&this->tex_error, &error_src, &error_dst, stage.camera.bzoom);
+	}
+
 	//Draw background
 	RECT back_src = {0, 0, 256, 256};
 	RECT_FIXED back_dst = {
@@ -355,7 +516,6 @@ break;
 	};
 	
 	Stage_DrawTex(&this->tex_back0, &back_src, &back_dst, stage.camera.bzoom);
-	
 }
 
 void Back_Week2_Free(StageBack *back)
@@ -380,7 +540,7 @@ StageBack *Back_Week2_New(void)
 		return NULL;
 	
 	//Set background functions
-	this->back.draw_fg = NULL;
+	this->back.draw_fg = Back_Week2_DrawFG;
 	this->back.draw_md = NULL;
 	this->back.draw_bg = Back_Week2_DrawBG;
 	this->back.free = Back_Week2_Free;
@@ -389,6 +549,7 @@ StageBack *Back_Week2_New(void)
 	IO_Data arc_back = IO_Read("\\WEEK2\\BACK.ARC;1");
 	Gfx_LoadTex(&this->tex_back0, Archive_Find(arc_back, "back0.tim"), 0);
 	Gfx_LoadTex(&this->tex_error, Archive_Find(arc_back, "error.tim"), 0);
+	Gfx_LoadTex(&this->tex_bsod, Archive_Find(arc_back, "bsod.tim"), 0);
 	Mem_Free(arc_back);
 
 	//Load tv0 textures
@@ -406,16 +567,27 @@ StageBack *Back_Week2_New(void)
 	Animatable_Init(&this->tv0right_animatable, tv0right_anim);
 	Animatable_Init(&this->tv0eyeright_animatable, tv0eyeright_anim);
 	Animatable_Init(&this->tv0wright_animatable, tv0wright_anim);
+	Animatable_Init(&this->tv0errright_animatable, tv0errright_anim);
+	Animatable_Init(&this->tv0bsodright_animatable, tv0bsodright_anim);
+	Animatable_Init(&this->tv0dicright_animatable, tv0dicright_anim);
 	Animatable_Init(&this->tv0left_animatable, tv0left_anim);
 	Animatable_Init(&this->tv0eyeleft_animatable, tv0eyeleft_anim);
 	Animatable_Init(&this->tv0wleft_animatable, tv0wleft_anim);
+	Animatable_Init(&this->tv0errleft_animatable, tv0errleft_anim);
+	Animatable_Init(&this->tv0bsodleft_animatable, tv0bsodleft_anim);
+	Animatable_Init(&this->tv0dicleft_animatable, tv0dicleft_anim);
 	
 	Animatable_SetAnim(&this->tv0right_animatable, 0);
 	Animatable_SetAnim(&this->tv0eyeright_animatable, 0);
 	Animatable_SetAnim(&this->tv0wright_animatable, 0);
+	Animatable_SetAnim(&this->tv0errright_animatable, 0);
+	Animatable_SetAnim(&this->tv0bsodright_animatable, 0);
 	Animatable_SetAnim(&this->tv0left_animatable, 0);
 	Animatable_SetAnim(&this->tv0eyeleft_animatable, 0);
 	Animatable_SetAnim(&this->tv0wleft_animatable, 0);
+	Animatable_SetAnim(&this->tv0errleft_animatable, 0);
+	Animatable_SetAnim(&this->tv0bsodleft_animatable, 0);
+	Animatable_SetAnim(&this->tv0dicleft_animatable, 0);
 	this->tv0_frame = this->tv0_tex_id = 0xFF; //Force art load
 	this->tv0l_frame = this->tv0l_tex_id = 0xFF; //Force art load
 

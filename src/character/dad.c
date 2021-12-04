@@ -58,10 +58,10 @@ static const CharFrame char_dad_frame[] = {
 	{Dad_ArcMain_Down, {  1,   142, 115, 113}, { 54, 113}}, 
 	{Dad_ArcMain_Down, {  122,   139, 113, 114}, { 53, 114}}, 
 	
-	{Dad_ArcMain_Up, {  2,   6, 110, 117}, { 60, 122}}, 
-	{Dad_ArcMain_Up, {  118,   4, 107, 117}, { 58, 122}}, 
-	{Dad_ArcMain_Up, {  8,   136, 102, 115}, { 54, 120}}, 
-	{Dad_ArcMain_Up, {  125,   135, 100, 116}, { 53, 121}}, 
+	{Dad_ArcMain_Up, {  2,   6, 110, 117}, { 60, 117}}, 
+	{Dad_ArcMain_Up, {  118,   4, 107, 117}, { 58, 117}}, 
+	{Dad_ArcMain_Up, {  8,   136, 102, 115}, { 54, 115}}, 
+	{Dad_ArcMain_Up, {  125,   135, 100, 116}, { 53, 116}}, 
 
 	{Dad_ArcMain_Right, {  1,   1, 112, 111}, { 51, 111}}, 
 	{Dad_ArcMain_Right, {  119,   3, 112, 111}, { 52, 111}}, 
