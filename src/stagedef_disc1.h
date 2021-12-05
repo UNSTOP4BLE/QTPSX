@@ -34,7 +34,7 @@
 		//Characters
 		{Char_BF_New,    FIXED_DEC(60,1),  FIXED_DEC(100,1)},
 		{Char_bot_New, FIXED_DEC(-120,1),  FIXED_DEC(100,1)},
-		{Char_GF_New,     FIXED_DEC(0,1),    FIXED_DEC(0,1)},
+		{Char_GF_New,     FIXED_DEC(0,1),    FIXED_DEC(1000,1)},
 		
 		//Stage background
 		Back_Week2_New,

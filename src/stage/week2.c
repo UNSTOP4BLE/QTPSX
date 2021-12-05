@@ -328,6 +328,9 @@ void Back_Week2_DrawBG(StageBack *back)
 				Animatable_SetAnim(&this->tv0right_animatable, 0);
 				Animatable_SetAnim(&this->tv0eyeright_animatable, 0);
 				Animatable_SetAnim(&this->tv0wright_animatable, 0);
+				Animatable_SetAnim(&this->tv0errright_animatable, 0);
+	            Animatable_SetAnim(&this->tv0bsodright_animatable, 0);
+	            Animatable_SetAnim(&this->tv0dicright_animatable, 0);
 				break;
 		}
 	}
@@ -343,6 +346,9 @@ void Back_Week2_DrawBG(StageBack *back)
 				Animatable_SetAnim(&this->tv0left_animatable, 0);
 				Animatable_SetAnim(&this->tv0eyeleft_animatable, 0);
 				Animatable_SetAnim(&this->tv0wleft_animatable, 0);
+				Animatable_SetAnim(&this->tv0errleft_animatable, 0);
+	            Animatable_SetAnim(&this->tv0bsodleft_animatable, 0);
+	            Animatable_SetAnim(&this->tv0dicleft_animatable, 0);
 				break;
 		}
 	}
@@ -392,9 +398,6 @@ void Back_Week2_DrawBG(StageBack *back)
 	Animatable_Animate(&this->tv0eyeright_animatable, (void*)this, Week2_tv0_SetFrame);
 	}
 	break;
-  default:
-break;
-}
 /*
 	░█████╗░███████╗███╗░░██╗░██████╗░█████╗░██████╗░██╗░░░██╗
 	██╔══██╗██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗╚██╗░██╔╝
@@ -410,8 +413,6 @@ break;
 	╚█████╔╝░░╚██╔╝░░███████╗██║░░██║███████╗╚█████╔╝██║░░██║██████╔╝
 	░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚══════╝░╚════╝░╚═╝░░╚═╝╚═════╝░*/
 
-	switch(stage.stage_id)
-	{
 	case StageId_1_3:
 	//idle
 	Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
@@ -481,7 +482,8 @@ break;
 break;
 }	
 	//Draw bsod background
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 2816 && stage.song_step <= 3326) {
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 2790 && stage.song_step <= 2926) 
+	{
 	RECT bsod_src = {0, 0, 256, 256};
 	RECT_FIXED bsod_dst = {
 		FIXED_DEC(-165,1) - fx,
@@ -494,7 +496,8 @@ break;
 	}
 
 	//Draw error background
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 2808 && stage.song_step <= 2815) {
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 2808 && stage.song_step <= 2815) 
+	{
 	RECT error_src = {0, 0, 256, 256};
 	RECT_FIXED error_dst = {
 		FIXED_DEC(-165,1) - fx,

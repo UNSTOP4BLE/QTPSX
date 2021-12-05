@@ -201,8 +201,6 @@ void Char_BF_Tick(Character *character)
 			(stage.song_step & 0x7) == 0)
 			character->set_anim(character, CharAnim_Idle);
 		
-            if (stage.stage_id == StageId_2_2 && (pad_state.held & (PAD_L1 | PAD_L2 | PAD_R1 | PAD_R2)))
-			    character->set_anim(character, PlayerAnim_Dodge);
 
 	}
 

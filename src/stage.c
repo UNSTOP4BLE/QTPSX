@@ -1751,6 +1751,9 @@ void Stage_Tick(void)
 				health_dst.w = health_back.w << FIXED_SHIFT;
 				Stage_DrawTex(&stage.tex_hud1, &health_back, &health_dst, stage.bump);
 			}
+            
+			if (stage.stage_id == StageId_2_2 && (pad_state.press & (INPUT_L2)))
+			stage.player->set_anim(stage.player, PlayerAnim_Dodge);
 			
 			//Hardcoded stage stuff
 			switch (stage.stage_id)
