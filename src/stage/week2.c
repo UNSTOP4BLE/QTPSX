@@ -230,7 +230,7 @@ void Week2_tv0l_SetFrame(void *user, u8 frame)
 		//Check if new art shall be loaded
 		const CharFrame *cframe = &tv0l_frame[this->tv0l_frame = frame];
 		if (cframe->tex != this->tv0l_tex_id)
-			Gfx_LoadTex(&this->tex_tv0, this->arc_tv0l_ptr[this->tv0l_tex_id = cframe->tex], 0);
+			Gfx_LoadTex(&this->tex_tv0l, this->arc_tv0l_ptr[this->tv0l_tex_id = cframe->tex], 0);
 	}
 }
 
@@ -244,7 +244,7 @@ void Week2_tv0l_Draw(Back_Week2 *this, fixed_t x, fixed_t y)
 	
 	RECT src = {cframe->src[0], cframe->src[1], cframe->src[2], cframe->src[3]};
 	RECT_FIXED dst = {ox, oy, src.w << FIXED_SHIFT, src.h << FIXED_SHIFT};
-	Stage_DrawTex(&this->tex_tv0, &src, &dst, stage.camera.bzoom);
+	Stage_DrawTex(&this->tex_tv0l, &src, &dst, stage.camera.bzoom);
 }
 
 
@@ -742,7 +742,7 @@ StageBack *Back_Week2_New(void)
 	this->arc_tv0_ptr[1] = Archive_Find(this->arc_tv0, "tv1.tim");
 	//Load tv0 textures
 	this->arc_tv0l = IO_Read("\\WEEK2\\TV.ARC;1");
-	this->arc_tv0l_ptr[0] = Archive_Find(this->arc_tv0l, "tv1.tim");
+	this->arc_tv0l_ptr[0] = Archive_Find(this->arc_tv0l, "tv0.tim");
 	
 	//Load smoke textures
 	this->arc_smoke = IO_Read("\\WEEK2\\SMOKE.ARC;1");
