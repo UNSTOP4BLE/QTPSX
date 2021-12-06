@@ -54,23 +54,25 @@ typedef struct
 
 //tv0 animation and rects
 static const CharFrame tv0_frame[8] = {
+	//tv0.png
 	//idle
-	{0, { 47,   0,  98,  52}, { 91,  52}}, //right
+	{0, { 62,   0,  128,  67}, { 128,  67}}, //right
 	//eye
-	{0, { 47,  52,  98,  52}, { 91,  52}}, //right
+	{0, { 62,  67,  127,  67}, { 128,  67}}, //right
 	//warning
-	{0, {47, 104,  98, 51}, { 91,  52}}, //right 1
-	{0, {47, 155,  98, 51}, { 91,  52}}, //right 2
-	{0, {158, 0,  98, 52}, { 91,  52}}, //right 3 (turned off)
+	{0, {62, 134,  128, 67}, { 128,  67}}, //right 1
+	//tv1.png
+	{1, {0, 0,  128, 67}, { 128,  67}}, //right 2
+	{1, {0, 67, 128, 67}, { 128,  67}}, //right 3 (turned off)
 
 	//error
-	{0, { 158,   52,  98,  52}, { 91,  52}}, //right
+	{1, { 0,   134,  127,  67}, { 128,  67}}, //right
 
 	//bsod
-	{0, { 158,   104,  98, 52}, { 91,  52}}, //right
+	{1, { 128,   67,  128, 67}, { 128,  67}}, //right
 
 	//incomin drop
-	{0, { 158,   156,  98, 51}, { 91,  52}}, //right
+	{1, { 129,   0,  127, 67}, { 128,  67}}, //right
 };
 
 
@@ -139,23 +141,24 @@ void Week2_tv0_Draw(Back_Week2 *this, fixed_t x, fixed_t y)
 
 
 static const CharFrame tv0l_frame[8] = {
+	//tv0.png
 	//idle tv
-	{0, {  0,   0,  47,  39}, { 48,  40}}, //left 
+	{0, {  0,   0,  62,  52}, { 62,  52}}, //left 
 	//red eye tv thing
-	{0, {  0,  52,  47,  39}, { 47,  39}}, //left 
+	{0, {  0,  67,  62,  51}, { 62,  52}}, //left 
 	//warning left
-	{0, {0,   104,  47, 40}, { 47,  39}}, //left 1 
-	{0, {0,   155,  47, 39}, { 47,  39}}, //left 2
-	{0, {0,   207,  48, 39}, { 47,  39}}, //left 3 (turned off)
+	{0, {0,   134,  62, 52}, { 62,  52}}, //left 1 
+	{0, {0,   204,  62, 52}, { 62,  52}}, //left 2
+	{0, {62,   205,  62, 51}, { 62,  52}}, //left 3 (turned off)
 
 	//error left
-	{0, {47,   206,  48, 39}, { 47,  39}}, //left
+	{0, {194,   102,  62, 51}, { 62,  52}}, //left
 
 	//bsod left
-	{0, {95,   206,  49, 39}, { 47,  39}}, //left
+	{0, {194,   0,  62, 51}, { 62,  52}}, //left
 
 	//drop incoming left
-	{0, {143,   216,  48, 40}, { 47,  39}}, //left
+	{0, {194,   51, 62, 51}, { 62,  52}}, //left
 };
 //idle
 static const Animation tv0left_anim[1] = {
@@ -213,7 +216,7 @@ static const CharFrame smoke_frame[18] = {
 static const Animation smoke_anim[1] = {
 
 	//idle smoke
-	{2, (const u8[]){0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, ASCR_BACK, 0}}, 
+	{2, (const u8[]){0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, ASCR_BACK, 0}}, 
 };
 
 //tv0 functions
@@ -282,8 +285,8 @@ void Back_Week2_DrawFG(StageBack *back)
 	fixed_t fx, fy;
 	fx = stage.camera.x;
 	fy = stage.camera.y;
+
 	//Animate and draw smoke
-	
 	if (stage.flag & STAGE_FLAG_JUST_STEP)
 	{
 		switch (stage.song_step & 7)
@@ -294,10 +297,188 @@ void Back_Week2_DrawFG(StageBack *back)
 		}
 	}
 	
-	if (stage.stage_id == StageId_1_3) {
-	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
-	Week2_smoke_Draw(this, FIXED_DEC(-50,1), FIXED_DEC(30,1));
-	Week2_smoke_Draw(this,  FIXED_DEC(50,1), FIXED_DEC(30,1));
+	int smoke = 0;
+	int smokecooldown = 0;
+
+	if (smokecooldown > 0) 
+        smokecooldown -= 1;
+	
+
+	if (smoke == 1)
+	{
+
+       	if (smokecooldown == 0)
+            smoke = 0;
+
+		Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+		Week2_smoke_Draw(this, FIXED_DEC(34,1), FIXED_DEC(37,1));
+
+		Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+		Week2_smoke_Draw(this, FIXED_DEC(290,1), FIXED_DEC(43,1));
+	}
+
+	//holy fuck this is garbage 
+	//smoke 1
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 316 && stage.song_step <= 336) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 2
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 384 && stage.song_step <= 400) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 3
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 448 && stage.song_step <= 464) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 4
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 512 && stage.song_step <= 528) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 5
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 576 && stage.song_step <= 592) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 6
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 640 && stage.song_step <= 656) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 6
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 704 && stage.song_step <= 720) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 7
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 768 && stage.song_step <= 784) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 8
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 832 && stage.song_step <= 848) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 9
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 640 && stage.song_step <= 656) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 10
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1216 && stage.song_step <= 1222) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 11
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1248 && stage.song_step <= 1261) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 12
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1280 && stage.song_step <= 1294) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 13
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1312 && stage.song_step <= 1325) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 14
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1344 && stage.song_step <= 1357) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 15
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1376 && stage.song_step <= 1388) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 16
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1408 && stage.song_step <= 1422) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+	//smoke 17
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1440 && stage.song_step <= 1453) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+    //smoke 18
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1472 && stage.song_step <= 1486) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+    //smoke 19
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1504 && stage.song_step <= 1517) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+    //smoke 20
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1536 && stage.song_step <= 1549) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+    //smoke 21
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1600 && stage.song_step <= 1614) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+    //smoke 22
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1632 && stage.song_step <= 1645) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+    //smoke 23
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1664 && stage.song_step <= 1677) 
+	{
+		smoke = 1;
+		smokecooldown = 50;
+	}
+    //smoke 24
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1696 && stage.song_step <= 1709) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+    //smoke 25
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1408 && stage.song_step <= 1422) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
+	}
+    //smoke 26
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1729 && stage.song_step <= 1742) 
+	{
+		smoke = 1; 
+		smokecooldown = 50;
 	}
 }
 
@@ -556,11 +737,11 @@ StageBack *Back_Week2_New(void)
 	Mem_Free(arc_back);
 
 	//Load tv0 textures
-	this->arc_tv0 = IO_Read("\\WEEK2\\TV0.ARC;1");
+	this->arc_tv0 = IO_Read("\\WEEK2\\TV.ARC;1");
 	this->arc_tv0_ptr[0] = Archive_Find(this->arc_tv0, "tv0.tim");
 	//Load tv0 textures
-	this->arc_tv0l = IO_Read("\\WEEK2\\TV0.ARC;1");
-	this->arc_tv0l_ptr[0] = Archive_Find(this->arc_tv0l, "tv0.tim");
+	this->arc_tv0l = IO_Read("\\WEEK2\\TV.ARC;1");
+	this->arc_tv0l_ptr[0] = Archive_Find(this->arc_tv0l, "tv1.tim");
 	
 	//Load smoke textures
 	this->arc_smoke = IO_Read("\\WEEK2\\SMOKE.ARC;1");
