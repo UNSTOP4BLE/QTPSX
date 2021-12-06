@@ -17,7 +17,7 @@ typedef struct
 	StageBack back;
 	
 	//Textures
-	IO_Data arc_tv0, arc_tv0_ptr[1];
+	IO_Data arc_tv0, arc_tv0_ptr[2];
 	IO_Data arc_tv0l, arc_tv0l_ptr[1];
 	IO_Data arc_smoke, arc_smoke_ptr[1];
 
@@ -739,6 +739,7 @@ StageBack *Back_Week2_New(void)
 	//Load tv0 textures
 	this->arc_tv0 = IO_Read("\\WEEK2\\TV.ARC;1");
 	this->arc_tv0_ptr[0] = Archive_Find(this->arc_tv0, "tv0.tim");
+	this->arc_tv0_ptr[1] = Archive_Find(this->arc_tv0, "tv1.tim");
 	//Load tv0 textures
 	this->arc_tv0l = IO_Read("\\WEEK2\\TV.ARC;1");
 	this->arc_tv0l_ptr[0] = Archive_Find(this->arc_tv0l, "tv1.tim");
