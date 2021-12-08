@@ -23,6 +23,7 @@
 
 #include "stage.h"
 #include "character/gf.h"
+#include "character/qtmenu.h"
 
 //Menu messages
 static const char *funny_messages[][2] = {
@@ -133,6 +134,7 @@ static struct
 	FontData font_bold, font_arial;
 	
 	Character *gf; //Title Girlfriend
+	Character *qtmenu; //Title Girlfriend
 } menu;
 
 #ifdef PSXF_NETWORK
@@ -264,7 +266,7 @@ static void Menu_DrawWeek(const char *week, s32 x, s32 y)
 	else
 	{
 		//Week
-		RECT label_src = {0, 32, 80, 32};
+		RECT label_src = {0, 0, 122, 25};
 		Gfx_BlitTex(&menu.tex_story, &label_src, x, y);
 		
 		//Number
@@ -296,10 +298,11 @@ void Menu_Load(MenuPage page)
 	FontData_Load(&menu.font_arial, Font_Arial);
 	
 	menu.gf = Char_GF_New(FIXED_DEC(62,1), FIXED_DEC(-12,1));
+	menu.qtmenu = Char_qtmenu_New(FIXED_DEC(-53,1), FIXED_DEC(120,1));
 	stage.camera.x = stage.camera.y = FIXED_DEC(0,1);
 	stage.camera.bzoom = FIXED_UNIT;
 	stage.gf_speed = 4;
-	
+
 	//Initialize menu state
 	menu.select = menu.next_select = 0;
 	
@@ -336,6 +339,7 @@ void Menu_Unload(void)
 {
 	//Free title Girlfriend
 	Character_Free(menu.gf);
+	Character_Free(menu.qtmenu);
 }
 
 void Menu_ToStage(StageId id, StageDiff diff, boolean story)
@@ -489,7 +493,7 @@ void Menu_Tick(void)
 			u32 x_rad = (logo_scale * (176 >> 1)) >> FIXED_SHIFT;
 			u32 y_rad = (logo_scale * (112 >> 1)) >> FIXED_SHIFT;
 			
-			RECT logo_src = {0, 0, 176, 112};
+			RECT logo_src = {2, 1, 171, 120};
 			RECT logo_dst = {
 				100 - x_rad + (SCREEN_WIDEADD2 >> 1),
 				68 - y_rad,
@@ -511,18 +515,19 @@ void Menu_Tick(void)
 				u8 press_g = (58  + ((press_lerp * (255 - 58))  >> 8)) >> 1;
 				u8 press_b = (206 + ((press_lerp * (255 - 206)) >> 8)) >> 1;
 				
-				RECT press_src = {0, 112, 256, 32};
+				RECT press_src = {0, 121, 256, 21};
 				Gfx_BlitTexCol(&menu.tex_title, &press_src, (SCREEN_WIDTH - 256) / 2, SCREEN_HEIGHT - 48, press_r, press_g, press_b);
 			}
 			else
 			{
 				//Flash white
-				RECT press_src = {0, (animf_count & 1) ? 144 : 112, 256, 32};
+				RECT press_src = {0, (animf_count & 1) ? 142 : 121, 256, 21};
 				Gfx_BlitTex(&menu.tex_title, &press_src, (SCREEN_WIDTH - 256) / 2, SCREEN_HEIGHT - 48);
 			}
 			
 			//Draw Girlfriend
 			menu.gf->tick(menu.gf);
+			menu.qtmenu->tick(menu.qtmenu);
 			break;
 		}
 		case MenuPage_Main:
@@ -530,7 +535,7 @@ void Menu_Tick(void)
 			static const char *menu_options[] = {
 				"STORY MODE",
 				"FREEPLAY",
-				"MODS",
+				"CREDITS",
 				"OPTIONS",
 				#ifdef PSXF_NETWORK
 					"JOIN SERVER",
@@ -670,14 +675,7 @@ void Menu_Tick(void)
 				const char *name;
 				const char *tracks[3];
 			} menu_options[] = {
-				{NULL, StageId_1_4, "TUTORIAL", {"TUTORIAL", NULL, NULL}},
-				{"1", StageId_1_1, "DADDY DEAREST", {"BOPEEBO", "FRESH", "DADBATTLE"}},
-				{"2", StageId_2_1, "SPOOKY MONTH", {"SPOOKEEZ", "SOUTH", "MONSTER"}},
-				{"3", StageId_3_1, "PICO", {"PICO", "PHILLY NICE", "BLAMMED"}},
-				{"4", StageId_4_1, "MOMMY MUST MURDER", {"SATIN PANTIES", "HIGH", "MILF"}},
-				{"5", StageId_5_1, "RED SNOW", {"COCOA", "EGGNOG", "WINTER HORRORLAND"}},
-				{"6", StageId_6_1, "HATING SIMULATOR", {"SENPAI", "ROSES", "THORNS"}},
-				{"7", StageId_7_1, "TANKMAN", {"UGH", "GUNS", "STRESS"}},
+				{"1", StageId_1_1, "CUTIE", {"CAREFREE", "CARELESS", "CENSORY OVERLOAD"}},
 			};
 			
 			//Initialize page
@@ -799,29 +797,12 @@ void Menu_Tick(void)
 				StageId stage;
 				const char *text;
 			} menu_options[] = {
-				//{StageId_4_4, "TEST"},
-				{StageId_1_4, "TUTORIAL"},
-				{StageId_1_1, "BOPEEBO"},
-				{StageId_1_2, "FRESH"},
-				{StageId_1_3, "DADBATTLE"},
-				{StageId_2_1, "SPOOKEEZ"},
-				{StageId_2_2, "SOUTH"},
-				{StageId_2_3, "MONSTER"},
-				{StageId_3_1, "PICO"},
-				{StageId_3_2, "PHILLY NICE"},
-				{StageId_3_3, "BLAMMED"},
-				{StageId_4_1, "SATIN PANTIES"},
-				{StageId_4_2, "HIGH"},
-				{StageId_4_3, "MILF"},
-				{StageId_5_1, "COCOA"},
-				{StageId_5_2, "EGGNOG"},
-				{StageId_5_3, "WINTER HORRORLAND"},
-				{StageId_6_1, "SENPAI"},
-				{StageId_6_2, "ROSES"},
-				{StageId_6_3, "THORNS"},
-				{StageId_7_1, "UGH"},
-				{StageId_7_2, "GUNS"},
-				{StageId_7_3, "STRESS"},
+				{StageId_1_1, "CAREFREE"},
+				{StageId_1_2, "CARELESS"},
+				{StageId_1_3, "CENSORY OVERLOAD"},
+				{StageId_2_1, "terminate temp shid remove later pls"},
+				{StageId_2_2, "TERMINATION"},
+				{StageId_2_3, "CESSATION"},
 			};
 			
 			//Initialize page
@@ -933,7 +914,7 @@ void Menu_Tick(void)
 			
 			//Draw page label
 			menu.font_bold.draw(&menu.font_bold,
-				"MODS",
+				"CREDITS",
 				16,
 				SCREEN_HEIGHT - 32,
 				FontAlign_Left

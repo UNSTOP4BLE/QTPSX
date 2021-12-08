@@ -1,8 +1,8 @@
 	{ //StageId_1_1 (Carefree)
 		//Characters
-		{Char_BF_New,    FIXED_DEC(60,1),  FIXED_DEC(100,1)},
-		{Char_Dad_New, FIXED_DEC(-120,1),  FIXED_DEC(100,1)},
-		{Char_GF_New,     FIXED_DEC(0,1),    FIXED_DEC(0,1)},
+		{Char_BF_New,    FIXED_DEC(210,1),  FIXED_DEC(60,1)},
+		{Char_Dad_New, FIXED_DEC(62,1),  FIXED_DEC(60,1)},
+		{Char_GF_New,     FIXED_DEC(140,1),    FIXED_DEC(-60,1)},
 		
 		//Stage background
 		Back_Week4_New,
@@ -16,9 +16,9 @@
 	},
 	{ //StageId_1_2 (Careless)
 		//Characters
-		{Char_BF_New,    FIXED_DEC(-600,1),  FIXED_DEC(100,1)},
-		{Char_qtm_New, FIXED_DEC(120,1),  FIXED_DEC(100,1)},
-		{Char_GF_New,     FIXED_DEC(-1000,1),    FIXED_DEC(0,1)},
+		{Char_BF_New,    FIXED_DEC(210,1),  FIXED_DEC(60,1)},
+		{Char_qtm_New, FIXED_DEC(62,1),  FIXED_DEC(60,1)},
+		{Char_GF_New,     FIXED_DEC(140,1),    FIXED_DEC(-60,1)},
 		
 		//Stage background
 		Back_Week2_New,
@@ -32,9 +32,9 @@
 	},
 	{ //StageId_1_3 (Censory-Overload)
 		//Characters
-		{Char_BF_New,    FIXED_DEC(150,1),  FIXED_DEC(100,1)},
-		{Char_bot_New, FIXED_DEC(65,1),  FIXED_DEC(60,1)},
-		{Char_GF_New,     FIXED_DEC(100,1),    FIXED_DEC(-60,1)},
+		{Char_BF_New,    FIXED_DEC(210,1),  FIXED_DEC(60,1)},
+		{Char_bot_New, FIXED_DEC(62,1),  FIXED_DEC(60,1)},
+		{Char_GF_New,     FIXED_DEC(140,1),    FIXED_DEC(-60,1)},
 		
 		//Stage background
 		Back_Week2_New,
@@ -65,9 +65,9 @@
 	
 	{ //StageId_2_1 (Terminate)
 		//Characters
-		{Char_BF_New,      FIXED_DEC(56,1),   FIXED_DEC(85,1)},
-		{Char_Dad_New,  FIXED_DEC(-90,1),   FIXED_DEC(85,1)},
-		{Char_GF_New,       FIXED_DEC(0,1),  FIXED_DEC(-15,1)},
+		{Char_BF_New,    FIXED_DEC(210,1),  FIXED_DEC(60,1)},
+		{Char_bot_New, FIXED_DEC(62,1),  FIXED_DEC(60,1)},
+		{Char_GF_New,     FIXED_DEC(140,1),    FIXED_DEC(-60,1)},
 		
 		//Stage background
 		Back_Week2_New,
@@ -81,10 +81,10 @@
 	},
 	{ //StageId_2_2 (Termination)
 		//Characters
-		{Char_BF_New,      FIXED_DEC(56,1),   FIXED_DEC(85,1)},
-		{Char_Dad_New, FIXED_DEC(-90,1),   FIXED_DEC(85,1)},
-		{Char_GF_New,       FIXED_DEC(0,1),  FIXED_DEC(-15,1)},
-		
+		{Char_BF_New,    FIXED_DEC(210,1),  FIXED_DEC(60,1)},
+		{Char_bot_New, FIXED_DEC(62,1),  FIXED_DEC(60,1)},
+		{Char_GF_New,     FIXED_DEC(140,1),    FIXED_DEC(-60,1)},
+
 		//Stage background
 		Back_Week2_New,
 		

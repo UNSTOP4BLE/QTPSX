@@ -26,7 +26,7 @@
 #define STAGE_PERFECT //Play all notes perfectly
 //#define STAGE_NOHUD //Disable the HUD
 
-#define STAGE_FREECAM //Freecam
+//#define STAGE_FREECAM //Freecam
 
 static const fixed_t note_x[8] = {
 	//BF
@@ -49,6 +49,7 @@ static const u16 note_key[] = {INPUT_LEFT, INPUT_DOWN, INPUT_UP, INPUT_RIGHT};
 #include "character/qtm.h"
 #include "character/bot.h"
 #include "character/gf.h"
+#include "character/qtmenu.h"
 
 #include "stage/week2.h"
 #include "stage/week4.h"
@@ -59,6 +60,11 @@ static const StageDef stage_defs[StageId_Max] = {
 
 //Stage state
 Stage stage;
+
+//timer
+int timercount = 0;
+
+
 
 //Stage music functions
 static void Stage_StartVocal(void)
@@ -1393,6 +1399,11 @@ void Stage_Tick(void)
 	{
 		case StageState_Play:
 		{
+		
+              FntPrint("timercount %d ", timercount);
+              timercount += 1;
+             //print timer text */
+
 			//Clear per-frame flags
 			stage.flag &= ~(STAGE_FLAG_JUST_STEP | STAGE_FLAG_SCORE_REFRESH);
 			

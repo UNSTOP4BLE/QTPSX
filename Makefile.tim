@@ -11,6 +11,7 @@ all: \
 	iso/bf/weeb.arc \
 	iso/dad/main.arc \
 	iso/qtm/main.arc \
+	iso/qtmenu/main.arc \
 	iso/bot/main.arc \
 	iso/gf/main.arc \
 	iso/gf/speaker.tim \
@@ -37,6 +38,8 @@ iso/bf/weeb.arc: iso/bf/weeb0.tim iso/bf/weeb1.tim
 iso/dad/main.arc: iso/dad/idle0.tim iso/dad/idle1.tim iso/dad/left.tim iso/dad/down.tim iso/dad/up.tim iso/dad/right.tim
 
 iso/qtm/main.arc: iso/qtm/idle0.tim iso/qtm/idle1.tim iso/qtm/left.tim  iso/qtm/leftb.tim iso/qtm/down.tim iso/qtm/downb.tim  iso/qtm/up.tim iso/qtm/upb.tim iso/qtm/right.tim iso/qtm/rightb.tim
+
+iso/qtmenu/main.arc: iso/qtmenu/idle0.tim
 
 iso/bot/main.arc: iso/bot/idle0.tim iso/bot/idle1.tim iso/bot/idle2.tim iso/bot/idle3.tim iso/bot/idle4.tim iso/bot/idle5.tim iso/bot/idle6.tim iso/bot/idle7.tim iso/bot/idle8.tim iso/bot/idle9.tim iso/bot/left0.tim iso/bot/left1.tim iso/bot/left2.tim iso/bot/left3.tim iso/bot/down0.tim iso/bot/down1.tim iso/bot/down2.tim iso/bot/down3.tim iso/bot/up0.tim iso/bot/up1.tim iso/bot/up2.tim iso/bot/up3.tim iso/bot/right0.tim iso/bot/right1.tim iso/bot/right2.tim iso/bot/right3.tim
 # GF

@@ -297,191 +297,162 @@ void Back_Week2_DrawFG(StageBack *back)
 		}
 	}
 	
-	int smoke = 0;
-	int smokecooldown = 0;
-
-	if (smokecooldown > 0) 
-        smokecooldown -= 1;
-	
-
-	if (smoke == 1)
-	{
-
-       	if (smokecooldown == 0)
-            smoke = 0;
-
-		Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
-		Week2_smoke_Draw(this, FIXED_DEC(34,1), FIXED_DEC(37,1));
-
-		Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
-		Week2_smoke_Draw(this, FIXED_DEC(290,1), FIXED_DEC(43,1));
-	}
-
 	//holy fuck this is garbage 
 	//smoke 1
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 316 && stage.song_step <= 336) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 316 && stage.song_step <= 336)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 2
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 384 && stage.song_step <= 400) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 384 && stage.song_step <= 400)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 3
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 448 && stage.song_step <= 464) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 448 && stage.song_step <= 464)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 4
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 512 && stage.song_step <= 528) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 512 && stage.song_step <= 528)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 5
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 576 && stage.song_step <= 592) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 576 && stage.song_step <= 592)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 6
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 640 && stage.song_step <= 656) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 640 && stage.song_step <= 656)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 6
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 704 && stage.song_step <= 720) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 704 && stage.song_step <= 720)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 7
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 768 && stage.song_step <= 784) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 768 && stage.song_step <= 784)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 8
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 832 && stage.song_step <= 848) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 832 && stage.song_step <= 848)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 9
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 640 && stage.song_step <= 656) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 640 && stage.song_step <= 656)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 10
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1216 && stage.song_step <= 1222) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1216 && stage.song_step <= 1222)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 11
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1248 && stage.song_step <= 1261) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1248 && stage.song_step <= 1261)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 12
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1280 && stage.song_step <= 1294) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1280 && stage.song_step <= 1294)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 13
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1312 && stage.song_step <= 1325) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1312 && stage.song_step <= 1325)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 14
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1344 && stage.song_step <= 1357) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1344 && stage.song_step <= 1357)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 15
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1376 && stage.song_step <= 1388) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1376 && stage.song_step <= 1388)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
 	//smoke 16
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1408 && stage.song_step <= 1422) 
+	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1408 && stage.song_step <= 1422)
 	{
-		smoke = 1; 
-		smokecooldown = 50;
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
+	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
+ 
+	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
+	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
 	}
-	//smoke 17
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1440 && stage.song_step <= 1453) 
-	{
-		smoke = 1; 
-		smokecooldown = 50;
-	}
-    //smoke 18
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1472 && stage.song_step <= 1486) 
-	{
-		smoke = 1; 
-		smokecooldown = 50;
-	}
-    //smoke 19
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1504 && stage.song_step <= 1517) 
-	{
-		smoke = 1; 
-		smokecooldown = 50;
-	}
-    //smoke 20
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1536 && stage.song_step <= 1549) 
-	{
-		smoke = 1; 
-		smokecooldown = 50;
-	}
-    //smoke 21
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1600 && stage.song_step <= 1614) 
-	{
-		smoke = 1; 
-		smokecooldown = 50;
-	}
-    //smoke 22
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1632 && stage.song_step <= 1645) 
-	{
-		smoke = 1; 
-		smokecooldown = 50;
-	}
-    //smoke 23
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1664 && stage.song_step <= 1677) 
-	{
-		smoke = 1;
-		smokecooldown = 50;
-	}
-    //smoke 24
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1696 && stage.song_step <= 1709) 
-	{
-		smoke = 1; 
-		smokecooldown = 50;
-	}
-    //smoke 25
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1408 && stage.song_step <= 1422) 
-	{
-		smoke = 1; 
-		smokecooldown = 50;
-	}
-    //smoke 26
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 1729 && stage.song_step <= 1742) 
-	{
-		smoke = 1; 
-		smokecooldown = 50;
-	}
-}
 
+}
 void Back_Week2_DrawBG(StageBack *back)
 {
 	Back_Week2 *this = (Back_Week2*)back;
@@ -490,6 +461,12 @@ void Back_Week2_DrawBG(StageBack *back)
 	fx = stage.camera.x;
 	fy = stage.camera.y;
 
+	//idle tv
+	Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
+	Week2_tv0l_Draw(this, FIXED_DEC(40,1) - fx, FIXED_DEC(37,1) - fy);
+    
+	Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
+	Week2_tv0_Draw(this, FIXED_DEC(360,1) - fx, FIXED_DEC(43,1) - fy);
 /*
 	░█████╗░░█████╗░██████╗░███████╗██╗░░░░░███████╗░██████╗░██████╗
 	██╔══██╗██╔══██╗██╔══██╗██╔════╝██║░░░░░██╔════╝██╔════╝██╔════╝
@@ -534,19 +511,11 @@ void Back_Week2_DrawBG(StageBack *back)
 		}
 	}
 
-
-	//idle
-	Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
-	Week2_tv0l_Draw(this, FIXED_DEC(34,1) - fx, FIXED_DEC(37,1) - fy);
-    
-	Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
-	Week2_tv0_Draw(this, FIXED_DEC(290,1) - fx, FIXED_DEC(43,1) - fy);
-	
-     
 	switch(stage.stage_id)
 	{
 	case StageId_1_2:
-      
+
+     
 	//eye
     if (stage.song_step >= 404 && stage.song_step <= 420)
 	{
@@ -595,12 +564,6 @@ void Back_Week2_DrawBG(StageBack *back)
 	░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚══════╝░╚════╝░╚═╝░░╚═╝╚═════╝░*/
 
 	case StageId_1_3:
-	//idle
-	Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
-	Week2_tv0l_Draw(this, FIXED_DEC(34,1) - fx, FIXED_DEC(37,1) - fy);
-    
-	Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
-	Week2_tv0_Draw(this, FIXED_DEC(290,1) - fx, FIXED_DEC(43,1) - fy);
       
 	//eye
     if (stage.song_step >= 256 && stage.song_step <= 316)
