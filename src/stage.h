@@ -238,6 +238,8 @@ typedef struct
 	Section *section_base;
 	
 	s16 song_step;
+
+	s16 timercount;
 	
 	u8 gf_speed; //Typically 4 steps, changes in Fresh
 	

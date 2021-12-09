@@ -28,6 +28,8 @@
 
 //#define STAGE_FREECAM //Freecam
 
+
+
 static const fixed_t note_x[8] = {
 	//BF
 	 FIXED_DEC(26,1) + FIXED_DEC(SCREEN_WIDEADD,4),
@@ -61,8 +63,7 @@ static const StageDef stage_defs[StageId_Max] = {
 //Stage state
 Stage stage;
 
-//timer
-int timercount = 0;
+
 
 
 
@@ -1108,6 +1109,7 @@ static void Stage_LoadState(void)
 {
 	//Initialize stage state
 	stage.flag = STAGE_FLAG_VOCAL_ACTIVE;
+	stage.timercount = 0;
 	
 	stage.gf_speed = 1 << 2;
 	
@@ -1399,10 +1401,13 @@ void Stage_Tick(void)
 	{
 		case StageState_Play:
 		{
-		
-              FntPrint("timercount %d ", timercount);
-              timercount += 1;
+			//timer
+              FntPrint("timercount %d ", stage.timercount);
+              stage.timercount++;
+
              //print timer text */
+
+			
 
 			//Clear per-frame flags
 			stage.flag &= ~(STAGE_FLAG_JUST_STEP | STAGE_FLAG_SCORE_REFRESH);
@@ -1733,6 +1738,10 @@ void Stage_Tick(void)
 					score_dst.x += FIXED_DEC(7,1);
 				}
 			}
+
+			//Draw stage foreground
+			if (stage.back->draw_fg != NULL)
+				stage.back->draw_fg(stage.back);
 			
 			if (stage.mode < StageMode_2P)
 			{
@@ -1790,9 +1799,7 @@ void Stage_Tick(void)
 					break;
 			}
 			
-			//Draw stage foreground
-			if (stage.back->draw_fg != NULL)
-				stage.back->draw_fg(stage.back);
+			
 			
 			//Tick foreground objects
 			ObjectList_Tick(&stage.objlist_fg);
