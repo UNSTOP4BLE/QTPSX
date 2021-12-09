@@ -306,11 +306,181 @@ void Back_Week2_DrawFG(StageBack *back)
 	if (stage.stage_id == StageId_1_3)
 	switch (stage.timercount)
 	{
-	case 100:
+	case 1612:
       smoke = 1;
-	case 210:
+	case 1919:
       smoke = 1;
-	case 320:
+	case 2219:
+	  smoke = 1;
+	case 2523:
+	  smoke = 1;
+	case 2816:
+	  smoke = 1;
+	case 3130:
+	  smoke = 1;
+	case 3440:
+	  smoke = 1;
+	case 3725:
+	  smoke = 1;
+	case 4025:
+	  smoke = 1;
+	case 5844:
+	  smoke = 1;
+	case 5996:
+	  smoke = 1;
+	case 6143:
+	  smoke = 1;
+	case 6344:
+	  smoke = 1;
+	case 6448:
+	  smoke = 1;
+	case 6597:
+	  smoke = 1;
+	case 6750:
+	  smoke = 1;
+	case 6884:
+	  smoke = 1;
+	case 7050:
+	  smoke = 1;
+	case 7210:
+	  smoke = 1;
+	case 7352:
+	  smoke = 1;
+	case 7543:
+	  smoke = 1;
+	case 7652:
+	  smoke = 1;
+	case 7812:
+	  smoke = 1;
+	case 7952:
+	  smoke = 1;
+	case 8140:
+	  smoke = 1;
+	case 8264:
+	  smoke = 1;
+	case 10690:
+	  smoke = 1;
+	case 10765:
+	  smoke = 1;
+	case 10860:
+	  smoke = 1;
+	case 10931:
+	  smoke = 1;
+	case 10976:
+	  smoke = 1;
+	case 11054:
+	  smoke = 1;
+	case 11128:
+	  smoke = 1;
+	case 11206:
+	  smoke = 1;
+	case 11281:
+	  smoke = 1;
+	case 11361:
+	  smoke = 1;
+	case 11446:
+	  smoke = 1;
+	case 11513:
+	  smoke = 1;
+	case 11587:
+	  smoke = 1;
+	case 11660:
+	  smoke = 1;
+	case 11732:
+	  smoke = 1;
+	case 11804:
+	  smoke = 1;
+	case 11884:
+	  smoke = 1;
+	case 11956:
+	  smoke = 1;
+	case 12044:
+	  smoke = 1;
+	case 12112:
+	  smoke = 1;
+	case 12190:
+	  smoke = 1;
+	case 12260:
+	  smoke = 1;
+	case 12335:
+	  smoke = 1;
+	case 12417:
+	  smoke = 1;
+	case 12486:
+	  smoke = 1;
+	case 12564:
+	  smoke = 1;
+	case 12581:
+	  smoke = 1;
+	case 12714:
+	  smoke = 1;
+	case 12792:
+	  smoke = 1;
+	case 12863:
+	  smoke = 1;
+	case 12941:
+	  smoke = 1;
+	case 13034:
+	  smoke = 1;
+	case 13111:
+	  smoke = 1;
+	//bg switch error 13355
+	case 13355:
+	  smoke = 1;
+	//bg switch bsod 13392 -- 15809
+	case 15819:
+	  smoke = 1;
+	case 15852:
+	  smoke = 1;
+	case 16001:
+	  smoke = 1;
+	case 16073:
+	  smoke = 1;
+	case 16158:
+	  smoke = 1;
+	case 16211:
+	  smoke = 1;
+	case 16258:
+	  smoke = 1;
+	case 16379:
+	  smoke = 1;
+	case 16424:
+	  smoke = 1;
+	case 16549:
+	  smoke = 1;
+	case 16608:
+	  smoke = 1;
+	case 16675:
+	  smoke = 1;
+	case 16796:
+	  smoke = 1;
+	case 16836:
+	  smoke = 1;
+	case 0:
+	  smoke = 1;
+	case 0:
+	  smoke = 1;
+	case 0:
+	  smoke = 1;
+	case 0:
+	  smoke = 1;
+	case 0:
+	  smoke = 1;
+	case 0:
+	  smoke = 1;
+	case 0:
+	  smoke = 1;
+	case 0:
+	  smoke = 1;
+	case 0:
+	  smoke = 1;
+	case 0:
+	  smoke = 1;
+	case 0:
+	  smoke = 1;
+	case 0:
+	  smoke = 1;
+	case 0:
 	  smoke = 1;
 	}
 
