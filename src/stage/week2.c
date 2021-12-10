@@ -12,6 +12,7 @@
 
 int  smoke = 0;
 int  cooldown = 0;
+int bsod = 0;
 
 
 
@@ -84,34 +85,34 @@ static const CharFrame tv0_frame[8] = {
 
 static const Animation tv0right_anim[1] = {
 
-	{2, (const u8[]){0, ASCR_BACK, 0}}, 
+	{2, (const u8[]){0, ASCR_BACK, 1}}, 
 };
 
 
 static const Animation tv0eyeright_anim[1] = {
 
-	{2, (const u8[]){1, ASCR_BACK, 0}},
+	{2, (const u8[]){1, ASCR_BACK, 1}},
 };   
 
 
 static const Animation tv0wright_anim[1] = {
 
-	{2, (const u8[]){2, 3, 4, ASCR_BACK, 0}}, 
+	{2, (const u8[]){2, 3, 4, ASCR_BACK, 1}}, 
 };
 
 static const Animation tv0errright_anim[1] = {
 
-	{2, (const u8[]){5, ASCR_BACK, 0}}, 
+	{2, (const u8[]){5, ASCR_BACK, 1}}, 
 };
 
 static const Animation tv0bsodright_anim[1] = {
 
-	{2, (const u8[]){6, ASCR_BACK, 0}}, 
+	{2, (const u8[]){6, ASCR_BACK, 1}}, 
 };
 
 static const Animation tv0dicright_anim[1] = {
 
-	{2, (const u8[]){7, ASCR_BACK, 0}}, 
+	{2, (const u8[]){7, ASCR_BACK, 1}}, 
 };
 
 //tv0 functions
@@ -168,32 +169,32 @@ static const CharFrame tv0l_frame[8] = {
 //idle
 static const Animation tv0left_anim[1] = {
 
-	{2, (const u8[]){0, ASCR_BACK, 0}},
+	{2, (const u8[]){0, ASCR_BACK, 1}},
 };
 //eye
 static const Animation tv0eyeleft_anim[1] = {
 
-	{2, (const u8[]){1, ASCR_BACK, 0}},
+	{2, (const u8[]){1, ASCR_BACK, 1}},
 };
 //warning
 static const Animation tv0wleft_anim[1] = {
 
-	{2, (const u8[]){2, 3, 4, ASCR_BACK, 0}},
+	{2, (const u8[]){2, 3, 4, ASCR_BACK, 1}},
 };
 //error
 static const Animation tv0errleft_anim[1] = {
 
-	{2, (const u8[]){5, ASCR_BACK, 0}},
+	{2, (const u8[]){5, ASCR_BACK, 1}},
 };
 //bsod
 static const Animation tv0bsodleft_anim[1] = {
 
-	{2, (const u8[]){6, ASCR_BACK, 0}},
+	{2, (const u8[]){6, ASCR_BACK, 1}},
 };
 //drop incoming
 static const Animation tv0dicleft_anim[1] = {
 
-	{2, (const u8[]){7, ASCR_BACK, 0}},
+	{2, (const u8[]){7, ASCR_BACK, 1}},
 };
 
 //smoke animation and rects
@@ -456,31 +457,41 @@ void Back_Week2_DrawFG(StageBack *back)
 	  smoke = 1;
 	case 16836:
 	  smoke = 1;
-	case 0:
+	case 16897:
 	  smoke = 1;
-	case 0:
+	case 16981:
 	  smoke = 1;
-	case 0:
+	case 17047:
 	  smoke = 1;
-	case 0:
+	case 17127:
 	  smoke = 1;
-	case 0:
+	case 17218:
 	  smoke = 1;
-	case 0:
+	case 17293:
 	  smoke = 1;
-	case 0:
+	case 17355:
 	  smoke = 1;
-	case 0:
+	case 17429:
 	  smoke = 1;
-	case 0:
+	case 17507:
 	  smoke = 1;
-	case 0:
+	case 17578:
 	  smoke = 1;
-	case 0:
+	case 17657:
 	  smoke = 1;
-	case 0:
+	case 17736:
 	  smoke = 1;
-	case 0:
+	case 17820:
+	  smoke = 1;
+	case 17883:
+	  smoke = 1;
+	case 17960:
+	  smoke = 1;
+	case 18042:
+	  smoke = 1;
+	case 18108:
+	  smoke = 1;
+	case 18190:
 	  smoke = 1;
 	}
 
@@ -613,6 +624,16 @@ void Back_Week2_DrawBG(StageBack *back)
 
 	case StageId_1_3:
       
+	 if (stage.timercount >= 13392)
+	{
+
+    Animatable_Animate(&this->tv0bsodleft_animatable, (void*)this, Week2_tv0l_SetFrame);
+    
+	Animatable_Animate(&this->tv0bsodright_animatable, (void*)this, Week2_tv0_SetFrame);
+
+	
+
+  }
 	//eye
     if (stage.song_step >= 256 && stage.song_step <= 316)
 	{
@@ -672,9 +693,11 @@ void Back_Week2_DrawBG(StageBack *back)
 	break;
   default:
 break;
-}	
+
+
+}
 	//Draw bsod background
-	if (stage.stage_id == StageId_1_3 && stage.song_step >= 2790 && stage.song_step <= 2926) 
+	if (stage.stage_id == StageId_1_3 && stage.timercount >= 13392) 
 	{
 	RECT bsod_src = {0, 0, 256, 256};
 	RECT_FIXED bsod_dst = {
