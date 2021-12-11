@@ -65,15 +65,15 @@ static const CharFrame char_bot_frame[] = {
 };
 
 static const Animation char_bot_anim[CharAnim_Max] = {
-    {2, (const u8[]){ 0, 1, 1, 2, 3, ASCR_CHGANI, CharAnim_Idle}}, //CharAnim_Idle
+    {1, (const u8[]){ 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, ASCR_CHGANI, CharAnim_Idle}}, //CharAnim_Idle
 	{2, (const u8[]){ 4, 5, ASCR_BACK, 1}},         //CharAnim_Left
-	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_LeftAlt
+	{1, (const u8[]){ 4, ASCR_CHGANI, CharAnim_LeftAlt}}, //CharAnim_LeftAlt
 	{2, (const u8[]){ 6, 7, ASCR_BACK, 1}},         //CharAnim_Down
-	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_DownAlt
+	{1, (const u8[]){ 4, ASCR_CHGANI, CharAnim_DownAlt}},   //CharAnim_DownAlt
 	{2, (const u8[]){ 8, 9, ASCR_BACK, 1}},         //CharAnim_Up
-	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_UpAlt
+	{1, (const u8[]){ 4, ASCR_CHGANI, CharAnim_UpAlt}},   //CharAnim_UpAlt
 	{2, (const u8[]){ 10, 11, ASCR_BACK, 1}},         //CharAnim_Right
-	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_RightAlt
+	{1, (const u8[]){ 4, ASCR_CHGANI, CharAnim_RightAlt}},   //CharAnim_RightAlt
 };
 
 //bot character functions
