@@ -18,28 +18,14 @@ enum
 	bot_ArcMain_Idle1,
 	bot_ArcMain_Idle2,
 	bot_ArcMain_Idle3,
-	bot_ArcMain_Idle4,
-	bot_ArcMain_Idle5,
-	bot_ArcMain_Idle6,
-	bot_ArcMain_Idle7,
-	bot_ArcMain_Idle8,
-	bot_ArcMain_Idle9,
 	bot_ArcMain_Left0,
 	bot_ArcMain_Left1,
-	bot_ArcMain_Left2,
-	bot_ArcMain_Left3,
 	bot_ArcMain_Down0,
 	bot_ArcMain_Down1,
-	bot_ArcMain_Down2,
-	bot_ArcMain_Down3,
 	bot_ArcMain_Up0,
 	bot_ArcMain_Up1,
-	bot_ArcMain_Up2,
-	bot_ArcMain_Up3,
 	bot_ArcMain_Right0,
 	bot_ArcMain_Right1,
-	bot_ArcMain_Right2,
-	bot_ArcMain_Right3,
 	
 	bot_Arc_Max,
 };
@@ -60,46 +46,33 @@ typedef struct
 //bot character definitions
 static const CharFrame char_bot_frame[] = {
 	{bot_ArcMain_Idle0, {  18,   89, 202, 163}, { 114, 163}}, 
-	{bot_ArcMain_Idle1, {  17,   93, 217, 161}, { 123, 161}}, 
-	{bot_ArcMain_Idle2, {  10,   88, 223, 161}, { 124, 161}}, 
-	{bot_ArcMain_Idle3, {  10,   92, 223, 162}, { 126, 162}}, 
-	{bot_ArcMain_Idle4, {  8,    93, 214, 162}, { 120, 162}},  
-	{bot_ArcMain_Idle5, {  27,   90, 200, 163}, { 106, 163}},  
-	{bot_ArcMain_Idle6, {  38,   86, 193, 161}, { 103, 161}},  
-	{bot_ArcMain_Idle7, {  37,   86, 188, 163}, { 103, 163}},  
-	{bot_ArcMain_Idle8, {  36,   86, 191, 165}, { 103, 165}},  
-	{bot_ArcMain_Idle9, {  30,   83, 200, 166}, { 112, 166}},  
+	{bot_ArcMain_Idle1, {  10,   88, 223, 161}, { 124, 161}}, 
+	{bot_ArcMain_Idle2, {  8,    93, 214, 162}, { 120, 162}},  
+	{bot_ArcMain_Idle3, {  38,   86, 193, 161}, { 103, 161}}, 
 	
 	{bot_ArcMain_Left0, {  17,   62, 186, 190}, { 144, 190}},  
 	{bot_ArcMain_Left1, {  39,   61, 186, 191}, { 141, 191}},  
-	{bot_ArcMain_Left2, {  13,   56, 183, 197}, { 141, 197}},  
-	{bot_ArcMain_Left3, {  34,   49, 182, 199}, { 141, 199}},  
 	
 	{bot_ArcMain_Down0, {  32,   106, 178, 147}, { 121, 147}},  
 	{bot_ArcMain_Down1, {  14,   106, 182, 146}, { 120, 146}},  
-	{bot_ArcMain_Down2, {  25,   98,  192, 144}, { 121, 144}},  
-	{bot_ArcMain_Down3, {  29,   108, 203, 140}, { 127, 140}}, 
+
 	
 	{bot_ArcMain_Up0, {  18,   58, 206, 193}, { 123, 193}},  
-	{bot_ArcMain_Up1, {  13,   60, 207, 193}, { 124, 193}},  
-	{bot_ArcMain_Up2, {  25,   52, 201, 192}, { 122, 192}},  
-	{bot_ArcMain_Up3, {  25,   54, 199, 194}, { 119, 194}},  
+	{bot_ArcMain_Up1, {  13,   60, 207, 193}, { 124, 193}},   
 
 	{bot_ArcMain_Right0, {  55,   103, 150, 151}, { 52, 151}},  
-	{bot_ArcMain_Right1, {  61,   100, 151, 151}, { 53, 151}},  
-	{bot_ArcMain_Right2, {  66,   103, 146, 152}, { 54, 152}},  
-	{bot_ArcMain_Right3, {  67,   99, 141, 152}, { 54, 152}},  
+	{bot_ArcMain_Right1, {  61,   100, 151, 151}, { 53, 151}},   
 };
 
 static const Animation char_bot_anim[CharAnim_Max] = {
-    {2, (const u8[]){ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, ASCR_CHGANI, CharAnim_Idle}}, //CharAnim_Idle
-	{2, (const u8[]){ 10, 11, 12, 13, ASCR_BACK, 1}},         //CharAnim_Left
+    {2, (const u8[]){ 0, 1, 1, 2, 3, ASCR_CHGANI, CharAnim_Idle}}, //CharAnim_Idle
+	{2, (const u8[]){ 4, 5, ASCR_BACK, 1}},         //CharAnim_Left
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_LeftAlt
-	{2, (const u8[]){ 14, 15, 16, 17, ASCR_BACK, 1}},         //CharAnim_Down
+	{2, (const u8[]){ 6, 7, ASCR_BACK, 1}},         //CharAnim_Down
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_DownAlt
-	{2, (const u8[]){ 18, 19, 20, 21, ASCR_BACK, 1}},         //CharAnim_Up
+	{2, (const u8[]){ 8, 9, ASCR_BACK, 1}},         //CharAnim_Up
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_UpAlt
-	{2, (const u8[]){ 22, 23, 24, 25, ASCR_BACK, 1}},         //CharAnim_Right
+	{2, (const u8[]){ 10, 11, ASCR_BACK, 1}},         //CharAnim_Right
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_RightAlt
 };
 
@@ -182,28 +155,14 @@ Character *Char_bot_New(fixed_t x, fixed_t y)
 		"idle1.tim", 
 		"idle2.tim", 
 		"idle3.tim", 
-		"idle4.tim", 
-		"idle5.tim", 
-		"idle6.tim", 
-		"idle7.tim", 
-		"idle8.tim", 
-		"idle9.tim", 
 		"left0.tim", 
 		"left1.tim", 
-		"left2.tim", 
-		"left3.tim", 
 		"down0.tim",  
-		"down1.tim",  
-		"down2.tim",  
-		"down3.tim",  
+		"down1.tim",   
 		"up0.tim", 
 		"up1.tim", 
-		"up2.tim", 
-		"up3.tim",    
 		"right0.tim", 
 		"right1.tim", 
-		"right2.tim", 
-		"right3.tim", 
 		NULL
 	};
 	IO_Data *arc_ptr = this->arc_ptr;

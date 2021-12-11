@@ -41,9 +41,9 @@ iso/qtm/main.arc: iso/qtm/idle0.tim iso/qtm/idle1.tim iso/qtm/left.tim  iso/qtm/
 
 iso/qtmenu/main.arc: iso/qtmenu/idle0.tim
 
-iso/bot/main.arc: iso/bot/idle0.tim iso/bot/idle1.tim iso/bot/idle2.tim iso/bot/idle3.tim iso/bot/idle4.tim iso/bot/idle5.tim iso/bot/idle6.tim iso/bot/idle7.tim iso/bot/idle8.tim iso/bot/idle9.tim iso/bot/left0.tim iso/bot/left1.tim iso/bot/left2.tim iso/bot/left3.tim iso/bot/down0.tim iso/bot/down1.tim iso/bot/down2.tim iso/bot/down3.tim iso/bot/up0.tim iso/bot/up1.tim iso/bot/up2.tim iso/bot/up3.tim iso/bot/right0.tim iso/bot/right1.tim iso/bot/right2.tim iso/bot/right3.tim
+iso/bot/main.arc: iso/bot/idle0.tim iso/bot/idle1.tim iso/bot/idle2.tim iso/bot/idle3.tim iso/bot/left0.tim iso/bot/left1.tim iso/bot/down0.tim iso/bot/down1.tim iso/bot/up0.tim iso/bot/up1.tim iso/bot/right0.tim iso/bot/right1.tim
 # GF
-iso/gf/main.arc: iso/gf/bopleft.tim iso/gf/bopright.tim iso/gf/cry.tim
+iso/gf/main.arc: iso/gf/bopleft.tim iso/gf/bopright.tim iso/gf/scared.tim iso/gf/cry.tim
 
 # Week 2
 iso/week2/back.arc: iso/week2/back0.tim iso/week2/error.tim iso/week2/bsod.tim

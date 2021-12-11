@@ -20,6 +20,7 @@ enum
 	GF_ArcMain_BopLeft,
 	GF_ArcMain_BopRight,
 	GF_ArcMain_Cry,
+	GF_ArcMain_UpAlt,
 	
 	GF_Arc_Max,
 };
@@ -39,8 +40,6 @@ typedef struct
 	//Speaker
 	Speaker speaker;
 	
-	//Pico test
-	u16 *pico_p;
 } Char_GF;
 
 //GF character definitions
@@ -61,6 +60,11 @@ static const CharFrame char_gf_frame[] = {
 	
 	{GF_ArcMain_Cry, {  0,   0,  73, 101}, { 37,  73}}, //12 cry
 	{GF_ArcMain_Cry, { 73,   0,  73, 101}, { 37,  73}}, //13 cry
+
+	{GF_ArcMain_UpAlt, {  0,   0,  77, 98}, { 43,  74}}, //14
+	{GF_ArcMain_UpAlt, {  77,   0,  77, 98}, { 43,  74}}, //15
+	{GF_ArcMain_UpAlt, {  0,   98,  77, 98}, { 43,  74}}, //16
+	{GF_ArcMain_UpAlt, {  77,   98,  77, 98}, { 43,  74}}, //17
 };
 
 static const Animation char_gf_anim[CharAnim_Max] = {
@@ -68,9 +72,9 @@ static const Animation char_gf_anim[CharAnim_Max] = {
 	{1, (const u8[]){ 0,  0,  1,  1,  2,  2,  3,  4,  4,  5, ASCR_BACK, 1}}, //CharAnim_Left
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_LeftAlt
 	{2, (const u8[]){12, 13, ASCR_REPEAT}},                                  //CharAnim_Down
-	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_DownAlt
+	{2, (const u8[]){ 14, 15, 16, 17, ASCR_BACK, 1}},                           //CharAnim_DownAlt
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_Up
-	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_UpAlt
+	{2, (const u8[]){ 14, 15, 16, 17, ASCR_BACK, 1}},         //CharAnim_UpAlt
 	{1, (const u8[]){ 6,  6,  7,  7,  8,  8,  9, 10, 10, 11, ASCR_BACK, 1}}, //CharAnim_Right
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_RightAlt
 };
@@ -94,13 +98,23 @@ void Char_GF_Tick(Character *character)
 {
 	Char_GF *this = (Char_GF*)character;
 	
-	
+	if (stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <= 15811)
+	character->set_anim(character, CharAnim_UpAlt);
+
 		if (stage.flag & STAGE_FLAG_JUST_STEP)
 		{
 			//Perform dance
 			if ((stage.song_step % stage.gf_speed) == 0)
 			{
 				//Switch animation
+
+				if (character->animatable.anim == CharAnim_Left && stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <= 15811)
+                    character->set_anim(character, CharAnim_UpAlt);
+
+			    if (character->animatable.anim == CharAnim_Right && stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <= 15811)
+                    character->set_anim(character, CharAnim_DownAlt);
+
+
 				if (character->animatable.anim == CharAnim_Left)
 					character->set_anim(character, CharAnim_Right);
 				else
@@ -169,6 +183,7 @@ Character *Char_GF_New(fixed_t x, fixed_t y)
 		"bopleft.tim",  //GF_ArcMain_BopLeft
 		"bopright.tim", //GF_ArcMain_BopRight
 		"cry.tim",      //GF_ArcMain_Cry
+		"scared.tim",      //GF_ArcMain_Cry
 		NULL
 	};
 	IO_Data *arc_ptr = this->arc_ptr;
