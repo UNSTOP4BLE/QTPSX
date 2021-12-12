@@ -85,13 +85,13 @@ static const CharFrame tv0_frame[8] = {
 
 static const Animation tv0right_anim[1] = {
 
-	{2, (const u8[]){0, ASCR_BACK, 1}}, 
+	{2, (const u8[]){0, 0, ASCR_BACK, 1}}, 
 };
 
 
 static const Animation tv0eyeright_anim[1] = {
 
-	{2, (const u8[]){1, ASCR_BACK, 1}},
+	{2, (const u8[]){1, 1, ASCR_BACK, 1}},
 };   
 
 
@@ -102,17 +102,17 @@ static const Animation tv0wright_anim[1] = {
 
 static const Animation tv0errright_anim[1] = {
 
-	{2, (const u8[]){5, ASCR_BACK, 1}}, 
+	{2, (const u8[]){5, 5, ASCR_BACK, 1}}, 
 };
 
 static const Animation tv0bsodright_anim[1] = {
 
-	{2, (const u8[]){6, ASCR_BACK, 1}}, 
+	{2, (const u8[]){6, 6, ASCR_BACK, 1}}, 
 };
 
 static const Animation tv0dicright_anim[1] = {
 
-	{2, (const u8[]){7, ASCR_BACK, 1}}, 
+	{2, (const u8[]){7, 7, ASCR_BACK, 1}}, 
 };
 
 //tv0 functions
@@ -169,12 +169,12 @@ static const CharFrame tv0l_frame[8] = {
 //idle
 static const Animation tv0left_anim[1] = {
 
-	{2, (const u8[]){0, ASCR_BACK, 1}},
+	{2, (const u8[]){0, 0, ASCR_BACK, 1}},
 };
 //eye
 static const Animation tv0eyeleft_anim[1] = {
 
-	{2, (const u8[]){1, ASCR_BACK, 1}},
+	{2, (const u8[]){1, 1, ASCR_BACK, 1}},
 };
 //warning
 static const Animation tv0wleft_anim[1] = {
@@ -184,17 +184,17 @@ static const Animation tv0wleft_anim[1] = {
 //error
 static const Animation tv0errleft_anim[1] = {
 
-	{2, (const u8[]){5, ASCR_BACK, 1}},
+	{2, (const u8[]){5, 5, ASCR_BACK, 1}},
 };
 //bsod
 static const Animation tv0bsodleft_anim[1] = {
 
-	{2, (const u8[]){6, ASCR_BACK, 1}},
+	{2, (const u8[]){6, 6, ASCR_BACK, 1}},
 };
 //drop incoming
 static const Animation tv0dicleft_anim[1] = {
 
-	{2, (const u8[]){7, ASCR_BACK, 1}},
+	{2, (const u8[]){7, 7, ASCR_BACK, 1}},
 };
 
 //smoke animation and rects
@@ -564,6 +564,13 @@ void Back_Week2_DrawBG(StageBack *back)
 		}
 	}
 
+		//idle tv
+	Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
+	Week2_tv0l_Draw(this, FIXED_DEC(40,1) - fx, FIXED_DEC(37,1) - fy);
+    
+	Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
+	Week2_tv0_Draw(this, FIXED_DEC(360,1) - fx, FIXED_DEC(43,1) - fy);
+
 	switch(stage.stage_id)
 	{
 	case StageId_1_2:
@@ -697,12 +704,7 @@ break;
 	Animatable_Animate(&this->tv0errright_animatable, (void*)this, Week2_tv0_SetFrame);
 	}
 
-	//idle tv
-	Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
-	Week2_tv0l_Draw(this, FIXED_DEC(40,1) - fx, FIXED_DEC(37,1) - fy);
-    
-	Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
-	Week2_tv0_Draw(this, FIXED_DEC(360,1) - fx, FIXED_DEC(43,1) - fy);
+
 	
 	//Draw bsod background
 	if (stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <=15811) 
