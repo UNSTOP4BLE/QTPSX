@@ -565,10 +565,9 @@ void Back_Week2_DrawBG(StageBack *back)
 	}
 
 		//idle tv
-	Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
+	
 	Week2_tv0l_Draw(this, FIXED_DEC(40,1) - fx, FIXED_DEC(37,1) - fy);
     
-	Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
 	Week2_tv0_Draw(this, FIXED_DEC(360,1) - fx, FIXED_DEC(43,1) - fy);
 
 	switch(stage.stage_id)
@@ -585,7 +584,7 @@ void Back_Week2_DrawBG(StageBack *back)
 	}
 	
     //eye
-	if (stage.song_step == 760)
+	else if (stage.song_step == 760)
 	{
 	Animatable_Animate(&this->tv0eyeleft_animatable, (void*)this, Week2_tv0l_SetFrame);
     
@@ -593,7 +592,7 @@ void Back_Week2_DrawBG(StageBack *back)
 	}
 
     //warning
-	if (stage.song_step >= 768 && stage.song_step <= 896)
+	else if (stage.song_step >= 768 && stage.song_step <= 896)
 	{
 	Animatable_Animate(&this->tv0wleft_animatable, (void*)this, Week2_tv0l_SetFrame);
 
@@ -601,11 +600,18 @@ void Back_Week2_DrawBG(StageBack *back)
 	}
 
     //eye
-	if (stage.song_step >= 896 && stage.song_step <= 914)
+	else if (stage.song_step >= 896 && stage.song_step <= 914)
 	{
 	Animatable_Animate(&this->tv0eyeleft_animatable, (void*)this, Week2_tv0l_SetFrame);
     
 	Animatable_Animate(&this->tv0eyeright_animatable, (void*)this, Week2_tv0_SetFrame);
+	}
+
+	else
+	{
+	 Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
+
+	 Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
 	}
 	break;
 /*
@@ -634,7 +640,7 @@ void Back_Week2_DrawBG(StageBack *back)
 	}
 	
     //drop
-	if (stage.timercount >= 4629 && stage.timercount <= 5836)
+	else if (stage.timercount >= 4629 && stage.timercount <= 5836)
 	{
 	Animatable_Animate(&this->tv0dicleft_animatable, (void*)this, Week2_tv0l_SetFrame);
     
@@ -642,7 +648,7 @@ void Back_Week2_DrawBG(StageBack *back)
 	}
 
     //warning
-	if (stage.timercount >= 5837 && stage.timercount <= 8256)
+    else if (stage.timercount >= 5837 && stage.timercount <= 8256)
 	{
 	Animatable_Animate(&this->tv0wleft_animatable, (void*)this, Week2_tv0l_SetFrame);
 
@@ -650,7 +656,7 @@ void Back_Week2_DrawBG(StageBack *back)
 	}
 
     //eye
-	if (stage.timercount >= 10634 && stage.timercount <= 10671)
+	else if (stage.timercount >= 10634 && stage.timercount <= 10671)
 	{
 	Animatable_Animate(&this->tv0eyeleft_animatable, (void*)this, Week2_tv0l_SetFrame);
     
@@ -658,7 +664,7 @@ void Back_Week2_DrawBG(StageBack *back)
 	}
 
 	//error
-	if (stage.timercount >= 13354 && stage.timercount <= 13392)
+	else if (stage.timercount >= 13354 && stage.timercount <= 13392)
 	{
 	Animatable_Animate(&this->tv0errleft_animatable, (void*)this, Week2_tv0l_SetFrame);
     
@@ -666,7 +672,7 @@ void Back_Week2_DrawBG(StageBack *back)
 	}
 
 	//bsod
-	if (stage.timercount >= 13392 && stage.timercount <= 15811)
+	else if (stage.timercount >= 13392 && stage.timercount <= 15811)
 	{
 	Animatable_Animate(&this->tv0bsodleft_animatable, (void*)this, Week2_tv0l_SetFrame);
     
@@ -674,11 +680,18 @@ void Back_Week2_DrawBG(StageBack *back)
 	}
 
     //warning
-	if (stage.timercount >= 15812 && stage.timercount <= 18237)
+	else if (stage.timercount >= 15812 && stage.timercount <= 18237)
 	{
 	Animatable_Animate(&this->tv0wleft_animatable, (void*)this, Week2_tv0l_SetFrame);
 
 	Animatable_Animate(&this->tv0wright_animatable, (void*)this, Week2_tv0_SetFrame);
+	}
+
+	else
+	{
+	 Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
+
+	 Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
 	}
 
 	break;
