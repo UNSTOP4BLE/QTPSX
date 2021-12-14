@@ -108,12 +108,8 @@ void Char_GF_Tick(Character *character)
 			{
 				//Switch animation
 
-				if (character->animatable.anim == CharAnim_Left && stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <= 15811)
+				if (character->animatable.anim == CharAnim_Idle && stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <= 15811)
                     character->set_anim(character, CharAnim_UpAlt);
-
-			    if (character->animatable.anim == CharAnim_Right && stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <= 15811)
-                    character->set_anim(character, CharAnim_DownAlt);
-
 
 				if (character->animatable.anim == CharAnim_Left)
 					character->set_anim(character, CharAnim_Right);

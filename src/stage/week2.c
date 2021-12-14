@@ -710,7 +710,9 @@ break;
 	░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝ */ 
 
 	//error
-	if (stage.stage_id == StageId_2_1 && stage.timercount >= 602)
+	if (stage.stage_id == StageId_2_1)
+	{
+	if (stage.timercount >= 602)
 	{
 	Animatable_Animate(&this->tv0errleft_animatable, (void*)this, Week2_tv0l_SetFrame);
     
@@ -721,6 +723,7 @@ break;
 	 Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
 
 	 Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
+	}
 	}
 
 
