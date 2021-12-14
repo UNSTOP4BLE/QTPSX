@@ -126,10 +126,10 @@ static const CharFrame char_bf_frame[] = {
 	{BF_ArcDead_Dead2, {  0, 128, 128, 128}, { 53,  98}}, //33 dead2 balls twitch 0
 	{BF_ArcDead_Dead2, {128, 128, 128, 128}, { 53,  98}}, //34 dead2 balls twitch 1
 
-	{BF_ArcMain_Dodge, {  0,   0, 128, 124}, { 53,  98}}, 
-	{BF_ArcMain_Dodge, {128,   0, 128, 124}, { 53,  97}}, 
-	{BF_ArcMain_Dodge, {  0, 120, 128, 128}, { 53,  97}}, 
-	{BF_ArcMain_Dodge, {128, 120, 128, 128}, { 53,  97}}, 
+	{BF_ArcMain_Dodge, {  1,   3, 94,  101}, { 50,  91}}, 
+	{BF_ArcMain_Dodge, {131,   3, 93,  101}, { 50,  91}}, 
+	{BF_ArcMain_Dodge, {  0, 121, 95,  100}, { 51,  90}}, 
+	{BF_ArcMain_Dodge, {126, 122, 95,  100}, { 51,  90}}, 
 };
 
 static const Animation char_bf_anim[PlayerAnim_Max] = {

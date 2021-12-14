@@ -800,7 +800,7 @@ void Menu_Tick(void)
 				{StageId_1_1, "CAREFREE"},
 				{StageId_1_2, "CARELESS"},
 				{StageId_1_3, "CENSORY OVERLOAD"},
-				{StageId_2_1, "terminate temp shid remove later pls"},
+				//{StageId_2_1, "terminate temp shid remove later pls"},
 				{StageId_2_2, "TERMINATION"},
 				{StageId_2_3, "CESSATION"},
 			};

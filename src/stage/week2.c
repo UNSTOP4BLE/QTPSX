@@ -564,7 +564,7 @@ void Back_Week2_DrawBG(StageBack *back)
 		}
 	}
 
-		//idle tv
+	//idle tv
 	
 	Week2_tv0l_Draw(this, FIXED_DEC(40,1) - fx, FIXED_DEC(37,1) - fy);
     
@@ -715,6 +715,12 @@ break;
 	Animatable_Animate(&this->tv0errleft_animatable, (void*)this, Week2_tv0l_SetFrame);
     
 	Animatable_Animate(&this->tv0errright_animatable, (void*)this, Week2_tv0_SetFrame);
+	}
+	else
+	{
+	 Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
+
+	 Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
 	}
 
 

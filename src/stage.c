@@ -23,7 +23,7 @@
 #include "object/splash.h"
 
 //Stage constants
-//#define STAGE_PERFECT //Play all notes perfectly
+#define STAGE_PERFECT //Play all notes perfectly
 //#define STAGE_NOHUD //Disable the HUD
 
 //#define STAGE_FREECAM //Freecam
@@ -63,9 +63,11 @@ static const StageDef stage_defs[StageId_Max] = {
 //Stage state
 Stage stage;
 
-
-
-
+int saw = 0;
+int dodge = 0;
+int dodgecooldown = 0;
+int dodgemechanic = 0;
+int dodgething = 0; 
 
 //Stage music functions
 static void Stage_StartVocal(void)
@@ -623,20 +625,20 @@ static void Stage_DrawHealth(s16 health, u8 i, s8 ox)
 	//Check if we should use 'dying' frame
 	s8 dying;
 	if (ox < 0)
-		dying = (health >= 18000) * 24;
+		dying = (health >= 18000) * 34;
 	else
-		dying = (health <= 2000) * 24;
+		dying = (health <= 2000) * 34;
 	
 	//Get src and dst
 	fixed_t hx = (128 << FIXED_SHIFT) * (10000 - health) / 10000;
 	RECT src = {
-		(i % 5) * 48 + dying,
-		16 + (i / 5) * 24,
-		24,
-		24
+		(i % 3) * 68 + dying,
+		16 + (i / 3) * 34,
+		34,
+		34
 	};
 	RECT_FIXED dst = {
-		hx + ox * FIXED_DEC(11,1) - FIXED_DEC(12,1),
+		hx + ox * FIXED_DEC(16,1) - FIXED_DEC(12,1),
 		FIXED_DEC(SCREEN_HEIGHT2 - 32 + 4 - 12, 1),
 		src.w << FIXED_SHIFT,
 		src.h << FIXED_SHIFT
@@ -1110,11 +1112,15 @@ static void Stage_LoadState(void)
 	//Initialize stage state
 	stage.flag = STAGE_FLAG_VOCAL_ACTIVE;
 	stage.timercount = 0;
+	dodge = 0;
+	dodgecooldown = 0;
 	
 	stage.gf_speed = 1 << 2;
 	
 	stage.state = StageState_Play;
 	
+
+
 	stage.player_state[0].character = stage.player;
 	stage.player_state[1].character = stage.opponent;
 	for (int i = 0; i < 2; i++)
@@ -1401,14 +1407,50 @@ void Stage_Tick(void)
 	{
 		case StageState_Play:
 		{
+			if (dodgemechanic == 1) 
+			{
+				if (saw == 1) 
+				{
+				//todo: draw the saw and warning thing
+				if (dodgething != 1) 
+				{
+					stage.state = StageState_Dead;
+				} 
+					saw = 0;
+				}	
+
+				if (dodgething == 1) 
+				{
+					dodgecooldown++;
+
+				if (dodgecooldown == 20) 
+				{
+					dodgecooldown = 0;
+					dodgething = 0;
+				}
+				}
+
+			}
+
+			if (dodge == 1) {
+				saw = 1;
+				dodgemechanic = 1;
+				dodge = 0;
+			}
+
+
+			//dodge in termination
+			if (stage.stage_id == StageId_2_2)
+			switch (stage.timercount)
+			{
+			case 577:
+				dodge = 1;
+			}
+
 			//timer
               FntPrint("timercount %d ", stage.timercount);
               stage.timercount++;
-
-             //print timer text */
-
 			
-
 			//Clear per-frame flags
 			stage.flag &= ~(STAGE_FLAG_JUST_STEP | STAGE_FLAG_SCORE_REFRESH);
 			
@@ -1772,8 +1814,11 @@ void Stage_Tick(void)
 				Stage_DrawTex(&stage.tex_hud1, &health_back, &health_dst, stage.bump);
 			}
             
-			if (stage.stage_id == StageId_2_2 && (pad_state.press & (INPUT_L2)))
-			stage.player->set_anim(stage.player, PlayerAnim_Dodge);
+			if (stage.stage_id == StageId_2_2 && (pad_state.press & (INPUT_L2))){
+				stage.player->set_anim(stage.player, PlayerAnim_Dodge);
+				dodgething = 1;
+			}
+			
 			
 			//Hardcoded stage stuff
 			switch (stage.stage_id)
