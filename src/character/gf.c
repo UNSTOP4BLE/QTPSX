@@ -70,7 +70,7 @@ static const CharFrame char_gf_frame[] = {
 static const Animation char_gf_anim[CharAnim_Max] = {
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_Idle
 	{1, (const u8[]){ 0,  0,  1,  1,  2,  2,  3,  4,  4,  5, ASCR_BACK, 1}}, //CharAnim_Left
-	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_LeftAlt
+	{2, (const u8[]){ 14, 15, 16, 17, ASCR_BACK, 1}},                           //CharAnim_LeftAlt
 	{2, (const u8[]){12, 13, ASCR_REPEAT}},                                  //CharAnim_Down
 	{2, (const u8[]){ 14, 15, 16, 17, ASCR_BACK, 1}},                           //CharAnim_DownAlt
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_Up
@@ -97,9 +97,6 @@ void Char_GF_SetFrame(void *user, u8 frame)
 void Char_GF_Tick(Character *character)
 {
 	Char_GF *this = (Char_GF*)character;
-	
-	if (stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <= 15811)
-	character->set_anim(character, CharAnim_UpAlt);
 
 		if (stage.flag & STAGE_FLAG_JUST_STEP)
 		{
@@ -107,11 +104,14 @@ void Char_GF_Tick(Character *character)
 			if ((stage.song_step % stage.gf_speed) == 0)
 			{
 				//Switch animation
-
-				if (character->animatable.anim == CharAnim_Idle && stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <= 15811)
+           
+				if (character->animatable.anim == CharAnim_Left && stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <= 15811)
                     character->set_anim(character, CharAnim_UpAlt);
 
-				if (character->animatable.anim == CharAnim_Left)
+                else if (character->animatable.anim != CharAnim_Left && stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <= 15811)
+                    character->set_anim(character, CharAnim_UpAlt);
+
+				else if (character->animatable.anim == CharAnim_Left)
 					character->set_anim(character, CharAnim_Right);
 				else
 					character->set_anim(character, CharAnim_Left);
