@@ -23,7 +23,7 @@
 #include "object/splash.h"
 
 //Stage constants
-#define STAGE_PERFECT //Play all notes perfectly
+//#define STAGE_PERFECT //Play all notes perfectly
 //#define STAGE_NOHUD //Disable the HUD
 
 //#define STAGE_FREECAM //Freecam
@@ -65,7 +65,6 @@ Stage stage;
 
 int saw = 0;
 int dodge = 0;
-int dodgecooldown = 0;
 int dodgemechanic = 0;
 int dodgething = 0; 
 
@@ -1113,7 +1112,6 @@ static void Stage_LoadState(void)
 	stage.flag = STAGE_FLAG_VOCAL_ACTIVE;
 	stage.timercount = 0;
 	dodge = 0;
-	dodgecooldown = 0;
 	
 	stage.gf_speed = 1 << 2;
 	
@@ -1418,17 +1416,6 @@ void Stage_Tick(void)
 				} 
 					saw = 0;
 				}	
-
-				if (dodgething == 1) 
-				{
-					dodgecooldown++;
-
-				if (dodgecooldown == 20) 
-				{
-					dodgecooldown = 0;
-					dodgething = 0;
-				}
-				}
 
 			}
 
@@ -1814,10 +1801,15 @@ void Stage_Tick(void)
 				Stage_DrawTex(&stage.tex_hud1, &health_back, &health_dst, stage.bump);
 			}
             
-			if (stage.stage_id == StageId_2_2 && (pad_state.press & (INPUT_L2))){
+			if (stage.stage_id == StageId_2_2 && (pad_state.press & (INPUT_L2)))
 				stage.player->set_anim(stage.player, PlayerAnim_Dodge);
-				dodgething = 1;
-			}
+
+            if (stage.player->animatable.anim == PlayerAnim_Dodge)
+			dodgething = 1;
+
+			else
+			dodgething = 0;
+			
 			
 			
 			//Hardcoded stage stuff
