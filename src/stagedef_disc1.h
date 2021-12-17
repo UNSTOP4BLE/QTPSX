@@ -37,7 +37,7 @@
 		{Char_GF_New,     FIXED_DEC(140,1),    FIXED_DEC(-60,1)},
 		
 		//Stage background
-		Back_Week2_New,
+		Back_overload_New,
 		
 		//Song info
 		{FIXED_DEC(21,10),FIXED_DEC(24,10),FIXED_DEC(29,10)},
@@ -70,7 +70,7 @@
 		{Char_GF_New,     FIXED_DEC(140,1),    FIXED_DEC(-60,1)},
 		
 		//Stage background
-		Back_Week2_New,
+		Back_overload_New,
 		
 		//Song info
 		{FIXED_DEC(28,10),FIXED_DEC(29,10),FIXED_DEC(3,1)},
@@ -86,7 +86,7 @@
 		{Char_GF_New,     FIXED_DEC(140,1),    FIXED_DEC(-60,1)},
 
 		//Stage background
-		Back_Week2_New,
+		Back_termination_New,
 		
 		//Song info
 		{FIXED_DEC(31,10),FIXED_DEC(31,10),FIXED_DEC(31,10)},

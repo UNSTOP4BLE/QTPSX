@@ -20,6 +20,8 @@ SRCS = src/main.c \
        src/psx/movie.c \
        src/stage/week2.c \
        src/stage/week4.c \
+       src/stage/overload.c \
+       src/stage/termination.c \
        src/animation.c \
        src/character.c \
        src/character/bf.c \

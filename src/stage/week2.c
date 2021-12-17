@@ -10,11 +10,6 @@
 #include "../archive.h"
 #include "../animation.h"
 
-int  smoke = 0;
-int  cooldown = 0;
-int bsod = 0;
-
-
 
 //Week 2 background structure
 typedef struct
@@ -25,11 +20,8 @@ typedef struct
 	//Textures
 	IO_Data arc_tv0, arc_tv0_ptr[2];
 	IO_Data arc_tv0l, arc_tv0l_ptr[1];
-	IO_Data arc_smoke, arc_smoke_ptr[1];
 
 	Gfx_Tex tex_back0; //Background
-	Gfx_Tex tex_error; //Background
-	Gfx_Tex tex_bsod; //Background
 
 	//tv0 state
 	Gfx_Tex tex_tv0 ;
@@ -37,10 +29,6 @@ typedef struct
 	//tv0 state
 	Gfx_Tex tex_tv0l ;
 	u8 tv0l_frame, tv0l_tex_id;
-
-	//smoke state
-	Gfx_Tex tex_smoke;
-	u8 smoke_frame, smoke_tex_id;
 	
 	
 	Animatable tv0right_animatable;
@@ -55,7 +43,6 @@ typedef struct
 	Animatable tv0errleft_animatable;
 	Animatable tv0bsodleft_animatable;
 	Animatable tv0dicleft_animatable;
-	Animatable smoke_animatable;
 } Back_Week2;
 
 //tv0 animation and rects
@@ -197,34 +184,6 @@ static const Animation tv0dicleft_anim[1] = {
 	{2, (const u8[]){7, 7, ASCR_BACK, 1}},
 };
 
-//smoke animation and rects
-static const CharFrame smoke_frame[18] = {
-    {0, {  0,    0,  13,  13}, { 0,  13}},
-	{0, {  13,   0,  31,  39}, { 0,  39}},
-	{0, {  44,   0,  33,  47}, { 0,  47}},
-	{0, {  77,   0,  41,  61}, { 0,  61}},
-	{0, { 118,   0,  43,  67}, { 0,  67}},
-	{0, { 161,   0,  49,  79}, { 0,  79}},
-	{0, { 210,   0,  46,  86}, { 0,  86}},
-	{0, { 0,     37, 45,  89}, { 0,  89}},
-	{0, { 45,    63, 45,  91}, { 0,  91}},
-	{0, { 90,    67, 49,  86}, { 0,  86}},
-	{0, { 139,   79, 51,  95}, { 0,  95}},
-	{0, { 190,   87, 53,  79}, { 0,  79}},
-	{0, { 0,     142, 45,  81}, { 0,  81}},
-	{0, {  45,   154, 46,  63}, { 0,  63}},
-	{0, {  90,   152, 47,  65}, { 0,  65}},
-	{0, {  137,  173, 43,  50}, { 0,  50}},
-	{0, {  180,  175, 32,  43}, { 0,  43}},
-	{0, {  180,  173, 76,  45}, { 0,  45}},
-
-};
-static const Animation smoke_anim[1] = {
-
-	//idle smoke
-	{2, (const u8[]){0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, ASCR_BACK, 0}}, 
-};
-
 //tv0 functions
 void Week2_tv0l_SetFrame(void *user, u8 frame)
 {
@@ -254,35 +213,6 @@ void Week2_tv0l_Draw(Back_Week2 *this, fixed_t x, fixed_t y)
 }
 
 
-//smoke functions
-void Week2_smoke_SetFrame(void *user, u8 frame)
-{
-	Back_Week2 *this = (Back_Week2*)user;
-	
-	//Check if this is a new frame
-	if (frame != this->smoke_frame)
-	{
-		//Check if new art shall be loaded
-		const CharFrame *cframe = &smoke_frame[this->smoke_frame = frame];
-		if (cframe->tex != this->smoke_tex_id)
-			Gfx_LoadTex(&this->tex_smoke, this->arc_smoke_ptr[this->smoke_tex_id = cframe->tex], 0);
-	}
-}
-
-
-void Week2_smoke_Draw(Back_Week2 *this, fixed_t x, fixed_t y)
-{
-	//Draw character
-	const CharFrame *cframe = &smoke_frame[this->smoke_frame];
-	
-	fixed_t ox = x - ((fixed_t)cframe->off[0] << FIXED_SHIFT);
-	fixed_t oy = y - ((fixed_t)cframe->off[1] << FIXED_SHIFT);
-	
-	RECT src = {cframe->src[0], cframe->src[1], cframe->src[2], cframe->src[3]};
-	RECT_FIXED dst = {ox, oy, src.w << FIXED_SHIFT, src.h << FIXED_SHIFT};
-	Stage_DrawTex(&this->tex_smoke, &src, &dst, stage.camera.bzoom);
-}
-
 //Week 2 background functions
 void Back_Week2_DrawFG(StageBack *back)
 {
@@ -292,225 +222,6 @@ void Back_Week2_DrawFG(StageBack *back)
 	fx = stage.camera.x;
 	fy = stage.camera.y;
 
-	//Animate and draw smoke
-	if (stage.flag & STAGE_FLAG_JUST_STEP)
-	{
-		switch (stage.song_step & 7)
-		{
-			case 0:
-				Animatable_SetAnim(&this->smoke_animatable, 0);
-				break;
-		}
-	}
-	
-	//smoke in censory overload
-	if (stage.stage_id == StageId_1_3)
-	switch (stage.timercount)
-	{
-	case 1612:
-      smoke = 1;
-	case 1919:
-      smoke = 1;
-	case 2219:
-	  smoke = 1;
-	case 2523:
-	  smoke = 1;
-	case 2816:
-	  smoke = 1;
-	case 3130:
-	  smoke = 1;
-	case 3440:
-	  smoke = 1;
-	case 3725:
-	  smoke = 1;
-	case 4025:
-	  smoke = 1;
-	case 5844:
-	  smoke = 1;
-	case 5996:
-	  smoke = 1;
-	case 6143:
-	  smoke = 1;
-	case 6344:
-	  smoke = 1;
-	case 6448:
-	  smoke = 1;
-	case 6597:
-	  smoke = 1;
-	case 6750:
-	  smoke = 1;
-	case 6884:
-	  smoke = 1;
-	case 7050:
-	  smoke = 1;
-	case 7210:
-	  smoke = 1;
-	case 7352:
-	  smoke = 1;
-	case 7543:
-	  smoke = 1;
-	case 7652:
-	  smoke = 1;
-	case 7812:
-	  smoke = 1;
-	case 7952:
-	  smoke = 1;
-	case 8140:
-	  smoke = 1;
-	case 8264:
-	  smoke = 1;
-	case 10690:
-	  smoke = 1;
-	case 10765:
-	  smoke = 1;
-	case 10860:
-	  smoke = 1;
-	case 10931:
-	  smoke = 1;
-	case 10976:
-	  smoke = 1;
-	case 11054:
-	  smoke = 1;
-	case 11128:
-	  smoke = 1;
-	case 11206:
-	  smoke = 1;
-	case 11281:
-	  smoke = 1;
-	case 11361:
-	  smoke = 1;
-	case 11446:
-	  smoke = 1;
-	case 11513:
-	  smoke = 1;
-	case 11587:
-	  smoke = 1;
-	case 11660:
-	  smoke = 1;
-	case 11732:
-	  smoke = 1;
-	case 11804:
-	  smoke = 1;
-	case 11884:
-	  smoke = 1;
-	case 11956:
-	  smoke = 1;
-	case 12044:
-	  smoke = 1;
-	case 12112:
-	  smoke = 1;
-	case 12190:
-	  smoke = 1;
-	case 12260:
-	  smoke = 1;
-	case 12335:
-	  smoke = 1;
-	case 12417:
-	  smoke = 1;
-	case 12486:
-	  smoke = 1;
-	case 12564:
-	  smoke = 1;
-	case 12581:
-	  smoke = 1;
-	case 12714:
-	  smoke = 1;
-	case 12792:
-	  smoke = 1;
-	case 12863:
-	  smoke = 1;
-	case 12941:
-	  smoke = 1;
-	case 13034:
-	  smoke = 1;
-	case 13111:
-	  smoke = 1;
-	//bg switch error 13355
-	case 13355:
-	  smoke = 1;
-	//bg switch bsod 13392 -- 15809
-	case 15819:
-	  smoke = 1;
-	case 15852:
-	  smoke = 1;
-	case 16001:
-	  smoke = 1;
-	case 16073:
-	  smoke = 1;
-	case 16158:
-	  smoke = 1;
-	case 16211:
-	  smoke = 1;
-	case 16258:
-	  smoke = 1;
-	case 16379:
-	  smoke = 1;
-	case 16424:
-	  smoke = 1;
-	case 16549:
-	  smoke = 1;
-	case 16608:
-	  smoke = 1;
-	case 16675:
-	  smoke = 1;
-	case 16796:
-	  smoke = 1;
-	case 16836:
-	  smoke = 1;
-	case 16897:
-	  smoke = 1;
-	case 16981:
-	  smoke = 1;
-	case 17047:
-	  smoke = 1;
-	case 17127:
-	  smoke = 1;
-	case 17218:
-	  smoke = 1;
-	case 17293:
-	  smoke = 1;
-	case 17355:
-	  smoke = 1;
-	case 17429:
-	  smoke = 1;
-	case 17507:
-	  smoke = 1;
-	case 17578:
-	  smoke = 1;
-	case 17657:
-	  smoke = 1;
-	case 17736:
-	  smoke = 1;
-	case 17820:
-	  smoke = 1;
-	case 17883:
-	  smoke = 1;
-	case 17960:
-	  smoke = 1;
-	case 18042:
-	  smoke = 1;
-	case 18108:
-	  smoke = 1;
-	case 18190:
-	  smoke = 1;
-	}
-
-	if (smoke == 1)
-	{
-	 cooldown ++;
-
-    Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);
-	Week2_smoke_Draw(this, FIXED_DEC(-160,1), FIXED_DEC(120,1));
- 
-	Animatable_Animate(&this->smoke_animatable, (void*)this, Week2_smoke_SetFrame);	
-	Week2_smoke_Draw(this, FIXED_DEC(120,1), FIXED_DEC(120,1));
-
-	if (cooldown == 38)
-	{
-	cooldown = 0;
-	smoke = 0;
-	}
-  }
 }
 void Back_Week2_DrawBG(StageBack *back)
 {
@@ -573,7 +284,6 @@ void Back_Week2_DrawBG(StageBack *back)
 	switch(stage.stage_id)
 	{
 	case StageId_1_2:
-
      
 	//eye
     if (stage.song_step >= 404 && stage.song_step <= 420)
@@ -614,148 +324,7 @@ void Back_Week2_DrawBG(StageBack *back)
 	 Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
 	}
 	break;
-/*
-	░█████╗░███████╗███╗░░██╗░██████╗░█████╗░██████╗░██╗░░░██╗
-	██╔══██╗██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗╚██╗░██╔╝
-	██║░░╚═╝█████╗░░██╔██╗██║╚█████╗░██║░░██║██████╔╝░╚████╔╝░
-	██║░░██╗██╔══╝░░██║╚████║░╚═══██╗██║░░██║██╔══██╗░░╚██╔╝░░
-	╚█████╔╝███████╗██║░╚███║██████╔╝╚█████╔╝██║░░██║░░░██║░░░
-	░╚════╝░╚══════╝╚═╝░░╚══╝╚═════╝░░╚════╝░╚═╝░░╚═╝░░░╚═╝░░░
-
-	░█████╗░██╗░░░██╗███████╗██████╗░██╗░░░░░░█████╗░░█████╗░██████╗░
-	██╔══██╗██║░░░██║██╔════╝██╔══██╗██║░░░░░██╔══██╗██╔══██╗██╔══██╗
-	██║░░██║╚██╗░██╔╝█████╗░░██████╔╝██║░░░░░██║░░██║███████║██║░░██║
-	██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗██║░░░░░██║░░██║██╔══██║██║░░██║
-	╚█████╔╝░░╚██╔╝░░███████╗██║░░██║███████╗╚█████╔╝██║░░██║██████╔╝
-	░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚══════╝░╚════╝░╚═╝░░╚═╝╚═════╝░*/
-
-	case StageId_1_3:
-    
-	//eye
-    if (stage.timercount >= 1311 && stage.timercount <= 1613)
-	{
-	Animatable_Animate(&this->tv0eyeleft_animatable, (void*)this, Week2_tv0l_SetFrame);
-
-	Animatable_Animate(&this->tv0eyeright_animatable, (void*)this, Week2_tv0_SetFrame);	
-	}
-	
-    //drop
-	else if (stage.timercount >= 4629 && stage.timercount <= 5836)
-	{
-	Animatable_Animate(&this->tv0dicleft_animatable, (void*)this, Week2_tv0l_SetFrame);
-    
-	Animatable_Animate(&this->tv0dicright_animatable, (void*)this, Week2_tv0_SetFrame);
-	}
-
-    //warning
-    else if (stage.timercount >= 5837 && stage.timercount <= 8256)
-	{
-	Animatable_Animate(&this->tv0wleft_animatable, (void*)this, Week2_tv0l_SetFrame);
-
-	Animatable_Animate(&this->tv0wright_animatable, (void*)this, Week2_tv0_SetFrame);
-	}
-
-    //eye
-	else if (stage.timercount >= 10634 && stage.timercount <= 10671)
-	{
-	Animatable_Animate(&this->tv0eyeleft_animatable, (void*)this, Week2_tv0l_SetFrame);
-    
-	Animatable_Animate(&this->tv0eyeright_animatable, (void*)this, Week2_tv0_SetFrame);
-	}
-
-	//error
-	else if (stage.timercount >= 13354 && stage.timercount <= 13392)
-	{
-	Animatable_Animate(&this->tv0errleft_animatable, (void*)this, Week2_tv0l_SetFrame);
-    
-	Animatable_Animate(&this->tv0errright_animatable, (void*)this, Week2_tv0_SetFrame);
-	}
-
-	//bsod
-	else if (stage.timercount >= 13392 && stage.timercount <= 15811)
-	{
-	Animatable_Animate(&this->tv0bsodleft_animatable, (void*)this, Week2_tv0l_SetFrame);
-    
-	Animatable_Animate(&this->tv0bsodright_animatable, (void*)this, Week2_tv0_SetFrame);
-	}
-
-    //warning
-	else if (stage.timercount >= 15812 && stage.timercount <= 18237)
-	{
-	Animatable_Animate(&this->tv0wleft_animatable, (void*)this, Week2_tv0l_SetFrame);
-
-	Animatable_Animate(&this->tv0wright_animatable, (void*)this, Week2_tv0_SetFrame);
-	}
-
-	else
-	{
-	 Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
-
-	 Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
-	}
-
-	break;
-  default:
-break;
-
-
 }
-
-
-/*	████████╗███████╗██████╗░███╗░░░███╗██╗███╗░░██╗░█████╗░████████╗███████╗
-	╚══██╔══╝██╔════╝██╔══██╗████╗░████║██║████╗░██║██╔══██╗╚══██╔══╝██╔════╝
-	░░░██║░░░█████╗░░██████╔╝██╔████╔██║██║██╔██╗██║███████║░░░██║░░░█████╗░░
-	░░░██║░░░██╔══╝░░██╔══██╗██║╚██╔╝██║██║██║╚████║██╔══██║░░░██║░░░██╔══╝░░
-	░░░██║░░░███████╗██║░░██║██║░╚═╝░██║██║██║░╚███║██║░░██║░░░██║░░░███████╗
-	░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝ */ 
-
-	//error
-	if (stage.stage_id == StageId_2_1)
-	{
-	if (stage.timercount >= 602)
-	{
-	Animatable_Animate(&this->tv0errleft_animatable, (void*)this, Week2_tv0l_SetFrame);
-    
-	Animatable_Animate(&this->tv0errright_animatable, (void*)this, Week2_tv0_SetFrame);
-	}
-	else
-	{
-	 Animatable_Animate(&this->tv0left_animatable, (void*)this, Week2_tv0l_SetFrame);
-
-	 Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
-	}
-	}
-
-
-	
-	//Draw bsod background
-	if (stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <=15811) 
-	{
-	RECT bsod_src = {0, 0, 256, 256};
-	RECT_FIXED bsod_dst = {
-		FIXED_DEC(-165,1) - fx,
-		FIXED_DEC(-140,1) - fy,
-		FIXED_DEC(550,1),
-		FIXED_DEC(260,1)
-	};
-	
-	Stage_DrawTex(&this->tex_bsod, &bsod_src, &bsod_dst, stage.camera.bzoom);
-	}
-
-	//Draw error background
-	if (stage.stage_id == StageId_1_3 && stage.timercount >=13354 && stage.timercount <= 13392) 
-	{
-	RECT error_src = {0, 0, 256, 256};
-	RECT_FIXED error_dst = {
-		FIXED_DEC(-165,1) - fx,
-		FIXED_DEC(-140,1) - fy,
-		FIXED_DEC(550,1),
-		FIXED_DEC(260,1)
-	};
-	
-	Stage_DrawTex(&this->tex_error, &error_src, &error_dst, stage.camera.bzoom);
-	}
-
 	//Draw background
 	RECT back_src = {0, 0, 256, 256};
 	RECT_FIXED back_dst = {
@@ -775,8 +344,6 @@ void Back_Week2_Free(StageBack *back)
 	//Free tv0 archive
 	Mem_Free(this->arc_tv0);
 
-	//Free smoke archive
-	Mem_Free(this->arc_smoke);
 
 	//Free structure
 	Mem_Free(this);
@@ -798,8 +365,6 @@ StageBack *Back_Week2_New(void)
 	//Load background textures
 	IO_Data arc_back = IO_Read("\\WEEK2\\BACK.ARC;1");
 	Gfx_LoadTex(&this->tex_back0, Archive_Find(arc_back, "back0.tim"), 0);
-	Gfx_LoadTex(&this->tex_error, Archive_Find(arc_back, "error.tim"), 0);
-	Gfx_LoadTex(&this->tex_bsod, Archive_Find(arc_back, "bsod.tim"), 0);
 	Mem_Free(arc_back);
 
 	//Load tv0 textures
@@ -810,9 +375,6 @@ StageBack *Back_Week2_New(void)
 	this->arc_tv0l = IO_Read("\\WEEK2\\TV.ARC;1");
 	this->arc_tv0l_ptr[0] = Archive_Find(this->arc_tv0l, "tv0.tim");
 	
-	//Load smoke textures
-	this->arc_smoke = IO_Read("\\WEEK2\\SMOKE.ARC;1");
-	this->arc_smoke_ptr[0] = Archive_Find(this->arc_smoke, "smoke.tim");
 	
 	//Initialize tv0 state
 	Animatable_Init(&this->tv0right_animatable, tv0right_anim);
@@ -842,10 +404,6 @@ StageBack *Back_Week2_New(void)
 	this->tv0_frame = this->tv0_tex_id = 0xFF; //Force art load
 	this->tv0l_frame = this->tv0l_tex_id = 0xFF; //Force art load
 
-	//Initialize smoke state
-	Animatable_Init(&this->smoke_animatable, smoke_anim);
-	Animatable_SetAnim(&this->smoke_animatable, 0);
-	this->smoke_frame = this->smoke_tex_id = 0xFF; //Force art load
 
 	return (StageBack*)this;
 }

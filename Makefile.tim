@@ -6,6 +6,7 @@ all: \
 	iso/stage/hud0.tim \
 	iso/stage/hud1.tim \
 	iso/stage/hud0weeb.tim \
+	iso/stage/warning.arc \
 	iso/bf/main.arc \
 	iso/bf/dead.arc \
 	iso/bf/weeb.arc \
@@ -18,7 +19,7 @@ all: \
 	iso/week2/back.arc \
 	iso/week2/tv.arc \
 	iso/week2/smoke.arc \
-	iso/week4/back.arc \
+	iso/week4/back.arc 
 
 iso/%.tim: iso/%.png
 	tools/funkintimconv/funkintimconv $@ $<
@@ -52,3 +53,6 @@ iso/week2/smoke.arc: iso/week2/smoke.tim
 
 # Week 4
 iso/week4/back.arc: iso/week4/back2.tim 
+
+# other shid
+iso/stage/warning.arc: iso/stage/warning.tim

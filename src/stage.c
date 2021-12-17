@@ -26,7 +26,7 @@
 #define STAGE_PERFECT //Play all notes perfectly
 //#define STAGE_NOHUD //Disable the HUD
 
-//#define STAGE_FREECAM //Freecam
+#define STAGE_FREECAM //Freecam
 
 
 
@@ -55,6 +55,8 @@ static const u16 note_key[] = {INPUT_LEFT, INPUT_DOWN, INPUT_UP, INPUT_RIGHT};
 
 #include "stage/week2.h"
 #include "stage/week4.h"
+#include "stage/overload.h"
+#include "stage/termination.h"
 
 static const StageDef stage_defs[StageId_Max] = {
 	#include "stagedef_disc1.h"
@@ -637,8 +639,8 @@ static void Stage_DrawHealth(s16 health, u8 i, s8 ox)
 		34
 	};
 	RECT_FIXED dst = {
-		hx + ox * FIXED_DEC(16,1) - FIXED_DEC(12,1),
-		FIXED_DEC(SCREEN_HEIGHT2 - 32 + 4 - 12, 1),
+		hx + ox * FIXED_DEC(18,1) - FIXED_DEC(17,1),
+		FIXED_DEC(SCREEN_HEIGHT2 - 32 + 4 - 17, 1),
 		src.w << FIXED_SHIFT,
 		src.h << FIXED_SHIFT
 	};
@@ -1432,12 +1434,119 @@ void Stage_Tick(void)
 			{
 			case 577:
 				dodge = 1;
+			case 7302:
+				dodge = 1;
+			case 7815:
+				dodge = 1;
+			case 8335:
+				dodge = 1;
+			case 9433:
+				dodge = 1;
+			case 9489:
+				dodge = 1;
+			case 9575:
+				dodge = 1;
+			case 9630:
+				dodge = 1;
+			case 9703:
+				dodge = 1; 
+			case 9757:
+				dodge = 1;
+			case 9840:
+				dodge = 1;
+			case 9890:
+				dodge = 1;
+			case 10463:
+				dodge = 1;
+			case 10539:
+				dodge = 1;
+			case 10616:
+				dodge = 1;
+			case 10662:
+				dodge = 1;
+			case 10731:
+				dodge = 1;
+			case 10792:
+				dodge = 1;
+			case 10871:
+				dodge = 1;
+			case 10928:
+				dodge = 1;
+			case 11057:
+				dodge = 1;
+			case 11178:
+				dodge = 1;
+			case 12542:
+				dodge = 1;
+			case 12588:
+				dodge = 1;
+			case 12666:
+				dodge = 1;
+			case 12709:
+				dodge = 1;
+			case 12793:
+				dodge = 1;
+			case 12866:
+				dodge = 1;
+			case 12930:
+				dodge = 1;
+			case 12993:
+				dodge = 1;
+			case 13119:
+				dodge = 1;
+			case 13251:
+				dodge = 1;
+			case 13504:
+				dodge = 1;
+			case 13770:
+				dodge = 1;
+			case 13900:
+				dodge = 1;
+			case 13961:
+				dodge = 1;
+			case 14028:
+				dodge = 1;
+			case 14578:
+				dodge = 1;
+			case 14819:
+				dodge = 1;
+			case 14868:
+				dodge = 1;
+			case 14995:
+				dodge = 1;
+			case 15062:
+				dodge = 1;
+			case 15838:
+				dodge = 1;
+			case 16032:
+				dodge = 1;
+			case 16094:
+				dodge = 1;
+			case 16673:
+				dodge = 1;
+			case 16731:
+				dodge = 1;
+			case 16804:
+				dodge = 1;
+			case 16855:
+				dodge = 1;
+			case 16938:
+				dodge = 1;
+			case 17000:
+				dodge = 1;
+			case 17065:
+				dodge = 1;
+			case 17116:
+				dodge = 1;
 			}
-
 			//timer
               FntPrint("timercount %d ", stage.timercount);
               stage.timercount++;
 			
+			if (dodge == 1) {
+				FntPrint(" \n dodge! %d ", dodge);
+			}
+
 			//Clear per-frame flags
 			stage.flag &= ~(STAGE_FLAG_JUST_STEP | STAGE_FLAG_SCORE_REFRESH);
 			

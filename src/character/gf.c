@@ -61,10 +61,10 @@ static const CharFrame char_gf_frame[] = {
 	{GF_ArcMain_Cry, {  0,   0,  73, 101}, { 37,  73}}, //12 cry
 	{GF_ArcMain_Cry, { 73,   0,  73, 101}, { 37,  73}}, //13 cry
 
-	{GF_ArcMain_UpAlt, {  0,   0,  77, 98}, { 43,  74}}, //14
-	{GF_ArcMain_UpAlt, {  77,   0,  77, 98}, { 43,  74}}, //15
-	{GF_ArcMain_UpAlt, {  0,   98,  77, 98}, { 43,  74}}, //16
-	{GF_ArcMain_UpAlt, {  77,   98,  77, 98}, { 43,  74}}, //17
+	{GF_ArcMain_UpAlt, {  0,   0,  77, 98}, { 43,  71}}, //14
+	{GF_ArcMain_UpAlt, {  77,   0,  77, 98}, { 43,  71}}, //15
+	{GF_ArcMain_UpAlt, {  0,   98,  77, 98}, { 43,  71}}, //16
+	{GF_ArcMain_UpAlt, {  77,   98,  77, 98}, { 43,  71}}, //17
 };
 
 static const Animation char_gf_anim[CharAnim_Max] = {
