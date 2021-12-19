@@ -16,8 +16,6 @@ typedef struct
 {
 	//Stage background base structure
 	StageBack back;
-	
-	int warningcooldown = 0;
 
 	//Textures
 	IO_Data arc_tv0, arc_tv0_ptr[2];
@@ -62,7 +60,7 @@ typedef struct
 	Animatable saw_animatable;
 } Back_termination;
 
-static const CharFrame saw_frame[4] = {
+static const CharFrame saw_frame[7] = {
 	//saw0.png
 	{0, {  0,   146,  144,  110}, { 0,  0}},
 	{0, {  0,  46,  191,  96}, { 0,  0}},
@@ -75,7 +73,7 @@ static const CharFrame saw_frame[4] = {
 };
 //saw
 static const Animation saw_anim[1] = {
-	{1, (const u8[]){0, 0, 1, 2, 3,  ASCR_CHGANI, 0}},
+	{1, (const u8[]){0, 1, 2, 3, 4, 5, 6, ASCR_BACK, 0}},
 };
 
 //saw functions
@@ -107,7 +105,6 @@ void termination_saw_Draw(Back_termination *this, fixed_t x, fixed_t y)
 }
 
 
-
 static const CharFrame warning_frame[4] = {
 	{0, {  0,   0,  57,  50}, { 0,  0}},
 	{0, {  57,  0,  57,  50}, { 0,  0}},
@@ -116,7 +113,7 @@ static const CharFrame warning_frame[4] = {
 };
 //warning
 static const Animation warning_anim[1] = {
-	{1, (const u8[]){0, 0, 1, 2, 3,  ASCR_CHGANI, 0}},
+	{1, (const u8[]){0, 0, 1, 2, 3,  ASCR_BACK, 0}},
 };
 
 //warning functions
@@ -158,17 +155,17 @@ static const CharFrame tv0_frame[8] = {
 	//warning
 	{0, {62, 134,  128, 67}, { 128,  67}}, //right 1
 	//tv1.png
-	{1, {0, 0,  128, 67}, { 128,  67}}, //right 2
-	{1, {0, 67, 128, 67}, { 128,  67}}, //right 3 (turned off)
+	{0, {0, 0,  128, 67}, { 128,  67}}, //right 2
+	{0, {0, 67, 128, 67}, { 128,  67}}, //right 3 (turned off)
 
 	//error
-	{1, { 0,   134,  127,  67}, { 128,  67}}, //right
+	{0, { 0,   134,  127,  67}, { 128,  67}}, //right
 
 	//bsod
-	{1, { 128,   67,  128, 67}, { 128,  67}}, //right
+	{0, { 128,   67,  128, 67}, { 128,  67}}, //right
 
 	//incomin drop
-	{1, { 129,   0,  127, 67}, { 128,  67}}, //right
+	{0, { 129,   0,  127, 67}, { 128,  67}}, //right
 };
 
 
@@ -352,6 +349,23 @@ void Back_termination_DrawBG(StageBack *back)
 	fx = stage.camera.x;
 	fy = stage.camera.y;
 
+	//Animate and draw saw
+	fx = stage.camera.x;
+	fy = stage.camera.y;
+	
+	if (stage.flag & STAGE_FLAG_JUST_STEP)
+	{
+		switch (stage.song_step & 7)
+		{
+			case 0:
+				Animatable_SetAnim(&this->saw_animatable, 0);
+				break;
+		}
+	}
+	
+	Animatable_Animate(&this->saw_animatable, (void*)this, termination_saw_SetFrame);
+	termination_saw_Draw(this, FIXED_DEC(-28,1), FIXED_DEC(-40,1));
+
 	//Animate and draw tv0left
 	fx = stage.camera.x;
 	fy = stage.camera.y;
@@ -512,6 +526,9 @@ void Back_termination_Free(StageBack *back)
 	//Free warning archive
 	Mem_Free(this->arc_warning);
 
+	//Free warning archive
+	Mem_Free(this->arc_saw);
+
 	//Free structure
 	Mem_Free(this);
 }
@@ -547,6 +564,11 @@ StageBack *Back_termination_New(void)
 	//Load warning textures
 	this->arc_warning = IO_Read("\\STAGE\\WARNING.ARC;1");
 	this->arc_warning_ptr[0] = Archive_Find(this->arc_warning, "warning.tim");
+
+	//Load warning textures
+	this->arc_saw = IO_Read("\\STAGE\\SAW.ARC;1");
+	this->arc_saw_ptr[0] = Archive_Find(this->arc_saw, "saw0.tim");
+
 	
 	//Initialize tv0 state
 	Animatable_Init(&this->tv0right_animatable, tv0right_anim);
@@ -563,6 +585,7 @@ StageBack *Back_termination_New(void)
 	Animatable_Init(&this->tv0dicleft_animatable, tv0dicleft_anim);
 
 	Animatable_Init(&this->warning_animatable, warning_anim);
+	Animatable_Init(&this->saw_animatable, saw_anim);
 	
 	Animatable_SetAnim(&this->tv0right_animatable, 0);
 	Animatable_SetAnim(&this->tv0eyeright_animatable, 0);
@@ -579,6 +602,8 @@ StageBack *Back_termination_New(void)
 	this->tv0l_frame = this->tv0l_tex_id = 0xFF; //Force art load
 
 	this->warning_frame = this->warning_tex_id = 0xFF; //Force art load
+
+	this->saw_frame = this->saw_tex_id = 0xFF; //Force art load
 
 	return (StageBack*)this;
 }

@@ -39,6 +39,7 @@
 				<file name = "hud1.tim" type = "data" source = "iso/stage/hud1.tim"/>
 				<file name = "hud0weeb.tim" type = "data" source = "iso/stage/hud0weeb.tim"/>
 				<file name = "warning.arc" type = "data" source = "iso/stage/warning.arc"/>
+				<file name = "saw.arc" type = "data" source = "iso/stage/saw.arc"/>
 			</dir>
 			
 			<!-- Week 1 assets -->
@@ -57,13 +58,14 @@
 				<file name = "1.3n.cht" type = "data" source = "iso/chart/dadbattle.json.cht"/>
 				<file name = "1.3h.cht" type = "data" source = "iso/chart/dadbattle-hard.json.cht"/>
 			</dir>
+	
 			
-			<!-- Week 2 assets -->
 			<dir name = "week2">
 				<!-- Background art -->
 				<file name = "back.arc" type = "data" source = "iso/week2/back.arc"/>
 				<file name = "tv.arc" type = "data" source = "iso/week2/tv.arc"/>
 				<file name = "smoke.arc" type = "data" source = "iso/week2/smoke.arc"/>
+				
 				
 				<!-- Spookeez charts -->
 				<file name = "2.1e.cht" type = "data" source = "iso/chart/spookeez-easy.json.cht"/>

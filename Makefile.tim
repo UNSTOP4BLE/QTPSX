@@ -19,6 +19,7 @@ all: \
 	iso/week2/back.arc \
 	iso/week2/tv.arc \
 	iso/week2/smoke.arc \
+	iso/stage/saw.arc \
 	iso/week4/back.arc 
 
 iso/%.tim: iso/%.png
@@ -56,3 +57,5 @@ iso/week4/back.arc: iso/week4/back2.tim
 
 # other shid
 iso/stage/warning.arc: iso/stage/warning.tim
+
+iso/stage/saw.arc: iso/stage/saw0.tim iso/stage/saw1.tim
