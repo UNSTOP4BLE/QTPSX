@@ -26,7 +26,7 @@
 #define STAGE_PERFECT //Play all notes perfectly
 //#define STAGE_NOHUD //Disable the HUD
 
-#define STAGE_FREECAM //Freecam
+//#define STAGE_FREECAM //Freecam
 
 
 

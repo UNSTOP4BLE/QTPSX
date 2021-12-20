@@ -10,6 +10,7 @@
 #include "../archive.h"
 #include "../animation.h"
 
+int mechanic = 0;
 
 //Week 2 background structure
 typedef struct
@@ -63,15 +64,15 @@ typedef struct
 
 static const CharFrame saw_frame[] = {
 	//saw0.png
-	{0, {  0,   146,  144,  110}, { 0,  0}},
-	{0, {  0,  46,  191,  96}, { 0,  0}},
+	{0, {  0,   146,  144,  110}, { 0,  110}},
+	{0, {  0,  46,  191,  96}, { 0,  96}},
 	//saw1.png
-	{1, {  0, 0,  256,  58}, { 0,  0}},
-	{1, {  0, 58,  256,  40}, { 0,  0}},
-	{1, {  0, 98,  256,  42}, { 0,  0}},
-	{1, {  0, 140,  256,  41}, { 0,  0}},
-	{1, {  0, 181,  256,  37}, { 0,  0}},
-	{1, {  0, 181,  256,  37}, { 0,  0}},
+	{1, {  0, 0,  256,  58}, { 0,  58}},
+	{1, {  0, 58,  256,  40}, { 0,  40}},
+	{1, {  0, 98,  256,  42}, { 0,  42}},
+	{1, {  0, 140,  256,  41}, { 0,  41}},
+	{1, {  0, 181,  256,  37}, { 0,  37}},
+	{1, {  0, 181,  256,  37}, { 0,  37}},
 };
 //saw
 static const Animation saw_anim[1] = {
@@ -105,7 +106,6 @@ void termination_Saw_Draw(Back_termination *this, fixed_t x, fixed_t y)
 	RECT_FIXED dst = {ox, oy, src.w << FIXED_SHIFT, src.h << FIXED_SHIFT};
 	Stage_DrawTex(&this->tex_saw, &src, &dst, stage.camera.bzoom);
 }
-
 
 static const CharFrame warning_frame[] = {
 	{0, {  0,   0,  57,  50}, { 0,  0}},
@@ -325,6 +325,7 @@ void Back_termination_DrawFG(StageBack *back)
 	fx = stage.camera.x;
 	fy = stage.camera.y;
 
+
 	//Animate and draw warning
 	fx = stage.camera.x;
 	fy = stage.camera.y;
@@ -339,17 +340,8 @@ void Back_termination_DrawFG(StageBack *back)
 		}
 	}
 	
-	Animatable_Animate(&this->warning_animatable, (void*)this, termination_warning_SetFrame);
-	termination_warning_Draw(this, FIXED_DEC(-28,1), FIXED_DEC(-40,1));
-}
 
-void Back_termination_DrawBG(StageBack *back)
-{
-	Back_termination *this = (Back_termination*)back;
-	
-	fixed_t fx, fy;
-	fx = stage.camera.x;
-	fy = stage.camera.y;
+	termination_warning_Draw(this, FIXED_DEC(-28,1), FIXED_DEC(-40,1));
 
 	//Animate and draw saw
 	
@@ -363,8 +355,17 @@ void Back_termination_DrawBG(StageBack *back)
 		}
 	}
 	
-	Animatable_Animate(&this->saw_animatable, (void*)this, termination_Saw_SetFrame);
-	termination_Saw_Draw(this, FIXED_DEC(-28,1), FIXED_DEC(-40,1));
+	
+	termination_Saw_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(40,1) - fy);
+}
+
+void Back_termination_DrawBG(StageBack *back)
+{
+	Back_termination *this = (Back_termination*)back;
+	
+	fixed_t fx, fy;
+	fx = stage.camera.x;
+	fy = stage.camera.y;
 
 	//Animate and draw tv0left
 	
@@ -397,10 +398,131 @@ void Back_termination_DrawBG(StageBack *back)
 ░░░██║░░░███████╗██║░░██║██║░╚═╝░██║██║██║░╚███║██║░░██║░░░██║░░░██║╚█████╔╝██║░╚███║
 ░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝*/
 
+if (mechanic == 1 ) {
+	Animatable_Animate(&this->saw_animatable, (void*)this, termination_Saw_SetFrame);
+	Animatable_Animate(&this->warning_animatable, (void*)this, termination_warning_SetFrame);
+
+	if (stage.timercount += 5) {
+		mechanic = 0;
+	}
+}
+
 switch(stage.stage_id)
 {
 	case StageId_2_2:
     
+	if (stage.timercount <= 573)
+	mechanic = 1;
+
+/*	case 7302:
+
+	case 7815:
+
+	case 8335:
+		
+	case 9433:
+		
+	case 9489:
+		
+	case 9575:
+			
+	case 9630:
+		
+	case 9703:
+			
+	case 9757:
+		
+	case 9840:
+
+	case 9890:
+	
+	case 10463:
+
+	case 10539:
+
+	case 10616:
+	
+	case 10662:
+			
+	case 10731:
+			
+	case 10792:
+			
+	case 10871:
+		
+	case 10928:
+	
+	case 11057:
+	
+	case 11178:
+	
+	case 12542:
+
+	case 12588:
+
+	case 12666:
+
+	case 12709:
+
+	case 12793:
+
+	case 12866:
+
+	case 12930:
+
+	case 12993:
+	
+	case 13119:
+		
+	case 13251:
+	
+	case 13504:
+	
+	case 13770:
+		
+	case 13900:
+	
+	case 13961:
+		
+	case 14028:
+			
+	case 14578:
+	
+	case 14819:
+			
+	case 14868:
+
+	case 14995:
+	
+	case 15062:
+
+	case 15838:
+		
+	case 16032:
+	
+	case 16094:
+
+	case 16673:
+
+	case 16731:
+	
+	case 16804:
+	
+	case 16855:
+		
+	case 16938:
+		
+	case 17000:
+		
+	case 17065:
+	
+	case 17116:
+	
+	}*/
+
+
+
+
 	//eye
     if (stage.timercount >= 1311 && stage.timercount <= 1613)
 	{
