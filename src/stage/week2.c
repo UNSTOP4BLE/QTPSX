@@ -284,7 +284,6 @@ void Back_Week2_DrawBG(StageBack *back)
 	switch(stage.stage_id)
 	{
 	case StageId_1_2:
-     
 	//eye
     if (stage.song_step >= 404 && stage.song_step <= 420)
 	{
@@ -324,7 +323,9 @@ void Back_Week2_DrawBG(StageBack *back)
 	 Animatable_Animate(&this->tv0right_animatable, (void*)this, Week2_tv0_SetFrame);
 	}
 	break;
-}
+	default:
+	break;
+	}
 	//Draw background
 	RECT back_src = {0, 0, 256, 256};
 	RECT_FIXED back_dst = {

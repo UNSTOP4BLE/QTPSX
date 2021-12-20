@@ -22,7 +22,7 @@ typedef struct
 	IO_Data arc_tv0l, arc_tv0l_ptr[1];
 	IO_Data arc_smoke, arc_smoke_ptr[1];
 	IO_Data arc_warning, arc_warning_ptr[1];
-	IO_Data arc_saw, arc_saw_ptr[1];
+	IO_Data arc_saw, arc_saw_ptr[2];
 
 	Gfx_Tex tex_back0; //Background
 	Gfx_Tex tex_error; //Background
@@ -58,18 +58,20 @@ typedef struct
 
 	Animatable warning_animatable;
 	Animatable saw_animatable;
+
 } Back_termination;
 
-static const CharFrame saw_frame[7] = {
+static const CharFrame saw_frame[] = {
 	//saw0.png
 	{0, {  0,   146,  144,  110}, { 0,  0}},
 	{0, {  0,  46,  191,  96}, { 0,  0}},
 	//saw1.png
-	{0, {  0, 0,  256,  58}, { 0,  0}},
-	{0, {  0, 58,  256,  40}, { 0,  0}},
-	{0, {  0, 98,  256,  42}, { 0,  0}},
-	{0, {  0, 140,  256,  41}, { 0,  0}},
-	{0, {  0, 181,  256,  37}, { 0,  0}},
+	{1, {  0, 0,  256,  58}, { 0,  0}},
+	{1, {  0, 58,  256,  40}, { 0,  0}},
+	{1, {  0, 98,  256,  42}, { 0,  0}},
+	{1, {  0, 140,  256,  41}, { 0,  0}},
+	{1, {  0, 181,  256,  37}, { 0,  0}},
+	{1, {  0, 181,  256,  37}, { 0,  0}},
 };
 //saw
 static const Animation saw_anim[1] = {
@@ -77,7 +79,7 @@ static const Animation saw_anim[1] = {
 };
 
 //saw functions
-void termination_saw_SetFrame(void *user, u8 frame)
+void termination_Saw_SetFrame(void *user, u8 frame)
 {
 	Back_termination *this = (Back_termination*)user;
 	
@@ -91,7 +93,7 @@ void termination_saw_SetFrame(void *user, u8 frame)
 	}
 }
 
-void termination_saw_Draw(Back_termination *this, fixed_t x, fixed_t y)
+void termination_Saw_Draw(Back_termination *this, fixed_t x, fixed_t y)
 {
 	//Draw character
 	const CharFrame *cframe = &saw_frame[this->saw_frame];
@@ -105,7 +107,7 @@ void termination_saw_Draw(Back_termination *this, fixed_t x, fixed_t y)
 }
 
 
-static const CharFrame warning_frame[4] = {
+static const CharFrame warning_frame[] = {
 	{0, {  0,   0,  57,  50}, { 0,  0}},
 	{0, {  57,  0,  57,  50}, { 0,  0}},
 	{0, {  114, 0,  57,  50}, { 0,  0}},
@@ -350,8 +352,6 @@ void Back_termination_DrawBG(StageBack *back)
 	fy = stage.camera.y;
 
 	//Animate and draw saw
-	fx = stage.camera.x;
-	fy = stage.camera.y;
 	
 	if (stage.flag & STAGE_FLAG_JUST_STEP)
 	{
@@ -363,12 +363,10 @@ void Back_termination_DrawBG(StageBack *back)
 		}
 	}
 	
-	Animatable_Animate(&this->saw_animatable, (void*)this, termination_saw_SetFrame);
-	termination_saw_Draw(this, FIXED_DEC(-28,1), FIXED_DEC(-40,1));
+	Animatable_Animate(&this->saw_animatable, (void*)this, termination_Saw_SetFrame);
+	termination_Saw_Draw(this, FIXED_DEC(-28,1), FIXED_DEC(-40,1));
 
 	//Animate and draw tv0left
-	fx = stage.camera.x;
-	fy = stage.camera.y;
 	
 	if (stage.flag & STAGE_FLAG_JUST_STEP)
 	{
@@ -568,6 +566,7 @@ StageBack *Back_termination_New(void)
 	//Load warning textures
 	this->arc_saw = IO_Read("\\STAGE\\SAW.ARC;1");
 	this->arc_saw_ptr[0] = Archive_Find(this->arc_saw, "saw0.tim");
+	this->arc_saw_ptr[1] = Archive_Find(this->arc_saw, "saw1.tim");
 
 	
 	//Initialize tv0 state
@@ -598,6 +597,8 @@ StageBack *Back_termination_New(void)
 	Animatable_SetAnim(&this->tv0errleft_animatable, 0);
 	Animatable_SetAnim(&this->tv0bsodleft_animatable, 0);
 	Animatable_SetAnim(&this->tv0dicleft_animatable, 0);
+    Animatable_SetAnim(&this->warning_animatable, 0);
+	Animatable_SetAnim(&this->saw_animatable, 0);
 	this->tv0_frame = this->tv0_tex_id = 0xFF; //Force art load
 	this->tv0l_frame = this->tv0l_tex_id = 0xFF; //Force art load
 
