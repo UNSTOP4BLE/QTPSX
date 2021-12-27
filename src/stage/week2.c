@@ -345,6 +345,9 @@ void Back_Week2_Free(StageBack *back)
 	//Free tv0 archive
 	Mem_Free(this->arc_tv0);
 
+	//Free tv0 archive
+	Mem_Free(this->arc_tv0l);
+
 
 	//Free structure
 	Mem_Free(this);

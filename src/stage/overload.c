@@ -775,6 +775,9 @@ void Back_overload_Free(StageBack *back)
 	//Free tv0 archive
 	Mem_Free(this->arc_tv0);
 
+	//Free tv0 archive
+	Mem_Free(this->arc_tv0l);
+
 	//Free smoke archive
 	Mem_Free(this->arc_smoke);
 
