@@ -49,13 +49,15 @@ typedef struct
 	Animatable tv0wright_animatable;
 	Animatable tv0errright_animatable;
 	Animatable tv0bsodright_animatable;
-	Animatable tv0dicright_animatable;
+	Animatable tv0dodgeright_animatable;
+	Animatable tv0glright_animatable;
 	Animatable tv0left_animatable;
 	Animatable tv0eyeleft_animatable;
 	Animatable tv0wleft_animatable;
 	Animatable tv0errleft_animatable;
 	Animatable tv0bsodleft_animatable;
-	Animatable tv0dicleft_animatable;
+	Animatable tv0glleft_animatable;
+	Animatable tv0dodgeleft_animatable;
 
 	Animatable warning_animatable;
 	Animatable saw_animatable;
@@ -166,7 +168,7 @@ static const CharFrame tv0_frame[8] = {
 	//bsod
 	{0, { 128,   67,  128, 67}, { 128,  67}}, //right
 
-	//incomin drop
+	//gud luck
 	{0, { 129,   0,  127, 67}, { 128,  67}}, //right
 };
 
@@ -199,7 +201,12 @@ static const Animation tv0bsodright_anim[1] = {
 	{2, (const u8[]){6, 6, ASCR_BACK, 1}}, 
 };
 
-static const Animation tv0dicright_anim[1] = {
+static const Animation tv0glright_anim[1] = {
+
+	{2, (const u8[]){7, 7, ASCR_BACK, 1}}, 
+};
+
+static const Animation tv0dodgeright_anim[1] = {
 
 	{2, (const u8[]){7, 7, ASCR_BACK, 1}}, 
 };
@@ -281,7 +288,12 @@ static const Animation tv0bsodleft_anim[1] = {
 	{2, (const u8[]){6, 6, ASCR_BACK, 1}},
 };
 //drop incoming
-static const Animation tv0dicleft_anim[1] = {
+static const Animation tv0glleft_anim[1] = {
+
+	{2, (const u8[]){7, 7, ASCR_BACK, 1}},
+};
+
+static const Animation tv0dodgeleft_anim[1] = {
 
 	{2, (const u8[]){7, 7, ASCR_BACK, 1}},
 };
@@ -386,7 +398,8 @@ void Back_termination_DrawBG(StageBack *back)
 				Animatable_SetAnim(&this->tv0wleft_animatable, 0);
 				Animatable_SetAnim(&this->tv0errleft_animatable, 0);
 	            Animatable_SetAnim(&this->tv0bsodleft_animatable, 0);
-	            Animatable_SetAnim(&this->tv0dicleft_animatable, 0);
+	            Animatable_SetAnim(&this->tv0glleft_animatable, 0);
+				Animatable_SetAnim(&this->tv0dodgeleft_animatable, 0);
 				break;
 		}
 	}
@@ -418,9 +431,9 @@ void Back_termination_DrawBG(StageBack *back)
     //drop
 	else if (stage.timercount >= 4629 && stage.timercount <= 5836)
 	{
-	Animatable_Animate(&this->tv0dicleft_animatable, (void*)this, termination_tv0l_SetFrame);
+	Animatable_Animate(&this->tv0glleft_animatable, (void*)this, termination_tv0l_SetFrame);
     
-	Animatable_Animate(&this->tv0dicright_animatable, (void*)this, termination_tv0_SetFrame);
+	Animatable_Animate(&this->tv0glright_animatable, (void*)this, termination_tv0_SetFrame);
 	}
 
     //warning
@@ -579,13 +592,15 @@ StageBack *Back_termination_New(void)
 	Animatable_Init(&this->tv0wright_animatable, tv0wright_anim);
 	Animatable_Init(&this->tv0errright_animatable, tv0errright_anim);
 	Animatable_Init(&this->tv0bsodright_animatable, tv0bsodright_anim);
-	Animatable_Init(&this->tv0dicright_animatable, tv0dicright_anim);
+	Animatable_Init(&this->tv0glright_animatable, tv0glright_anim);
+	Animatable_Init(&this->tv0dodgeright_animatable, tv0dodgeright_anim);
 	Animatable_Init(&this->tv0left_animatable, tv0left_anim);
 	Animatable_Init(&this->tv0eyeleft_animatable, tv0eyeleft_anim);
 	Animatable_Init(&this->tv0wleft_animatable, tv0wleft_anim);
 	Animatable_Init(&this->tv0errleft_animatable, tv0errleft_anim);
 	Animatable_Init(&this->tv0bsodleft_animatable, tv0bsodleft_anim);
-	Animatable_Init(&this->tv0dicleft_animatable, tv0dicleft_anim);
+	Animatable_Init(&this->tv0glleft_animatable, tv0glleft_anim);
+	Animatable_Init(&this->tv0dodgeleft_animatable, tv0dodgeleft_anim);
 
 	Animatable_Init(&this->warning_animatable, warning_anim);
 	Animatable_Init(&this->saw_animatable, saw_anim);
@@ -600,7 +615,8 @@ StageBack *Back_termination_New(void)
 	Animatable_SetAnim(&this->tv0wleft_animatable, 0);
 	Animatable_SetAnim(&this->tv0errleft_animatable, 0);
 	Animatable_SetAnim(&this->tv0bsodleft_animatable, 0);
-	Animatable_SetAnim(&this->tv0dicleft_animatable, 0);
+	Animatable_SetAnim(&this->tv0glleft_animatable, 0);
+	Animatable_SetAnim(&this->tv0dodgeleft_animatable, 0);
     Animatable_SetAnim(&this->warning_animatable, 0);
 	Animatable_SetAnim(&this->saw_animatable, 0);
 	this->tv0_frame = this->tv0_tex_id = 0xFF; //Force art load
