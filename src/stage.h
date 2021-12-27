@@ -240,6 +240,8 @@ typedef struct
 	s16 song_step;
 
 	s16 timercount;
+	s16 warning;
+	u8 saw;
 	
 	u8 gf_speed; //Typically 4 steps, changes in Fresh
 	

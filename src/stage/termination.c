@@ -340,8 +340,12 @@ void Back_termination_DrawFG(StageBack *back)
 		}
 	}
 	
-
+       
+	if (stage.warning > 0 && stage.warning <= 30)
+	{
+	Animatable_Animate(&this->warning_animatable, (void*)this, termination_warning_SetFrame);
 	termination_warning_Draw(this, FIXED_DEC(-28,1), FIXED_DEC(-40,1));
+	}
 
 	//Animate and draw saw
 	
@@ -355,8 +359,11 @@ void Back_termination_DrawFG(StageBack *back)
 		}
 	}
 	
-	
+	if (stage.saw == 1)
+	{
+	Animatable_Animate(&this->saw_animatable, (void*)this, termination_Saw_SetFrame);
 	termination_Saw_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(40,1) - fy);
+	}
 }
 
 void Back_termination_DrawBG(StageBack *back)
@@ -397,129 +404,6 @@ void Back_termination_DrawBG(StageBack *back)
 ░░░██║░░░██╔══╝░░██╔══██╗██║╚██╔╝██║██║██║╚████║██╔══██║░░░██║░░░██║██║░░██║██║╚████║
 ░░░██║░░░███████╗██║░░██║██║░╚═╝░██║██║██║░╚███║██║░░██║░░░██║░░░██║╚█████╔╝██║░╚███║
 ░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝*/
-
-if (mechanic == 1 ) {
-	Animatable_Animate(&this->saw_animatable, (void*)this, termination_Saw_SetFrame);
-	Animatable_Animate(&this->warning_animatable, (void*)this, termination_warning_SetFrame);
-
-	if (stage.timercount += 5) {
-		mechanic = 0;
-	}
-}
-
-switch(stage.stage_id)
-{
-	case StageId_2_2:
-    
-	if (stage.timercount <= 573)
-	mechanic = 1;
-
-/*	case 7302:
-
-	case 7815:
-
-	case 8335:
-		
-	case 9433:
-		
-	case 9489:
-		
-	case 9575:
-			
-	case 9630:
-		
-	case 9703:
-			
-	case 9757:
-		
-	case 9840:
-
-	case 9890:
-	
-	case 10463:
-
-	case 10539:
-
-	case 10616:
-	
-	case 10662:
-			
-	case 10731:
-			
-	case 10792:
-			
-	case 10871:
-		
-	case 10928:
-	
-	case 11057:
-	
-	case 11178:
-	
-	case 12542:
-
-	case 12588:
-
-	case 12666:
-
-	case 12709:
-
-	case 12793:
-
-	case 12866:
-
-	case 12930:
-
-	case 12993:
-	
-	case 13119:
-		
-	case 13251:
-	
-	case 13504:
-	
-	case 13770:
-		
-	case 13900:
-	
-	case 13961:
-		
-	case 14028:
-			
-	case 14578:
-	
-	case 14819:
-			
-	case 14868:
-
-	case 14995:
-	
-	case 15062:
-
-	case 15838:
-		
-	case 16032:
-	
-	case 16094:
-
-	case 16673:
-
-	case 16731:
-	
-	case 16804:
-	
-	case 16855:
-		
-	case 16938:
-		
-	case 17000:
-		
-	case 17065:
-	
-	case 17116:
-	
-	}*/
-
 
 
 
@@ -586,12 +470,8 @@ switch(stage.stage_id)
 	 Animatable_Animate(&this->tv0right_animatable, (void*)this, termination_tv0_SetFrame);
 	}
 
-	break;
-  default:
-break;
 
 
-}
 	
 	//Draw bsod background
 	if (stage.stage_id == StageId_2_2 && stage.timercount >= 13392 && stage.timercount <=15811) 
@@ -639,6 +519,8 @@ void Back_termination_Free(StageBack *back)
 	
 	//Free tv0 archive
 	Mem_Free(this->arc_tv0);
+
+	Mem_Free(this->arc_tv0l);
 
 	//Free smoke archive
 	Mem_Free(this->arc_smoke);

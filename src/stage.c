@@ -69,6 +69,9 @@ int saw = 0;
 int dodge = 0;
 int dodgemechanic = 0;
 int dodgething = 0; 
+int mechaniccooldown = 0;
+int cooldown2 = 0;
+int check = 0;
 
 //Stage music functions
 static void Stage_StartVocal(void)
@@ -1133,6 +1136,8 @@ static void Stage_LoadState(void)
 		stage.player_state[i].refresh_score = false;
 		stage.player_state[i].score = 0;
 		strcpy(stage.player_state[i].score_text, "0");
+		stage.warning = 0;
+		stage.saw = 0;
 		
 		stage.player_state[i].pad_held = stage.player_state[i].pad_press = 0;
 	}
@@ -1409,28 +1414,45 @@ void Stage_Tick(void)
 		{
 			if (dodgemechanic == 1) 
 			{
-				if (saw == 1) 
-				{
+				 if (stage.warning >= 0 && check == 0)
+			      stage.warning++;
+
 				//todo: draw the saw and warning thing
+				if (stage.warning >= 30)
+				{
+				check = 1;
+				stage.warning = 0;
+				stage.saw = 1;
+				}
+				if (stage.saw == 1)
+				   mechaniccooldown++;
+
+				 if (mechaniccooldown >= 30)
+                {
+				 mechaniccooldown = 0;
 				if (dodgething != 1) 
 				{
 					stage.state = StageState_Dead;
-				} 
+				}
+				    dodgemechanic = 0;
+				    stage.saw = 0;
 					saw = 0;
-				}	
-
-			}
+				}
+					
+				}
 
 			if (dodge == 1) {
-				saw = 1;
 				dodgemechanic = 1;
 				dodge = 0;
+				check = 0;
+				stage.warning = 0;
+				stage.saw = 0;
 			}
 
 
 			//dodge in termination
 			if (stage.stage_id == StageId_2_2)
-			switch (stage.timercount)
+			switch (stage.timercount + 40)
 			{
 			case 577:
 				dodge = 1;
@@ -1910,14 +1932,21 @@ void Stage_Tick(void)
 				Stage_DrawTex(&stage.tex_hud1, &health_back, &health_dst, stage.bump);
 			}
             
-			if (stage.stage_id == StageId_2_2 && (pad_state.press & (INPUT_L2)))
+			if (stage.stage_id == StageId_2_2 && (pad_state.press & (INPUT_L2)) && cooldown2 == 0)
+			{
 				stage.player->set_anim(stage.player, PlayerAnim_Dodge);
+				   cooldown2 = 28;
+			}
+
 
             if (stage.player->animatable.anim == PlayerAnim_Dodge)
 			dodgething = 1;
 
 			else
 			dodgething = 0;
+
+			if (cooldown2 > 0)
+			   cooldown2--;
 			
 			
 			
