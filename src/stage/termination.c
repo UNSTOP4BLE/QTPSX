@@ -10,8 +10,6 @@
 #include "../archive.h"
 #include "../animation.h"
 
-int mechanic = 0;
-
 //Week 2 background structure
 typedef struct
 {
@@ -159,17 +157,17 @@ static const CharFrame tv0_frame[8] = {
 	//warning
 	{0, {62, 134,  128, 67}, { 128,  67}}, //right 1
 	//tv1.png
-	{0, {0, 0,  128, 67}, { 128,  67}}, //right 2
-	{0, {0, 67, 128, 67}, { 128,  67}}, //right 3 (turned off)
+	{1, {0, 0,  128, 67}, { 128,  67}}, //right 2
+	{1, {0, 67, 128, 67}, { 128,  67}}, //right 3 (turned off)
 
 	//error
-	{0, { 0,   134,  127,  67}, { 128,  67}}, //right
+	{1, { 0,   134,  127,  67}, { 128,  67}}, //right
 
 	//bsod
-	{0, { 128,   67,  128, 67}, { 128,  67}}, //right
+	{1, { 128,   67,  128, 67}, { 128,  67}}, //right
 
 	//gud luck
-	{0, { 129,   0,  127, 67}, { 128,  67}}, //right
+	{1, { 129,   0,  127, 67}, { 128,  67}}, //right
 };
 
 
