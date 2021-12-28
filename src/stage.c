@@ -72,6 +72,7 @@ int dodgething = 0;
 int mechaniccooldown = 0;
 int cooldown2 = 0;
 int check = 0;
+int dcooldown= 0;
 
 //Stage music functions
 static void Stage_StartVocal(void)
@@ -1138,6 +1139,7 @@ static void Stage_LoadState(void)
 		strcpy(stage.player_state[i].score_text, "0");
 		stage.warning = 0;
 		stage.saw = 0;
+		dcooldown = 0;
 		
 		stage.player_state[i].pad_held = stage.player_state[i].pad_press = 0;
 	}
@@ -1564,10 +1566,9 @@ void Stage_Tick(void)
 			//timer
               FntPrint("timercount %d ", stage.timercount);
               stage.timercount++;
+
+            FntPrint("dcool %d ", dcooldown);
 			
-			if (dodge == 1) {
-				FntPrint(" \n dodge! %d ", dodge);
-			}
 
 			//Clear per-frame flags
 			stage.flag &= ~(STAGE_FLAG_JUST_STEP | STAGE_FLAG_SCORE_REFRESH);
@@ -1932,18 +1933,28 @@ void Stage_Tick(void)
 				Stage_DrawTex(&stage.tex_hud1, &health_back, &health_dst, stage.bump);
 			}
             
+			if (dcooldown > 0)
+			    dcooldown++;		
+
 			if (stage.stage_id == StageId_2_2 && (pad_state.press & (INPUT_L2)) && cooldown2 == 0)
 			{
+				 dcooldown = 1;
 				stage.player->set_anim(stage.player, PlayerAnim_Dodge);
 				   cooldown2 = 28;
 			}
 
 
-            if (stage.player->animatable.anim == PlayerAnim_Dodge)
+            if (dcooldown > 0 && dcooldown <= 33)
+			{	
 			dodgething = 1;
+			}
 
 			else
 			dodgething = 0;
+
+
+			if (dcooldown == 34)
+	        dcooldown = 0;
 
 			if (cooldown2 > 0)
 			   cooldown2--;
