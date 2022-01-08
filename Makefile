@@ -30,6 +30,7 @@ SRCS = src/main.c \
        src/character/qtm.c \
        src/character/qtmenu.c \
        src/character/bot.c \
+       src/character/botcess.c \
        src/character/gf.c \
        src/object.c \
        src/object/combo.c \

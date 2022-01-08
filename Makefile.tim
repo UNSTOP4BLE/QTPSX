@@ -14,6 +14,7 @@ all: \
 	iso/qtm/main.arc \
 	iso/qtmenu/main.arc \
 	iso/bot/main.arc \
+	iso/botcess/main.arc \
 	iso/gf/main.arc \
 	iso/gf/speaker.tim \
 	iso/week2/back.arc \
@@ -44,12 +45,16 @@ iso/qtm/main.arc: iso/qtm/idle0.tim iso/qtm/idle1.tim iso/qtm/left.tim  iso/qtm/
 iso/qtmenu/main.arc: iso/qtmenu/idle0.tim
 
 iso/bot/main.arc: iso/bot/idle0.tim iso/bot/idle1.tim iso/bot/idle2.tim iso/bot/idle3.tim iso/bot/idle4.tim iso/bot/idle5.tim iso/bot/idle6.tim iso/bot/idle7.tim iso/bot/idle8.tim iso/bot/idle9.tim iso/bot/left0.tim iso/bot/left1.tim iso/bot/left2.tim iso/bot/left3.tim iso/bot/down0.tim iso/bot/down1.tim iso/bot/down2.tim iso/bot/down3.tim iso/bot/up0.tim iso/bot/up1.tim iso/bot/up2.tim iso/bot/up3.tim iso/bot/right0.tim iso/bot/right1.tim iso/bot/right2.tim iso/bot/right3.tim
+
+iso/botcess/main.arc: iso/botcess/idle0.tim iso/botcess/idle1.tim iso/botcess/idle2.tim iso/botcess/idle3.tim iso/botcess/idle4.tim iso/botcess/idle5.tim iso/botcess/idle6.tim iso/botcess/idle7.tim iso/botcess/idle8.tim iso/botcess/idle9.tim iso/botcess/left0.tim iso/botcess/left1.tim iso/botcess/left2.tim iso/botcess/left3.tim iso/botcess/down0.tim iso/botcess/down1.tim iso/botcess/down2.tim iso/botcess/down3.tim iso/botcess/up0.tim iso/botcess/up1.tim iso/botcess/up2.tim iso/botcess/up3.tim iso/botcess/right0.tim iso/botcess/right1.tim iso/botcess/right2.tim iso/botcess/right3.tim
+
+iso/botcess/main.arc: iso/botcess/idleb0.tim iso/botcess/idleb1.tim iso/botcess/idleb2.tim iso/botcess/idleb3.tim iso/botcess/idleb4.tim iso/botcess/idleb5.tim iso/botcess/idleb6.tim iso/botcess/idleb7.tim iso/botcess/idleb8.tim iso/botcess/idleb9.tim iso/botcess/leftb0.tim iso/botcess/leftb1.tim iso/botcess/leftb2.tim iso/botcess/leftb3.tim iso/botcess/downb0.tim iso/botcess/downb1.tim iso/botcess/downb2.tim iso/botcess/downb3.tim iso/botcess/upb0.tim iso/botcess/upb1.tim iso/botcess/upb2.tim iso/botcess/upb3.tim iso/botcess/rightb0.tim iso/botcess/rightb1.tim iso/botcess/rightb2.tim iso/botcess/rightb3.tim
 # GF
 iso/gf/main.arc: iso/gf/bopleft.tim iso/gf/bopright.tim iso/gf/scared.tim iso/gf/cry.tim
 
 # Week 2
 iso/week2/back.arc: iso/week2/back0.tim iso/week2/error.tim iso/week2/bsod.tim
-iso/week2/tv.arc: iso/week2/tv0.tim iso/week2/tv1.tim
+iso/week2/tv.arc: iso/week2/tv0.tim iso/week2/tv1.tim iso/week2/tv2.tim
 iso/week2/smoke.arc: iso/week2/smoke.tim
 
 # Week 4

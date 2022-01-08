@@ -17,7 +17,7 @@ typedef struct
 	StageBack back;
 
 	//Textures
-	IO_Data arc_tv0, arc_tv0_ptr[2];
+	IO_Data arc_tv0, arc_tv0_ptr[3];
 	IO_Data arc_tv0l, arc_tv0l_ptr[1];
 	IO_Data arc_smoke, arc_smoke_ptr[1];
 	IO_Data arc_warning, arc_warning_ptr[1];
@@ -47,8 +47,9 @@ typedef struct
 	Animatable tv0wright_animatable;
 	Animatable tv0errright_animatable;
 	Animatable tv0bsodright_animatable;
-	Animatable tv0dodgeright_animatable;
 	Animatable tv0glright_animatable;
+	Animatable tv0dodgeright_animatable;
+	Animatable tv0woright_animatable;
 	Animatable tv0left_animatable;
 	Animatable tv0eyeleft_animatable;
 	Animatable tv0wleft_animatable;
@@ -56,6 +57,7 @@ typedef struct
 	Animatable tv0bsodleft_animatable;
 	Animatable tv0glleft_animatable;
 	Animatable tv0dodgeleft_animatable;
+	Animatable tv0woleft_animatable;
 
 	Animatable warning_animatable;
 	Animatable saw_animatable;
@@ -148,15 +150,13 @@ void termination_warning_Draw(Back_termination *this, fixed_t x, fixed_t y)
 
 
 //tv0 animation and rects
-static const CharFrame tv0_frame[8] = {
-	//tv0.png
+static const CharFrame tv0_frame[10] = {
 	//idle
-	{0, { 62,   0,  128,  67}, { 128,  67}}, //right
+	{1, {0, 67, 128, 67}, { 128,  67}}, //right 3 (turned off)
 	//eye
 	{0, { 62,  67,  127,  67}, { 128,  67}}, //right
 	//warning
 	{0, {62, 134,  128, 67}, { 128,  67}}, //right 1
-	//tv1.png
 	{1, {0, 0,  128, 67}, { 128,  67}}, //right 2
 	{1, {0, 67, 128, 67}, { 128,  67}}, //right 3 (turned off)
 
@@ -167,7 +167,13 @@ static const CharFrame tv0_frame[8] = {
 	{1, { 128,   67,  128, 67}, { 128,  67}}, //right
 
 	//gud luck
-	{1, { 129,   0,  127, 67}, { 128,  67}}, //right
+	{2, { 128,   0,  128, 67}, { 128,  67}}, //right
+
+	//dodge
+	{2, { 0,   0,  128, 67}, { 128,  67}}, //right
+
+	//watch out
+	{1, {128, 134,  128, 68}, { 128,  67}}, //right
 };
 
 
@@ -206,7 +212,12 @@ static const Animation tv0glright_anim[1] = {
 
 static const Animation tv0dodgeright_anim[1] = {
 
-	{2, (const u8[]){7, 7, ASCR_BACK, 1}}, 
+	{2, (const u8[]){8, 8, ASCR_BACK, 1}}, 
+};
+
+static const Animation tv0woright_anim[1] = {
+
+	{2, (const u8[]){9, 9, ASCR_BACK, 1}}, 
 };
 
 //tv0 functions
@@ -240,10 +251,10 @@ void termination_tv0_Draw(Back_termination *this, fixed_t x, fixed_t y)
 }
 
 
-static const CharFrame tv0l_frame[8] = {
+static const CharFrame tv0l_frame[10] = {
 	//tv0.png
 	//idle tv
-	{0, {  0,   0,  62,  52}, { 62,  52}}, //left 
+	{0, {62,   205,  62, 51}, { 62,  52}}, //left 3 (turned off)
 	//red eye tv thing
 	{0, {  0,  67,  62,  51}, { 62,  52}}, //left 
 	//warning left
@@ -257,8 +268,14 @@ static const CharFrame tv0l_frame[8] = {
 	//bsod left
 	{0, {194,   0,  62, 51}, { 62,  52}}, //left
 
-	//drop incoming left
-	{0, {194,   51, 62, 51}, { 62,  52}}, //left
+	//gl
+	{0, {194,  154, 62, 51}, { 62,  52}}, //left
+
+	//dodge
+	{0, {186,  205, 63, 51}, { 62,  52}}, //left
+
+	//watch out
+	{0, {124,  205, 62, 51}, { 62,  52}}, //left
 };
 //idle
 static const Animation tv0left_anim[1] = {
@@ -293,7 +310,12 @@ static const Animation tv0glleft_anim[1] = {
 
 static const Animation tv0dodgeleft_anim[1] = {
 
-	{2, (const u8[]){7, 7, ASCR_BACK, 1}},
+	{2, (const u8[]){8, 8, ASCR_BACK, 1}},
+};
+
+static const Animation tv0woleft_anim[1] = {
+
+	{2, (const u8[]){9, 9, ASCR_BACK, 1}},
 };
 
 
@@ -384,8 +406,28 @@ void Back_termination_DrawBG(StageBack *back)
 	fx = stage.camera.x;
 	fy = stage.camera.y;
 
-	//Animate and draw tv0left
+	//Animate and draw tv0right
+	fx = stage.camera.x;
+	fy = stage.camera.y;
 	
+	if (stage.flag & STAGE_FLAG_JUST_STEP)
+	{
+		switch (stage.song_step & 7)
+		{
+			case 0:
+				Animatable_SetAnim(&this->tv0right_animatable, 0);
+				Animatable_SetAnim(&this->tv0eyeright_animatable, 0);
+				Animatable_SetAnim(&this->tv0wright_animatable, 0);
+				Animatable_SetAnim(&this->tv0errright_animatable, 0);
+	            Animatable_SetAnim(&this->tv0bsodright_animatable, 0);
+	            Animatable_SetAnim(&this->tv0glright_animatable, 0);
+				Animatable_SetAnim(&this->tv0dodgeright_animatable, 0);
+				Animatable_SetAnim(&this->tv0woright_animatable, 0);
+				break;
+		}
+	}
+
+	//Animate and draw tv0left
 	if (stage.flag & STAGE_FLAG_JUST_STEP)
 	{
 		switch (stage.song_step & 7)
@@ -398,6 +440,7 @@ void Back_termination_DrawBG(StageBack *back)
 	            Animatable_SetAnim(&this->tv0bsodleft_animatable, 0);
 	            Animatable_SetAnim(&this->tv0glleft_animatable, 0);
 				Animatable_SetAnim(&this->tv0dodgeleft_animatable, 0);
+				Animatable_SetAnim(&this->tv0woleft_animatable, 0);
 				break;
 		}
 	}
@@ -418,32 +461,40 @@ void Back_termination_DrawBG(StageBack *back)
 
 
 
-	//eye
-    if (stage.timercount >= 1311 && stage.timercount <= 1613)
+	//dodge
+    if (stage.timercount <= 348)
 	{
-	Animatable_Animate(&this->tv0eyeleft_animatable, (void*)this, termination_tv0l_SetFrame);
+	Animatable_Animate(&this->tv0dodgeleft_animatable, (void*)this, termination_tv0l_SetFrame);
 
-	Animatable_Animate(&this->tv0eyeright_animatable, (void*)this, termination_tv0_SetFrame);	
+	Animatable_Animate(&this->tv0dodgeright_animatable, (void*)this, termination_tv0_SetFrame);	
 	}
 	
-    //drop
-	else if (stage.timercount >= 4629 && stage.timercount <= 5836)
+    //gl
+	else if (stage.timercount > 348 && stage.timercount <= 599)
 	{
 	Animatable_Animate(&this->tv0glleft_animatable, (void*)this, termination_tv0l_SetFrame);
     
 	Animatable_Animate(&this->tv0glright_animatable, (void*)this, termination_tv0_SetFrame);
 	}
 
+    //watch out (not set)
+    else if (stage.timercount >= 7208 && stage.timercount <= 7323)
+	{
+	Animatable_Animate(&this->tv0woleft_animatable, (void*)this, termination_tv0l_SetFrame);
+
+	Animatable_Animate(&this->tv0woright_animatable, (void*)this, termination_tv0_SetFrame);
+	}
+
     //warning
-    else if (stage.timercount >= 5837 && stage.timercount <= 8256)
+	else if (stage.timercount >= 8364 && stage.timercount <= 10427)
 	{
 	Animatable_Animate(&this->tv0wleft_animatable, (void*)this, termination_tv0l_SetFrame);
-
+    
 	Animatable_Animate(&this->tv0wright_animatable, (void*)this, termination_tv0_SetFrame);
 	}
 
-    //eye
-	else if (stage.timercount >= 10634 && stage.timercount <= 10671)
+	//eye
+	else if (stage.timercount > 10427 && stage.timercount <= 11439)
 	{
 	Animatable_Animate(&this->tv0eyeleft_animatable, (void*)this, termination_tv0l_SetFrame);
     
@@ -451,41 +502,38 @@ void Back_termination_DrawBG(StageBack *back)
 	}
 
 	//error
-	else if (stage.timercount >= 13354 && stage.timercount <= 13392)
+	else if (stage.timercount > 11439 && stage.timercount <= 11465)
 	{
 	Animatable_Animate(&this->tv0errleft_animatable, (void*)this, termination_tv0l_SetFrame);
     
 	Animatable_Animate(&this->tv0errright_animatable, (void*)this, termination_tv0_SetFrame);
 	}
 
-	//bsod
-	else if (stage.timercount >= 13392 && stage.timercount <= 15811)
+    //bsod
+	else if (stage.timercount > 11465 && stage.timercount <= 13533)
 	{
 	Animatable_Animate(&this->tv0bsodleft_animatable, (void*)this, termination_tv0l_SetFrame);
-    
+
 	Animatable_Animate(&this->tv0bsodright_animatable, (void*)this, termination_tv0_SetFrame);
 	}
 
-    //warning
-	else if (stage.timercount >= 15812 && stage.timercount <= 18237)
+	//warning
+	else if (stage.timercount > 13533 && stage.timercount <= 17701)
 	{
 	Animatable_Animate(&this->tv0wleft_animatable, (void*)this, termination_tv0l_SetFrame);
 
 	Animatable_Animate(&this->tv0wright_animatable, (void*)this, termination_tv0_SetFrame);
 	}
-
+	
 	else
 	{
 	 Animatable_Animate(&this->tv0left_animatable, (void*)this, termination_tv0l_SetFrame);
 
 	 Animatable_Animate(&this->tv0right_animatable, (void*)this, termination_tv0_SetFrame);
 	}
-
-
-
 	
 	//Draw bsod background
-	if (stage.stage_id == StageId_2_2 && stage.timercount >= 13392 && stage.timercount <=15811) 
+	if (stage.stage_id == StageId_2_2 && stage.timercount > 11465 && stage.timercount <= 13533) 
 	{
 	RECT bsod_src = {0, 0, 256, 256};
 	RECT_FIXED bsod_dst = {
@@ -499,7 +547,7 @@ void Back_termination_DrawBG(StageBack *back)
 	}
 
 	//Draw error background
-	if (stage.stage_id == StageId_2_2 && stage.timercount >=13354 && stage.timercount <= 13392) 
+	if (stage.stage_id == StageId_2_2 && stage.timercount > 11439 && stage.timercount <= 11465) 
 	{
 	RECT error_src = {0, 0, 256, 256};
 	RECT_FIXED error_dst = {
@@ -570,6 +618,7 @@ StageBack *Back_termination_New(void)
 	this->arc_tv0 = IO_Read("\\WEEK2\\TV.ARC;1");
 	this->arc_tv0_ptr[0] = Archive_Find(this->arc_tv0, "tv0.tim");
 	this->arc_tv0_ptr[1] = Archive_Find(this->arc_tv0, "tv1.tim");
+	this->arc_tv0_ptr[2] = Archive_Find(this->arc_tv0, "tv2.tim");
 	//Load tv0 textures
 	this->arc_tv0l = IO_Read("\\WEEK2\\TV.ARC;1");
 	this->arc_tv0l_ptr[0] = Archive_Find(this->arc_tv0l, "tv0.tim");
@@ -592,6 +641,7 @@ StageBack *Back_termination_New(void)
 	Animatable_Init(&this->tv0bsodright_animatable, tv0bsodright_anim);
 	Animatable_Init(&this->tv0glright_animatable, tv0glright_anim);
 	Animatable_Init(&this->tv0dodgeright_animatable, tv0dodgeright_anim);
+	Animatable_Init(&this->tv0woright_animatable, tv0woright_anim);
 	Animatable_Init(&this->tv0left_animatable, tv0left_anim);
 	Animatable_Init(&this->tv0eyeleft_animatable, tv0eyeleft_anim);
 	Animatable_Init(&this->tv0wleft_animatable, tv0wleft_anim);
@@ -599,6 +649,7 @@ StageBack *Back_termination_New(void)
 	Animatable_Init(&this->tv0bsodleft_animatable, tv0bsodleft_anim);
 	Animatable_Init(&this->tv0glleft_animatable, tv0glleft_anim);
 	Animatable_Init(&this->tv0dodgeleft_animatable, tv0dodgeleft_anim);
+	Animatable_Init(&this->tv0woleft_animatable, tv0woleft_anim);
 
 	Animatable_Init(&this->warning_animatable, warning_anim);
 	Animatable_Init(&this->saw_animatable, saw_anim);
@@ -608,6 +659,9 @@ StageBack *Back_termination_New(void)
 	Animatable_SetAnim(&this->tv0wright_animatable, 0);
 	Animatable_SetAnim(&this->tv0errright_animatable, 0);
 	Animatable_SetAnim(&this->tv0bsodright_animatable, 0);
+	Animatable_SetAnim(&this->tv0glright_animatable, 0);
+	Animatable_SetAnim(&this->tv0dodgeright_animatable, 0);
+	Animatable_SetAnim(&this->tv0woright_animatable, 0);
 	Animatable_SetAnim(&this->tv0left_animatable, 0);
 	Animatable_SetAnim(&this->tv0eyeleft_animatable, 0);
 	Animatable_SetAnim(&this->tv0wleft_animatable, 0);
@@ -615,6 +669,8 @@ StageBack *Back_termination_New(void)
 	Animatable_SetAnim(&this->tv0bsodleft_animatable, 0);
 	Animatable_SetAnim(&this->tv0glleft_animatable, 0);
 	Animatable_SetAnim(&this->tv0dodgeleft_animatable, 0);
+	Animatable_SetAnim(&this->tv0woleft_animatable, 0);
+
     Animatable_SetAnim(&this->warning_animatable, 0);
 	Animatable_SetAnim(&this->saw_animatable, 0);
 	this->tv0_frame = this->tv0_tex_id = 0xFF; //Force art load

@@ -50,6 +50,7 @@ static const u16 note_key[] = {INPUT_LEFT, INPUT_DOWN, INPUT_UP, INPUT_RIGHT};
 #include "character/dad.h"
 #include "character/qtm.h"
 #include "character/bot.h"
+#include "character/botcess.h"
 #include "character/gf.h"
 #include "character/qtmenu.h"
 
@@ -1456,7 +1457,7 @@ void Stage_Tick(void)
 			if (stage.stage_id == StageId_2_2)
 			switch (stage.timercount + 40)
 			{
-			case 577:
+/*			case 577:
 				dodge = 1;
 			case 7302:
 				dodge = 1;
@@ -1561,7 +1562,7 @@ void Stage_Tick(void)
 			case 17065:
 				dodge = 1;
 			case 17116:
-				dodge = 1;
+				dodge = 1; */
 			}
 			//timer
               FntPrint("timercount %d ", stage.timercount);

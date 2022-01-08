@@ -97,9 +97,9 @@
 	},
 	{ //StageId_2_3 (Cessation)
 		//Characters
-		{Char_BF_New,      FIXED_DEC(56,1),   FIXED_DEC(85,1)},
-		{Char_Dad_New,  FIXED_DEC(-90,1),   FIXED_DEC(85,1)},
-		{Char_GF_New,       FIXED_DEC(0,1),  FIXED_DEC(-15,1)},
+		{Char_BF_New,    FIXED_DEC(210,1),  FIXED_DEC(60,1)},
+		{Char_botcess_New, FIXED_DEC(62,1),  FIXED_DEC(60,1)},
+		{Char_GF_New,     FIXED_DEC(140,1),    FIXED_DEC(-60,1)},
 		
 		//Stage background
 		Back_Week2_New,

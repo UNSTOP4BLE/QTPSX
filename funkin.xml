@@ -98,6 +98,7 @@
 				<file name = "dad.arc" type = "data" source = "iso/dad/main.arc"/>
 				<file name = "qtm.arc" type = "data" source = "iso/qtm/main.arc"/>
 				<file name = "bot.arc" type = "data" source = "iso/bot/main.arc"/>
+				<file name = "botcess.arc" type = "data" source = "iso/botcess/main.arc"/>
 				<file name = "qtmenu.arc" type = "data" source = "iso/qtmenu/main.arc"/>
 
 				<!-- Girlfriend assets -->

@@ -20,7 +20,7 @@ static const XA_TrackDef xa_tracks[] = {
 	{XA_Week2A, XA_LENGTH(1000)}, //XA_Spookeez
 	{XA_Week2A, XA_LENGTH(31500)}, //XA_South
 	//WEEK2B.XA
-	{XA_Week2B, XA_LENGTH(31600)}, //XA_Monster
+	{XA_Week2B, XA_LENGTH(18300)}, //XA_Monster
 };
 
 static const char *xa_paths[] = {
