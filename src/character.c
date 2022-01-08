@@ -66,8 +66,9 @@ void Character_CheckEndSing(Character *this)
 	     this->animatable.anim == CharAnim_UpAlt ||
 	     this->animatable.anim == CharAnim_Right ||
 	     this->animatable.anim == CharAnim_RightAlt) &&
-	    stage.note_scroll >= this->sing_end)
+	     stage.note_scroll >= this->sing_end)
 		this->set_anim(this, CharAnim_Idle);
+		
 }
 
 void Character_PerformIdle(Character *this)
@@ -86,5 +87,17 @@ void Character_PerformIdle(Character *this)
 		     this->animatable.anim != CharAnim_RightAlt) &&
 		    (stage.song_step & 0x7) == 0)
 			this->set_anim(this, CharAnim_Idle);
+
+		if (Animatable_Ended(&this->animatable2) &&
+		    (this->animatable.anim != CharAnim_Left &&
+		     this->animatable.anim != CharAnim_LeftAlt &&
+		     this->animatable.anim != CharAnim_Down &&
+		     this->animatable.anim != CharAnim_DownAlt &&
+		     this->animatable.anim != CharAnim_Up &&
+		     this->animatable.anim != CharAnim_UpAlt &&
+		     this->animatable.anim != CharAnim_Right &&
+		     this->animatable.anim != CharAnim_RightAlt) &&
+		    (stage.song_step & 0x7) == 0)
+			this->set_anim(this, CharAnim_Idleb);
 	}
 }

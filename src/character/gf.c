@@ -77,6 +77,8 @@ static const Animation char_gf_anim[CharAnim_Max] = {
 	{2, (const u8[]){ 14, 15, 16, 17, ASCR_BACK, 1}},         //CharAnim_UpAlt
 	{1, (const u8[]){ 6,  6,  7,  7,  8,  8,  9, 10, 10, 11, ASCR_BACK, 1}}, //CharAnim_Right
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_RightAlt
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_Up
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_Up
 };
 
 //GF character functions
@@ -104,13 +106,20 @@ void Char_GF_Tick(Character *character)
 			if ((stage.song_step % stage.gf_speed) == 0)
 			{
 				//Switch animation
-           
+				//censory overload
 				if (character->animatable.anim == CharAnim_Left && stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <= 15811)
                     character->set_anim(character, CharAnim_UpAlt);
 
                 else if (character->animatable.anim != CharAnim_Left && stage.stage_id == StageId_1_3 && stage.timercount >= 13392 && stage.timercount <= 15811)
                     character->set_anim(character, CharAnim_UpAlt);
 
+				//termination
+				else if (character->animatable.anim == CharAnim_Left && stage.stage_id == StageId_2_2 && stage.timercount > 11465 && stage.timercount <= 13533)
+                    character->set_anim(character, CharAnim_UpAlt);
+
+                else if (character->animatable.anim != CharAnim_Left && stage.stage_id == StageId_2_2 && stage.timercount > 11465 && stage.timercount <= 13533)
+                    character->set_anim(character, CharAnim_UpAlt);
+					
 				else if (character->animatable.anim == CharAnim_Left)
 					character->set_anim(character, CharAnim_Right);
 				else

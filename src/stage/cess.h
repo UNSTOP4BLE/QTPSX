@@ -4,12 +4,12 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#ifndef _OVERLOAD_H
-#define _OVERLOAD_H
+#ifndef _CESS_H
+#define _CESS_H
 
 #include "../stage.h"
 
 //Week 4 functions
-StageBack *Back_overload_New();
+StageBack *Back_cess_New();
 
 #endif

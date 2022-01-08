@@ -58,6 +58,7 @@ static const u16 note_key[] = {INPUT_LEFT, INPUT_DOWN, INPUT_UP, INPUT_RIGHT};
 #include "stage/week4.h"
 #include "stage/overload.h"
 #include "stage/termination.h"
+#include "stage/cess.h"
 
 static const StageDef stage_defs[StageId_Max] = {
 	#include "stagedef_disc1.h"
