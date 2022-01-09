@@ -267,7 +267,7 @@ Character *Char_botcess_New(fixed_t x, fixed_t y)
 	//Set character information
 	this->character.spec = 0;
 	
-	this->character.health_i = 2;
+	this->character.health_i = 3;
 	
 	this->character.focus_x = FIXED_DEC(0,1);
 	this->character.focus_y = FIXED_DEC(-80,1);
