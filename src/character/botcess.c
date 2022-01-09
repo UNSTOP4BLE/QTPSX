@@ -164,7 +164,7 @@ static const CharFrame char_botcess_frame[] = {
 };
 
 static const Animation char_botcess_anim[CharAnim_Max] = {
-    {2, (const u8[]){ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, ASCR_CHGANI, CharAnim_Idle}}, //CharAnim_Idle
+    {2, (const u8[]){ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, ASCR_BACK, 0}}, //CharAnim_Idle
 	{2, (const u8[]){ 10, 11, 12, ASCR_BACK, 0}},         //CharAnim_Left
 	{2, (const u8[]){ 32, 33, 34, 	ASCR_BACK, 0}},   //CharAnim_LeftAlt
 	{2, (const u8[]){ 13, 14, 15, ASCR_BACK, 0}},         //CharAnim_Down
@@ -174,12 +174,12 @@ static const Animation char_botcess_anim[CharAnim_Max] = {
 	{2, (const u8[]){ 19, 20, 21, ASCR_BACK, 0}},         //CharAnim_Right
 	{2, (const u8[]){ 41, 42, 43, 	ASCR_BACK, 0}},   //CharAnim_RightAlt
 	{0, (const u8[]){ ASCR_CHGANI, CharAnim_Idle}},  
-	{2, (const u8[]){ 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, ASCR_CHGANI, CharAnim_Idleb}}, //CharAnim_Idleb
+	{2, (const u8[]){ 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, ASCR_BACK, 0}}, //CharAnim_Idleb
 
 };
 
 static const Animation char_botcess_anim2[CharAnim_Max] = {
-    {2, (const u8[]){ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, ASCR_CHGANI, CharAnim_Idle}}, //CharAnim_Idle
+    {2, (const u8[]){ 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, ASCR_BACK, 0}}, //CharAnim_Idle
 	{2, (const u8[]){ 44, 45, 46,	ASCR_BACK, 0}},         //CharAnim_Left
 	{2, (const u8[]){ 44, 45, 46,	ASCR_BACK, 0}},   //CharAnim_LeftAlt
 	{2, (const u8[]){ 13, 14, 15,	ASCR_BACK, 0}},         //CharAnim_Down
@@ -189,7 +189,7 @@ static const Animation char_botcess_anim2[CharAnim_Max] = {
 	{2, (const u8[]){ 53, 54, 55, 	ASCR_BACK, 0}},         //CharAnim_Right
 	{2, (const u8[]){ 53, 54, 55, 	ASCR_BACK, 0}},   //CharAnim_RightAlt
 	{0, (const u8[]){ ASCR_CHGANI, CharAnim_Idleb}},  
-	{2, (const u8[]){ 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, ASCR_CHGANI, CharAnim_Idleb}}, //CharAnim_Idleb
+	{2, (const u8[]){ 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, ASCR_BACK, 0}}, //CharAnim_Idleb
 
 };
 
@@ -216,11 +216,14 @@ void Char_botcess_Tick(Character *character)
 	if ((character->pad_held & (INPUT_LEFT | INPUT_DOWN | INPUT_UP | INPUT_RIGHT)) == 0)
 		Character_PerformIdle(character);
 	
-	//Animate and draw
-	Animatable_Animate(&character->animatable, (void*)this, Char_botcess_SetFrame);
-	//alt anims 2
-	//Animatable_Animate(&character->animatable2, (void*)this, Char_botcess_SetFrame);
 
+	//alt anims 2
+	if (stage.timercount >= 5736 && stage.timercount <= 7432 || stage.timercount >= 8554 || stage.song_step <= 10)
+	Animatable_Animate(&character->animatable2, (void*)this, Char_botcess_SetFrame);
+    
+	//Animate and draw
+	else
+	Animatable_Animate(&character->animatable, (void*)this, Char_botcess_SetFrame);
 
 	Character_Draw(character, &this->tex, &char_botcess_frame[this->frame]);
 }

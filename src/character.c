@@ -9,6 +9,8 @@
 #include "mem.h"
 #include "stage.h"
 
+int animidle;
+
 //Character functions
 void Character_Free(Character *this)
 {
@@ -58,6 +60,12 @@ void Character_CheckStartSing(Character *this)
 
 void Character_CheckEndSing(Character *this)
 {
+	if (stage.stage_id == StageId_2_3 && stage.song_step >= -60 && stage.timercount <= 4635)
+	animidle = CharAnim_Idleb;
+
+	else 
+	animidle = CharAnim_Idle;
+
 	if ((this->animatable.anim == CharAnim_Left ||
 	     this->animatable.anim == CharAnim_LeftAlt ||
 	     this->animatable.anim == CharAnim_Down ||
@@ -67,12 +75,19 @@ void Character_CheckEndSing(Character *this)
 	     this->animatable.anim == CharAnim_Right ||
 	     this->animatable.anim == CharAnim_RightAlt) &&
 	     stage.note_scroll >= this->sing_end)
-		this->set_anim(this, CharAnim_Idle);
+			this->set_anim(this, animidle);
 		
 }
 
+
 void Character_PerformIdle(Character *this)
 {
+	if (stage.stage_id == StageId_2_3 && stage.song_step >= -60 && stage.timercount <= 4635)
+	animidle = CharAnim_Idleb;
+
+	else 
+	animidle = CharAnim_Idle;
+
 	Character_CheckEndSing(this);
 	if (stage.flag & STAGE_FLAG_JUST_STEP)
 	{
@@ -86,8 +101,8 @@ void Character_PerformIdle(Character *this)
 		     this->animatable.anim != CharAnim_Right &&
 		     this->animatable.anim != CharAnim_RightAlt) &&
 		    (stage.song_step & 0x7) == 0)
-			this->set_anim(this, CharAnim_Idle);
-
+			this->set_anim(this, animidle);
+		
 		if (Animatable_Ended(&this->animatable2) &&
 		    (this->animatable.anim != CharAnim_Left &&
 		     this->animatable.anim != CharAnim_LeftAlt &&
@@ -98,6 +113,6 @@ void Character_PerformIdle(Character *this)
 		     this->animatable.anim != CharAnim_Right &&
 		     this->animatable.anim != CharAnim_RightAlt) &&
 		    (stage.song_step & 0x7) == 0)
-			this->set_anim(this, CharAnim_Idleb);
+			this->set_anim(this, animidle);
 	}
 }
