@@ -28,7 +28,7 @@
 		1, 2,
 		XA_Fresh, 2,
 		
-		StageId_1_3, STAGE_LOAD_STAGE | STAGE_LOAD_OPPONENT
+		StageId_1_3, 0
 	},
 	{ //StageId_1_3 (Censory-Overload)
 		//Characters
@@ -110,4 +110,20 @@
 		XA_Monster, 0,
 		
 		StageId_2_3, 0
+	},
+	{ //StageId_2_2 (Termination)
+		//Characters
+		{Char_BF_New,    FIXED_DEC(210,1),  FIXED_DEC(60,1)},
+		{Char_bot_New, FIXED_DEC(62,1),  FIXED_DEC(60,1)},
+		{Char_GF_New,     FIXED_DEC(140,1),    FIXED_DEC(-60,1)},
+
+		//Stage background
+		Back_termination_New,
+		
+		//Song info
+		{FIXED_DEC(31,10),FIXED_DEC(31,10),FIXED_DEC(31,10)},
+		2, 2,
+		XA_South, 2,
+		
+		StageId_3_1, STAGE_LOAD_FLAG | STAGE_LOAD_OPPONENT
 	},

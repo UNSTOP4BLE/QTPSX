@@ -533,7 +533,7 @@ void Back_termination_DrawBG(StageBack *back)
 	}
 	
 	//Draw bsod background
-	if (stage.stage_id == StageId_2_2 && stage.timercount > 11465 && stage.timercount <= 13533) 
+	if (stage.timercount > 11465 && stage.timercount <= 13533) 
 	{
 	RECT bsod_src = {0, 0, 256, 256};
 	RECT_FIXED bsod_dst = {
@@ -547,7 +547,7 @@ void Back_termination_DrawBG(StageBack *back)
 	}
 
 	//Draw error background
-	if (stage.stage_id == StageId_2_2 && stage.timercount > 11439 && stage.timercount <= 11465) 
+	if (stage.timercount > 11439 && stage.timercount <= 11465) 
 	{
 	RECT error_src = {0, 0, 256, 256};
 	RECT_FIXED error_dst = {

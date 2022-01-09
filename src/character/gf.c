@@ -119,7 +119,16 @@ void Char_GF_Tick(Character *character)
 
                 else if (character->animatable.anim != CharAnim_Left && stage.stage_id == StageId_2_2 && stage.timercount > 11465 && stage.timercount <= 13533)
                     character->set_anim(character, CharAnim_UpAlt);
+				//termination baby mode
+				else if (character->animatable.anim == CharAnim_Left && stage.stage_id == StageId_3_1 && stage.timercount > 11465 && stage.timercount <= 13533)
+                    character->set_anim(character, CharAnim_UpAlt);
+
+                else if (character->animatable.anim != CharAnim_Left && stage.stage_id == StageId_3_1 && stage.timercount > 11465 && stage.timercount <= 13533)
+                    character->set_anim(character, CharAnim_UpAlt);
 					
+
+
+
 				else if (character->animatable.anim == CharAnim_Left)
 					character->set_anim(character, CharAnim_Right);
 				else

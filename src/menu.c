@@ -554,7 +554,7 @@ void Menu_Tick(void)
 			
 			//Draw version identification
 			menu.font_bold.draw(&menu.font_bold,
-				"PSXFUNKIN BY CUCKYDEV",
+				"QTPSX BY UNSTOPABLE",
 				16,
 				SCREEN_HEIGHT - 32,
 				FontAlign_Left
@@ -803,6 +803,7 @@ void Menu_Tick(void)
 				//{StageId_2_1, "TERMINATE"},
 				{StageId_2_2, "TERMINATION"},
 				{StageId_2_3, "CESSATION"},
+				{StageId_3_1, "TERMINATION BABY MODE"},
 			};
 			
 			//Initialize page
@@ -899,10 +900,26 @@ void Menu_Tick(void)
 				const char *text;
 				boolean difficulty;
 			} menu_options[] = {
-				{StageId_Kapi_1, "VS KAPI", false},
-				{StageId_Clwn_1, "VS TRICKY", true},
-				{StageId_Clwn_4, "   EXPURGATION", false},
-				{StageId_2_4,    "CLUCKED", false},
+				{StageId_Clwn_2, "	OG QT DEVS", false},
+				{StageId_Clwn_2, "HAZARDOUS", false},
+				{StageId_Clwn_2, "COUNTNIGHTSHADE", false},
+				{StageId_Clwn_2, "", false},
+				{StageId_Clwn_2, "	OG TNX DEVS", false},
+				{StageId_Clwn_2, "KADEDEV", false},
+				{StageId_Clwn_2, "NINJAMUFFIN", false},
+				{StageId_Clwn_2, "", false},
+				{StageId_Kapi_1, "	PORT PROGRAMMING", false},
+				{StageId_Kapi_2, "UNSTOPABLE", false},	
+				{StageId_Kapi_2, "IGORSOU", false},	
+				{StageId_Clwn_2, "", false},
+				{StageId_Clwn_1, "	SPRITES AND IMAGES", false},
+				{StageId_Clwn_1, "UNSTOPABLE", false},
+				{StageId_Clwn_2, "", false},
+				{StageId_Clwn_1, "	PLAYTESTING", false},
+				{StageId_Clwn_1, "UNSTOPABLE", false},
+				{StageId_Clwn_1, "MR P", false},
+				{StageId_Clwn_1, "JOHN PAUL", false},
+
 			};
 			
 			//Initialize page
@@ -941,17 +958,6 @@ void Menu_Tick(void)
 						menu.select++;
 					else
 						menu.select = 0;
-				}
-				
-				//Select option if cross is pressed
-				if (pad_state.press & (PAD_START | PAD_CROSS))
-				{
-					menu.next_page = MenuPage_Stage;
-					menu.page_param.stage.id = menu_options[menu.select].stage;
-					menu.page_param.stage.story = true;
-					if (!menu_options[menu.select].difficulty)
-						menu.page_param.stage.diff = StageDiff_Hard;
-					Trans_Start();
 				}
 				
 				//Return to main menu if circle is pressed
