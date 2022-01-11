@@ -373,7 +373,7 @@ void Back_termination_DrawFG(StageBack *back)
 	}
 	
        
-	if (stage.warning > 0 && stage.warning <= 30)
+	if (stage.dodge> 0 && stage.dodge <= 30)
 	{
 	Animatable_Animate(&this->warning_animatable, (void*)this, termination_warning_SetFrame);
 	termination_warning_Draw(this, FIXED_DEC(-28,1), FIXED_DEC(-40,1));
@@ -391,7 +391,7 @@ void Back_termination_DrawFG(StageBack *back)
 		}
 	}
 	
-	if (stage.saw == 1)
+	if (stage.dodge > 30 && stage.dodge <= 60)
 	{
 	Animatable_Animate(&this->saw_animatable, (void*)this, termination_Saw_SetFrame);
 	termination_Saw_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(40,1) - fy);

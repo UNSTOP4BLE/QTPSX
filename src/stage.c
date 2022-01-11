@@ -23,12 +23,12 @@
 #include "object/splash.h"
 
 //Stage constants
-#define STAGE_PERFECT //Play all notes perfectly
+//#define STAGE_PERFECT //Play all notes perfectly
 //#define STAGE_NOHUD //Disable the HUD
 
 //#define STAGE_FREECAM //Freecam
 
-
+int bfdodge;
 
 static const fixed_t note_x[8] = {
 	//BF
@@ -66,15 +66,6 @@ static const StageDef stage_defs[StageId_Max] = {
 
 //Stage state
 Stage stage;
-
-int saw = 0;
-int dodge = 0;
-int dodgemechanic = 0;
-int dodgething = 0; 
-int mechaniccooldown = 0;
-int cooldown2 = 0;
-int check = 0;
-int dcooldown= 0;
 
 //Stage music functions
 static void Stage_StartVocal(void)
@@ -1118,8 +1109,6 @@ static void Stage_LoadState(void)
 {
 	//Initialize stage state
 	stage.flag = STAGE_FLAG_VOCAL_ACTIVE;
-	stage.timercount = 0;
-	dodge = 0;
 	
 	stage.gf_speed = 1 << 2;
 	
@@ -1139,9 +1128,8 @@ static void Stage_LoadState(void)
 		stage.player_state[i].refresh_score = false;
 		stage.player_state[i].score = 0;
 		strcpy(stage.player_state[i].score_text, "0");
-		stage.warning = 0;
-		stage.saw = 0;
-		dcooldown = 0;
+		stage.timercount = 0;
+		stage.dodge = -1;
 		
 		stage.player_state[i].pad_held = stage.player_state[i].pad_press = 0;
 	}
@@ -1416,160 +1404,133 @@ void Stage_Tick(void)
 	{
 		case StageState_Play:
 		{
-			if (dodgemechanic == 1) 
-			{
-				 if (stage.warning >= 0 && check == 0)
-			      stage.warning++;
+				 if (stage.dodge >= 0)
+			      stage.dodge++;
 
 				//todo: draw the saw and warning thing
-				if (stage.warning >= 30)
-				{
-				check = 1;
-				stage.warning = 0;
-				stage.saw = 1;
-				}
-				if (stage.saw == 1)
-				   mechaniccooldown++;
-
-				 if (mechaniccooldown >= 30)
+				 if (stage.dodge == 60)
                 {
-				 mechaniccooldown = 0;
-				if (dodgething != 1) 
-				{
+				if (bfdodge <= 0) 
 					stage.state = StageState_Dead;
-				}
-				    dodgemechanic = 0;
-				    stage.saw = 0;
-					saw = 0;
-				}
-					
-				}
-
-			if (dodge == 1) {
-				dodgemechanic = 1;
-				dodge = 0;
-				check = 0;
-				stage.warning = 0;
-				stage.saw = 0;
-			}
-
+				}			
 
 			//dodge in termination
 			if (stage.stage_id == StageId_2_2)
 			switch (stage.timercount + 40)
 			{
-/*			case 577:
-				dodge = 1;
+     		case 577:
+				stage.dodge = 0;
 			case 7302:
-				dodge = 1;
+				stage.dodge = 0;
 			case 7815:
-				dodge = 1;
+				stage.dodge = 0;
 			case 8335:
-				dodge = 1;
+				stage.dodge = 0;
 			case 9433:
-				dodge = 1;
+				stage.dodge = 0;
 			case 9489:
-				dodge = 1;
+				stage.dodge = 0;
 			case 9575:
-				dodge = 1;
+				stage.dodge = 0;
 			case 9630:
-				dodge = 1;
+				stage.dodge = 0;
 			case 9703:
-				dodge = 1; 
+				stage.dodge = 0; 
 			case 9757:
-				dodge = 1;
+				stage.dodge = 0;
 			case 9840:
-				dodge = 1;
+				stage.dodge = 0;
 			case 9890:
-				dodge = 1;
+				stage.dodge = 0;
 			case 10463:
-				dodge = 1;
+				stage.dodge = 0;
 			case 10539:
-				dodge = 1;
+				stage.dodge = 0;
 			case 10616:
-				dodge = 1;
+				stage.dodge = 0;
 			case 10662:
-				dodge = 1;
+				stage.dodge = 0;
 			case 10731:
-				dodge = 1;
+				stage.dodge = 0;
 			case 10792:
-				dodge = 1;
+				stage.dodge = 0;
 			case 10871:
-				dodge = 1;
+				stage.dodge = 0;
 			case 10928:
-				dodge = 1;
+				stage.dodge = 0;
 			case 11057:
-				dodge = 1;
+				stage.dodge = 0;
 			case 11178:
-				dodge = 1;
+				stage.dodge = 0;
 			case 12542:
-				dodge = 1;
+				stage.dodge = 0;
 			case 12588:
-				dodge = 1;
+				stage.dodge = 0;
 			case 12666:
-				dodge = 1;
+				stage.dodge = 0;
 			case 12709:
-				dodge = 1;
+				stage.dodge = 0;
 			case 12793:
-				dodge = 1;
+				stage.dodge = 0;
 			case 12866:
-				dodge = 1;
+				stage.dodge = 0;
 			case 12930:
-				dodge = 1;
+				stage.dodge = 0;
 			case 12993:
-				dodge = 1;
+				stage.dodge = 0;
 			case 13119:
-				dodge = 1;
+				stage.dodge = 0;
 			case 13251:
-				dodge = 1;
+				stage.dodge = 0;
 			case 13504:
-				dodge = 1;
+				stage.dodge = 0;
 			case 13770:
-				dodge = 1;
+				stage.dodge = 0;
 			case 13900:
-				dodge = 1;
+				stage.dodge = 0;
 			case 13961:
-				dodge = 1;
+				stage.dodge = 0;
 			case 14028:
-				dodge = 1;
+				stage.dodge = 0;
 			case 14578:
-				dodge = 1;
+				stage.dodge = 0;
 			case 14819:
-				dodge = 1;
+				stage.dodge = 0;
 			case 14868:
-				dodge = 1;
+				stage.dodge = 0;
 			case 14995:
-				dodge = 1;
+				stage.dodge = 0;
 			case 15062:
-				dodge = 1;
+				stage.dodge = 0;
 			case 15838:
-				dodge = 1;
+				stage.dodge = 0;
 			case 16032:
-				dodge = 1;
+				stage.dodge = 0;
 			case 16094:
-				dodge = 1;
+				stage.dodge = 0;
 			case 16673:
-				dodge = 1;
+				stage.dodge = 0;
 			case 16731:
-				dodge = 1;
+				stage.dodge = 0;
 			case 16804:
-				dodge = 1;
+				stage.dodge = 0;
 			case 16855:
-				dodge = 1;
+				stage.dodge = 0;
 			case 16938:
-				dodge = 1;
+				stage.dodge = 0;
 			case 17000:
-				dodge = 1;
+				stage.dodge = 0;
 			case 17065:
-				dodge = 1;
+				stage.dodge = 0;
 			case 17116:
-				dodge = 1; */
+				stage.dodge = 0;
 			}
 			//timer
               FntPrint("timercount %d ", stage.timercount);
               stage.timercount++;
 
-            FntPrint("dcool %d ", dcooldown);
+            FntPrint("dodge %d ", stage.dodge);
+			FntPrint("bfdodge %d ", bfdodge);
 			
 
 			//Clear per-frame flags
@@ -1933,36 +1894,20 @@ void Stage_Tick(void)
 				Stage_DrawTex(&stage.tex_hud1, &health_fill, &health_dst, stage.bump);
 				health_dst.w = health_back.w << FIXED_SHIFT;
 				Stage_DrawTex(&stage.tex_hud1, &health_back, &health_dst, stage.bump);
-			}
-            
-			if (dcooldown > 0)
-			    dcooldown++;		
+			}	
 
-			if (stage.stage_id == StageId_2_2 && (pad_state.press & (INPUT_L2)) && cooldown2 == 0)
+			if (stage.stage_id == StageId_2_2 && (pad_state.press & (INPUT_L2)) && bfdodge <= 0)
 			{
-				 dcooldown = 1;
 				stage.player->set_anim(stage.player, PlayerAnim_Dodge);
-				   cooldown2 = 28;
+				   bfdodge = 1;
 			}
-
-
-            if (dcooldown > 0 && dcooldown <= 33)
-			{	
-			dodgething = 1;
-			}
+			
+			if (bfdodge > 0 && bfdodge < 32) 
+			bfdodge++;
 
 			else
-			dodgething = 0;
-
-
-			if (dcooldown == 34)
-	        dcooldown = 0;
-
-			if (cooldown2 > 0)
-			   cooldown2--;
-			
-			
-			
+			bfdodge = 0;
+				
 			//Tick foreground objects
 			ObjectList_Tick(&stage.objlist_fg);
 			
