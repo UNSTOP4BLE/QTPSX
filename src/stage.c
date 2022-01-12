@@ -23,7 +23,7 @@
 #include "object/splash.h"
 
 //Stage constants
-//#define STAGE_PERFECT //Play all notes perfectly
+#define STAGE_PERFECT //Play all notes perfectly
 //#define STAGE_NOHUD //Disable the HUD
 
 //#define STAGE_FREECAM //Freecam
@@ -1581,11 +1581,11 @@ void Stage_Tick(void)
 				break;
 			}
 			//timer
-              FntPrint("timercount %d ", stage.timercount);
+             //FntPrint("timercount %d ", stage.timercount);
               stage.timercount++;
 
-            FntPrint("dodge %d ", stage.dodge);
-			FntPrint("bfdodge %d ", bfdodge);
+            //FntPrint("dodge %d ", stage.dodge);
+			//FntPrint("bfdodge %d ", bfdodge);
 			
 
 			//Clear per-frame flags
