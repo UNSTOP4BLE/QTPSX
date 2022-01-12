@@ -114,10 +114,11 @@ static const CharFrame warning_frame[] = {
 	{0, {  57,  0,  57,  50}, { 0,  0}},
 	{0, {  114, 0,  57,  50}, { 0,  0}},
 	{0, {  171, 0,  57,  50}, { 0,  0}},
+	{0, {   45, 7,  22,  14}, { 0,  0}},
 };
 //warning
 static const Animation warning_anim[1] = {
-	{1, (const u8[]){0, 0, 1, 2, 3,  ASCR_BACK, 0}},
+	{1, (const u8[]){1, 1, 0, 0, 4, 4, 1, 1, 0, 0, 4, 4, ASCR_BACK, 0}},
 };
 
 //warning functions
@@ -364,7 +365,7 @@ void Back_termination_DrawFG(StageBack *back)
 	
 	if (stage.flag & STAGE_FLAG_JUST_STEP)
 	{
-		switch (stage.song_step & 7)
+		switch (stage.song_step % 7)
 		{
 			case 0:
 				Animatable_SetAnim(&this->warning_animatable, 0);
@@ -373,7 +374,7 @@ void Back_termination_DrawFG(StageBack *back)
 	}
 	
        
-	if (stage.dodge> 0 && stage.dodge <= 30)
+	if (stage.dodge> 0 && stage.dodge <= 32)
 	{
 	Animatable_Animate(&this->warning_animatable, (void*)this, termination_warning_SetFrame);
 	termination_warning_Draw(this, FIXED_DEC(-28,1), FIXED_DEC(-40,1));
@@ -391,7 +392,7 @@ void Back_termination_DrawFG(StageBack *back)
 		}
 	}
 	
-	if (stage.dodge > 30 && stage.dodge <= 60)
+	if (stage.dodge > 32 && stage.dodge <= 60)
 	{
 	Animatable_Animate(&this->saw_animatable, (void*)this, termination_Saw_SetFrame);
 	termination_Saw_Draw(this, FIXED_DEC(-50,1) - fx, FIXED_DEC(40,1) - fy);

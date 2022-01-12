@@ -1404,14 +1404,14 @@ void Stage_Tick(void)
 	{
 		case StageState_Play:
 		{
-				 if (stage.dodge >= 0)
+				 if (stage.dodge >= 0 && stage.dodge != 62)
 			      stage.dodge++;
 
 				//todo: draw the saw and warning thing
-				 if (stage.dodge == 60)
+				 if (stage.dodge >= 53 && stage.dodge <= 60)
                 {
 				if (bfdodge <= 0) 
-					stage.state = StageState_Dead;
+					stage.player_state[0].health = 0;
 				}			
 
 			//dodge in termination
@@ -1420,110 +1420,165 @@ void Stage_Tick(void)
 			{
      		case 577:
 				stage.dodge = 0;
+				break;
 			case 7302:
 				stage.dodge = 0;
+				break;
 			case 7815:
 				stage.dodge = 0;
+				break;
 			case 8335:
 				stage.dodge = 0;
+				break;
 			case 9433:
 				stage.dodge = 0;
+				break;
 			case 9489:
 				stage.dodge = 0;
+				break;
 			case 9575:
 				stage.dodge = 0;
+				break;
 			case 9630:
 				stage.dodge = 0;
+				break;
 			case 9703:
 				stage.dodge = 0; 
+				break;
 			case 9757:
 				stage.dodge = 0;
+				break;
 			case 9840:
 				stage.dodge = 0;
+				break;
 			case 9890:
 				stage.dodge = 0;
+				break;
 			case 10463:
 				stage.dodge = 0;
+				break;
 			case 10539:
 				stage.dodge = 0;
+				break;
 			case 10616:
 				stage.dodge = 0;
+				break;
 			case 10662:
 				stage.dodge = 0;
+				break;
 			case 10731:
 				stage.dodge = 0;
+				break;
 			case 10792:
 				stage.dodge = 0;
+				break;
 			case 10871:
 				stage.dodge = 0;
+				break;
 			case 10928:
 				stage.dodge = 0;
+				break;
 			case 11057:
 				stage.dodge = 0;
+				break;
 			case 11178:
 				stage.dodge = 0;
+				break;
 			case 12542:
 				stage.dodge = 0;
+				break;
 			case 12588:
 				stage.dodge = 0;
+				break;
 			case 12666:
 				stage.dodge = 0;
+				break;
 			case 12709:
 				stage.dodge = 0;
+				break;
 			case 12793:
 				stage.dodge = 0;
+				break;
 			case 12866:
 				stage.dodge = 0;
+				break;
 			case 12930:
 				stage.dodge = 0;
+				break;
 			case 12993:
 				stage.dodge = 0;
+				break;
 			case 13119:
 				stage.dodge = 0;
+				break;
 			case 13251:
 				stage.dodge = 0;
+				break;
 			case 13504:
 				stage.dodge = 0;
+				break;
 			case 13770:
 				stage.dodge = 0;
+				break;
 			case 13900:
 				stage.dodge = 0;
+				break;
 			case 13961:
 				stage.dodge = 0;
+				break;
 			case 14028:
 				stage.dodge = 0;
+				break;
 			case 14578:
 				stage.dodge = 0;
+				break;
 			case 14819:
 				stage.dodge = 0;
+				break;
 			case 14868:
 				stage.dodge = 0;
+				break;
 			case 14995:
 				stage.dodge = 0;
+				break;
 			case 15062:
 				stage.dodge = 0;
+				break;
 			case 15838:
 				stage.dodge = 0;
+				break;
 			case 16032:
 				stage.dodge = 0;
+				break;
 			case 16094:
 				stage.dodge = 0;
+				break;
 			case 16673:
 				stage.dodge = 0;
+				break;
 			case 16731:
 				stage.dodge = 0;
+				break;
 			case 16804:
 				stage.dodge = 0;
+				break;
 			case 16855:
 				stage.dodge = 0;
+				break;
 			case 16938:
 				stage.dodge = 0;
+				break;
 			case 17000:
 				stage.dodge = 0;
+				break;
 			case 17065:
 				stage.dodge = 0;
+				break;
 			case 17116:
 				stage.dodge = 0;
+				break;
+				default:
+				break;
 			}
 			//timer
               FntPrint("timercount %d ", stage.timercount);
